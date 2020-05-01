@@ -3,10 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */; };
+		CE2C2C8B245C1E52001CBD87 /* NPCommonLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */; };
+		CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */; };
+		CE2C2C9F245C1E81001CBD87 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */; };
+		CE2C2CA0245C1E81001CBD87 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C8F245C1E81001CBD87 /* NoDataView.xib */; };
+		CE2C2CA1245C1E81001CBD87 /* GIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C93245C1E81001CBD87 /* GIFImageView.m */; };
+		CE2C2CA2245C1E81001CBD87 /* GIFProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C96245C1E81001CBD87 /* GIFProgressHUD.m */; };
+		CE2C2CA3245C1E81001CBD87 /* UIImage+GIFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C99245C1E81001CBD87 /* UIImage+GIFImage.m */; };
+		CE2C2CA4245C1E81001CBD87 /* SimpleDropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C9B245C1E81001CBD87 /* SimpleDropDownCellView.swift */; };
+		CE2C2CA5245C1E81001CBD87 /* SimpleDropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C9C245C1E81001CBD87 /* SimpleDropDownCellView.xib */; };
+		CE2C2CA6245C1E81001CBD87 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C9E245C1E81001CBD87 /* ImagePicker.swift */; };
+		CE2C2CA8245C1FC7001CBD87 /* GeneralUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CA7245C1FC7001CBD87 /* GeneralUtility.swift */; };
+		CE2C2CB6245C2063001CBD87 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAA245C2063001CBD87 /* ArrayExtension.swift */; };
+		CE2C2CB7245C2063001CBD87 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAB245C2063001CBD87 /* DateExtension.swift */; };
+		CE2C2CB8245C2063001CBD87 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAC245C2063001CBD87 /* DictionaryExtension.swift */; };
+		CE2C2CB9245C2063001CBD87 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAD245C2063001CBD87 /* FontExtension.swift */; };
+		CE2C2CBA245C2063001CBD87 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAE245C2063001CBD87 /* KeyboardLayoutConstraint.swift */; };
+		CE2C2CBB245C2063001CBD87 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CAF245C2063001CBD87 /* LabelExtension.swift */; };
+		CE2C2CBC245C2063001CBD87 /* NSManagedObjectContextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB0245C2063001CBD87 /* NSManagedObjectContextExtension.swift */; };
+		CE2C2CBD245C2063001CBD87 /* NSManagedObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB1245C2063001CBD87 /* NSManagedObjectExtension.swift */; };
+		CE2C2CBE245C2063001CBD87 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB2245C2063001CBD87 /* StringExtension.swift */; };
+		CE2C2CBF245C2063001CBD87 /* TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB3245C2063001CBD87 /* TableViewExtension.swift */; };
+		CE2C2CC0245C2063001CBD87 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB4245C2063001CBD87 /* UserDefaultsExtension.swift */; };
+		CE2C2CC1245C2063001CBD87 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CB5245C2063001CBD87 /* ViewExtension.swift */; };
+		CE2C2CC6245C2173001CBD87 /* BBDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CC3245C2173001CBD87 /* BBDrawerController.swift */; };
+		CE2C2CC7245C2173001CBD87 /* BBDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CC4245C2173001CBD87 /* BBDrawerControllerSegue.swift */; };
+		CE2C2CC8245C2173001CBD87 /* BBMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CC5245C2173001CBD87 /* BBMainControllerSegue.swift */; };
+		CE2C2CCD245C2180001CBD87 /* DropDownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CCA245C2180001CBD87 /* DropDownManager.swift */; };
+		CE2C2CCE245C2180001CBD87 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CCB245C2180001CBD87 /* LocationManager.swift */; };
+		CE2C2CD1245C225C001CBD87 /* ServerConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CD0245C225C001CBD87 /* ServerConstant.swift */; };
+		CE2C2CD5245C22BA001CBD87 /* ServerCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CD3245C22BA001CBD87 /* ServerCommunicationManager.swift */; };
+		CE2C2CD6245C22BA001CBD87 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CD4245C22BA001CBD87 /* ServiceManager.swift */; };
+		CE2C2CFC245C2906001CBD87 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2CE9245C2906001CBD87 /* Menu.storyboard */; };
+		CE2C2CFD245C2906001CBD87 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2CEA245C2906001CBD87 /* MenuViewController.swift */; };
+		CE2C2D07245C2A40001CBD87 /* MenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2D05245C2A40001CBD87 /* MenuTableCell.swift */; };
+		CE2C2D08245C2A40001CBD87 /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2D06245C2A40001CBD87 /* MenuTableCell.xib */; };
+		CE2C2D0A245C2FAC001CBD87 /* viewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */; };
+		CE2C2D0C245C324D001CBD87 /* PatientListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */; };
 		CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */; };
 		CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959212245AF8FF00F4BBF6 /* ViewController.swift */; };
 		CE959216245AF8FF00F4BBF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE959214245AF8FF00F4BBF6 /* Main.storyboard */; };
@@ -14,7 +52,6 @@
 		CE95921B245AF90500F4BBF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE959219245AF90500F4BBF6 /* LaunchScreen.storyboard */; };
 		CE959226245AF90500F4BBF6 /* DocotorPatientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959225245AF90500F4BBF6 /* DocotorPatientTests.swift */; };
 		CE959231245AF90500F4BBF6 /* DocotorPatientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959230245AF90500F4BBF6 /* DocotorPatientUITests.swift */; };
-		CE959240245AFA3E00F4BBF6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95923F245AFA3E00F4BBF6 /* ViewExtension.swift */; };
 		CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959243245AFAAB00F4BBF6 /* Constant.swift */; };
 		CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */; };
 /* End PBXBuildFile section */
@@ -37,6 +74,48 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DocotorPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.debug.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.debug.xcconfig"; sourceTree = "<group>"; };
+		CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCommonLoaderView.swift; sourceTree = "<group>"; };
+		CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NPCommonLoaderView.xib; sourceTree = "<group>"; };
+		CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		CE2C2C8F245C1E81001CBD87 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
+		CE2C2C92245C1E81001CBD87 /* GIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFImageView.h; sourceTree = "<group>"; };
+		CE2C2C93245C1E81001CBD87 /* GIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFImageView.m; sourceTree = "<group>"; };
+		CE2C2C95245C1E81001CBD87 /* GIFProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFProgressHUD.h; sourceTree = "<group>"; };
+		CE2C2C96245C1E81001CBD87 /* GIFProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFProgressHUD.m; sourceTree = "<group>"; };
+		CE2C2C98245C1E81001CBD87 /* UIImage+GIFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIFImage.h"; sourceTree = "<group>"; };
+		CE2C2C99245C1E81001CBD87 /* UIImage+GIFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIFImage.m"; sourceTree = "<group>"; };
+		CE2C2C9B245C1E81001CBD87 /* SimpleDropDownCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleDropDownCellView.swift; sourceTree = "<group>"; };
+		CE2C2C9C245C1E81001CBD87 /* SimpleDropDownCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleDropDownCellView.xib; sourceTree = "<group>"; };
+		CE2C2C9E245C1E81001CBD87 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		CE2C2CA7245C1FC7001CBD87 /* GeneralUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralUtility.swift; sourceTree = "<group>"; };
+		CE2C2CAA245C2063001CBD87 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		CE2C2CAB245C2063001CBD87 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		CE2C2CAC245C2063001CBD87 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		CE2C2CAD245C2063001CBD87 /* FontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		CE2C2CAE245C2063001CBD87 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		CE2C2CAF245C2063001CBD87 /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB0245C2063001CBD87 /* NSManagedObjectContextExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB1245C2063001CBD87 /* NSManagedObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB2245C2063001CBD87 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB3245C2063001CBD87 /* TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB4245C2063001CBD87 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		CE2C2CB5245C2063001CBD87 /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		CE2C2CC3245C2173001CBD87 /* BBDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBDrawerController.swift; sourceTree = "<group>"; };
+		CE2C2CC4245C2173001CBD87 /* BBDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBDrawerControllerSegue.swift; sourceTree = "<group>"; };
+		CE2C2CC5245C2173001CBD87 /* BBMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBMainControllerSegue.swift; sourceTree = "<group>"; };
+		CE2C2CCA245C2180001CBD87 /* DropDownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownManager.swift; sourceTree = "<group>"; };
+		CE2C2CCB245C2180001CBD87 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		CE2C2CD0245C225C001CBD87 /* ServerConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConstant.swift; sourceTree = "<group>"; };
+		CE2C2CD3245C22BA001CBD87 /* ServerCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCommunicationManager.swift; sourceTree = "<group>"; };
+		CE2C2CD4245C22BA001CBD87 /* ServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		CE2C2CE9245C2906001CBD87 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		CE2C2CEA245C2906001CBD87 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		CE2C2D05245C2A40001CBD87 /* MenuTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableCell.swift; sourceTree = "<group>"; };
+		CE2C2D06245C2A40001CBD87 /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
+		CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewControllerExtension.swift; sourceTree = "<group>"; };
+		CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListVC.swift; sourceTree = "<group>"; };
 		CE95920B245AF8FF00F4BBF6 /* DocotorPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocotorPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE959212245AF8FF00F4BBF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,9 +129,9 @@
 		CE95922C245AF90500F4BBF6 /* DocotorPatientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DocotorPatientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE959230245AF90500F4BBF6 /* DocotorPatientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocotorPatientUITests.swift; sourceTree = "<group>"; };
 		CE959232245AF90500F4BBF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE95923F245AFA3E00F4BBF6 /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		CE959243245AFAAB00F4BBF6 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignuUpViewController.swift; sourceTree = "<group>"; };
+		EBC34095A2712DFAA16E0650 /* Pods-DocotorPatient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.release.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +160,191 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20822BBCB90D615DECB46EC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */,
+				EBC34095A2712DFAA16E0650 /* Pods-DocotorPatient.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3C1035E9C9ECFCDCBC078A2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE2C2C87245C1E12001CBD87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2D03245C2A23001CBD87 /* CustomCell */,
+				CE2C2D02245C2A1A001CBD87 /* CustomView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE2C2C88245C1E52001CBD87 /* NPCommonLoaderView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */,
+				CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */,
+			);
+			path = NPCommonLoaderView;
+			sourceTree = "<group>";
+		};
+		CE2C2C8D245C1E81001CBD87 /* NoDataView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */,
+				CE2C2C8F245C1E81001CBD87 /* NoDataView.xib */,
+			);
+			path = NoDataView;
+			sourceTree = "<group>";
+		};
+		CE2C2C90245C1E81001CBD87 /* GIFProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C91245C1E81001CBD87 /* GIFImageView */,
+				CE2C2C94245C1E81001CBD87 /* GIFProgressHUD */,
+				CE2C2C97245C1E81001CBD87 /* UIImage+animatedGIF */,
+			);
+			path = GIFProgressHUD;
+			sourceTree = "<group>";
+		};
+		CE2C2C91245C1E81001CBD87 /* GIFImageView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C92245C1E81001CBD87 /* GIFImageView.h */,
+				CE2C2C93245C1E81001CBD87 /* GIFImageView.m */,
+			);
+			path = GIFImageView;
+			sourceTree = "<group>";
+		};
+		CE2C2C94245C1E81001CBD87 /* GIFProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C95245C1E81001CBD87 /* GIFProgressHUD.h */,
+				CE2C2C96245C1E81001CBD87 /* GIFProgressHUD.m */,
+			);
+			path = GIFProgressHUD;
+			sourceTree = "<group>";
+		};
+		CE2C2C97245C1E81001CBD87 /* UIImage+animatedGIF */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C98245C1E81001CBD87 /* UIImage+GIFImage.h */,
+				CE2C2C99245C1E81001CBD87 /* UIImage+GIFImage.m */,
+			);
+			path = "UIImage+animatedGIF";
+			sourceTree = "<group>";
+		};
+		CE2C2C9A245C1E81001CBD87 /* SimpleDropDownCellView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C9B245C1E81001CBD87 /* SimpleDropDownCellView.swift */,
+				CE2C2C9C245C1E81001CBD87 /* SimpleDropDownCellView.xib */,
+			);
+			path = SimpleDropDownCellView;
+			sourceTree = "<group>";
+		};
+		CE2C2C9D245C1E81001CBD87 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C9E245C1E81001CBD87 /* ImagePicker.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		CE2C2CA9245C2063001CBD87 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2CAA245C2063001CBD87 /* ArrayExtension.swift */,
+				CE2C2CAB245C2063001CBD87 /* DateExtension.swift */,
+				CE2C2CAC245C2063001CBD87 /* DictionaryExtension.swift */,
+				CE2C2CAD245C2063001CBD87 /* FontExtension.swift */,
+				CE2C2CAE245C2063001CBD87 /* KeyboardLayoutConstraint.swift */,
+				CE2C2CAF245C2063001CBD87 /* LabelExtension.swift */,
+				CE2C2CB0245C2063001CBD87 /* NSManagedObjectContextExtension.swift */,
+				CE2C2CB1245C2063001CBD87 /* NSManagedObjectExtension.swift */,
+				CE2C2CB2245C2063001CBD87 /* StringExtension.swift */,
+				CE2C2CB3245C2063001CBD87 /* TableViewExtension.swift */,
+				CE2C2CB4245C2063001CBD87 /* UserDefaultsExtension.swift */,
+				CE2C2CB5245C2063001CBD87 /* ViewExtension.swift */,
+				CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE2C2CC2245C2173001CBD87 /* BBDrawerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2CC3245C2173001CBD87 /* BBDrawerController.swift */,
+				CE2C2CC4245C2173001CBD87 /* BBDrawerControllerSegue.swift */,
+				CE2C2CC5245C2173001CBD87 /* BBMainControllerSegue.swift */,
+			);
+			path = BBDrawerViewController;
+			sourceTree = "<group>";
+		};
+		CE2C2CC9245C2180001CBD87 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2CCA245C2180001CBD87 /* DropDownManager.swift */,
+				CE2C2CCB245C2180001CBD87 /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		CE2C2CD2245C22BA001CBD87 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2CD3245C22BA001CBD87 /* ServerCommunicationManager.swift */,
+				CE2C2CD4245C22BA001CBD87 /* ServiceManager.swift */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		CE2C2CD7245C2906001CBD87 /* SlideOutMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2CE9245C2906001CBD87 /* Menu.storyboard */,
+				CE2C2CEA245C2906001CBD87 /* MenuViewController.swift */,
+				CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */,
+			);
+			path = SlideOutMenu;
+			sourceTree = "<group>";
+		};
+		CE2C2D02245C2A1A001CBD87 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2C90245C1E81001CBD87 /* GIFProgressHUD */,
+				CE2C2C9D245C1E81001CBD87 /* ImagePicker */,
+				CE2C2C8D245C1E81001CBD87 /* NoDataView */,
+				CE2C2C9A245C1E81001CBD87 /* SimpleDropDownCellView */,
+				CE2C2C88245C1E52001CBD87 /* NPCommonLoaderView */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		CE2C2D03245C2A23001CBD87 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2D04245C2A40001CBD87 /* SideMenuCell */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		CE2C2D04245C2A40001CBD87 /* SideMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C2D05245C2A40001CBD87 /* MenuTableCell.swift */,
+				CE2C2D06245C2A40001CBD87 /* MenuTableCell.xib */,
+			);
+			path = SideMenuCell;
+			sourceTree = "<group>";
+		};
 		CE959202245AF8FF00F4BBF6 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +352,8 @@
 				CE959224245AF90500F4BBF6 /* DocotorPatientTests */,
 				CE95922F245AF90500F4BBF6 /* DocotorPatientUITests */,
 				CE95920C245AF8FF00F4BBF6 /* Products */,
+				20822BBCB90D615DECB46EC6 /* Pods */,
+				3C1035E9C9ECFCDCBC078A2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +370,8 @@
 		CE95920D245AF8FF00F4BBF6 /* DocotorPatient */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C2CD2245C22BA001CBD87 /* ServiceLayer */,
+				CE2C2C87245C1E12001CBD87 /* View */,
 				CE959245245B0B0700F4BBF6 /* ViewController */,
 				CE95923E245AFA1E00F4BBF6 /* Utilities */,
 				CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */,
@@ -136,23 +405,19 @@
 		CE95923E245AFA1E00F4BBF6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C2CA7245C1FC7001CBD87 /* GeneralUtility.swift */,
+				CE2C2CC9245C2180001CBD87 /* Manager */,
+				CE2C2CC2245C2173001CBD87 /* BBDrawerViewController */,
+				CE2C2CA9245C2063001CBD87 /* Extensions */,
 				CE959242245AFA8100F4BBF6 /* Constant */,
-				CE959241245AFA7500F4BBF6 /* Extension */,
-				CE95923F245AFA3E00F4BBF6 /* ViewExtension.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		CE959241245AFA7500F4BBF6 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		CE959242245AFA8100F4BBF6 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C2CD0245C225C001CBD87 /* ServerConstant.swift */,
 				CE959243245AFAAB00F4BBF6 /* Constant.swift */,
 			);
 			path = Constant;
@@ -161,6 +426,7 @@
 		CE959245245B0B0700F4BBF6 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C2CD7245C2906001CBD87 /* SlideOutMenu */,
 				CE959246245B0B1300F4BBF6 /* Authentication */,
 			);
 			path = ViewController;
@@ -181,9 +447,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE959235245AF90500F4BBF6 /* Build configuration list for PBXNativeTarget "DocotorPatient" */;
 			buildPhases = (
+				F1FB7AEBF50EBABBFEEA0DA8 /* [CP] Check Pods Manifest.lock */,
 				CE959207245AF8FF00F4BBF6 /* Sources */,
 				CE959208245AF8FF00F4BBF6 /* Frameworks */,
 				CE959209245AF8FF00F4BBF6 /* Resources */,
+				29F089A9986E8AE34EA642EF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,9 +546,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */,
+				CE2C2CA5245C1E81001CBD87 /* SimpleDropDownCellView.xib in Resources */,
 				CE95921B245AF90500F4BBF6 /* LaunchScreen.storyboard in Resources */,
+				CE2C2CFC245C2906001CBD87 /* Menu.storyboard in Resources */,
 				CE959218245AF90500F4BBF6 /* Assets.xcassets in Resources */,
 				CE959216245AF8FF00F4BBF6 /* Main.storyboard in Resources */,
+				CE2C2CA0245C1E81001CBD87 /* NoDataView.xib in Resources */,
+				CE2C2D08245C2A40001CBD87 /* MenuTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,16 +573,89 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29F089A9986E8AE34EA642EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1FB7AEBF50EBABBFEEA0DA8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DocotorPatient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE959207245AF8FF00F4BBF6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE959240245AFA3E00F4BBF6 /* ViewExtension.swift in Sources */,
+				CE2C2C8B245C1E52001CBD87 /* NPCommonLoaderView.swift in Sources */,
+				CE2C2CB7245C2063001CBD87 /* DateExtension.swift in Sources */,
 				CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */,
+				CE2C2CC8245C2173001CBD87 /* BBMainControllerSegue.swift in Sources */,
+				CE2C2CD1245C225C001CBD87 /* ServerConstant.swift in Sources */,
+				CE2C2CC1245C2063001CBD87 /* ViewExtension.swift in Sources */,
+				CE2C2CA4245C1E81001CBD87 /* SimpleDropDownCellView.swift in Sources */,
+				CE2C2CCE245C2180001CBD87 /* LocationManager.swift in Sources */,
+				CE2C2CBB245C2063001CBD87 /* LabelExtension.swift in Sources */,
+				CE2C2CBA245C2063001CBD87 /* KeyboardLayoutConstraint.swift in Sources */,
+				CE2C2CA8245C1FC7001CBD87 /* GeneralUtility.swift in Sources */,
+				CE2C2CC7245C2173001CBD87 /* BBDrawerControllerSegue.swift in Sources */,
+				CE2C2CD5245C22BA001CBD87 /* ServerCommunicationManager.swift in Sources */,
+				CE2C2C9F245C1E81001CBD87 /* NoDataView.swift in Sources */,
+				CE2C2CBF245C2063001CBD87 /* TableViewExtension.swift in Sources */,
+				CE2C2CC0245C2063001CBD87 /* UserDefaultsExtension.swift in Sources */,
+				CE2C2D0C245C324D001CBD87 /* PatientListVC.swift in Sources */,
+				CE2C2CB8245C2063001CBD87 /* DictionaryExtension.swift in Sources */,
+				CE2C2CA2245C1E81001CBD87 /* GIFProgressHUD.m in Sources */,
 				CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */,
+				CE2C2CBD245C2063001CBD87 /* NSManagedObjectExtension.swift in Sources */,
+				CE2C2CA1245C1E81001CBD87 /* GIFImageView.m in Sources */,
 				CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */,
+				CE2C2CA6245C1E81001CBD87 /* ImagePicker.swift in Sources */,
+				CE2C2CBC245C2063001CBD87 /* NSManagedObjectContextExtension.swift in Sources */,
+				CE2C2D0A245C2FAC001CBD87 /* viewControllerExtension.swift in Sources */,
+				CE2C2CC6245C2173001CBD87 /* BBDrawerController.swift in Sources */,
+				CE2C2D07245C2A40001CBD87 /* MenuTableCell.swift in Sources */,
+				CE2C2CB9245C2063001CBD87 /* FontExtension.swift in Sources */,
+				CE2C2CB6245C2063001CBD87 /* ArrayExtension.swift in Sources */,
+				CE2C2CD6245C22BA001CBD87 /* ServiceManager.swift in Sources */,
+				CE2C2CCD245C2180001CBD87 /* DropDownManager.swift in Sources */,
+				CE2C2CA3245C1E81001CBD87 /* UIImage+GIFImage.m in Sources */,
+				CE2C2CBE245C2063001CBD87 /* StringExtension.swift in Sources */,
 				CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */,
+				CE2C2CFD245C2906001CBD87 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +826,7 @@
 		};
 		CE959236245AF90500F4BBF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -497,6 +844,7 @@
 		};
 		CE959237245AF90500F4BBF6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBC34095A2712DFAA16E0650 /* Pods-DocotorPatient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

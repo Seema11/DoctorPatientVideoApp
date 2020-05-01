@@ -26,13 +26,13 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DocotorPatient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="DocotorPatient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ILB-gi-mc8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stethoscope" translatesAutoresizingMaskIntoConstraints="NO" id="DX2-bX-eI8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="111.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110.99999999999994" id="y4f-3X-pFb"/>
                                 </constraints>
@@ -331,7 +331,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stethoscope" translatesAutoresizingMaskIntoConstraints="NO" id="I2d-tX-Z8Y">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="111.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110.99999999999994" id="ONH-UF-84i"/>
                                 </constraints>

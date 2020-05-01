@@ -44,6 +44,8 @@ struct Constant {
         }
     }
     
+    
+    
 }
 extension Constant {
     
@@ -52,4 +54,12 @@ extension Constant {
         static let GreenButton: UIColor = UIColor.init(named: "GreenButton")!
         static let LightBlue: UIColor = UIColor.init(named: "LightBlue")!
     }
+    
+      struct UserDefaultsKey {
+            static let authorization = "Authorization"
+            static let fcmToken = "fcmToken"
+            static let isLogin = "isLogin"
+            static let _id = "_id"
+            static let password = "password"
+        }
 }
