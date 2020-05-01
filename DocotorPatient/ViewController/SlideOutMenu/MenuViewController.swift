@@ -89,7 +89,9 @@ extension MenuViewController {
         
         
         tableView.register(MenuTableCell.nib, forCellReuseIdentifier: MenuTableCell.identifier)
-        tableView.rowHeight = 40
+        tableView.rowHeight = 60
+        
+        
         tableView.tableFooterView = UIView()
 
  //     Cast child controller of parent as UINavigationController
@@ -127,6 +129,7 @@ extension MenuViewController {
 
 // MARK: UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
     }
@@ -135,6 +138,9 @@ extension MenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableCell.identifier) as! MenuTableCell
         cell.menuItem = menuItems[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
     }
 }
 

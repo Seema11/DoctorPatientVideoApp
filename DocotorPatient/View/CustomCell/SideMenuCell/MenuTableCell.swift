@@ -20,7 +20,7 @@ class MenuTableCell: UITableViewCell {
         return String(describing: self)
     }
     
-    var menuItem: MenuItem = MenuItem(title: "", icon: UIImage(named: "user")!) {
+    var menuItem: MenuItem = MenuItem(title: "", icon: UIImage(named: "video-call 50-30")!) {
         didSet {
             iconImageView.image = menuItem.icon
             menuTitleLabel.text = menuItem.title

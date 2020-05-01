@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */; };
+		CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */; };
 		CE2C2C8B245C1E52001CBD87 /* NPCommonLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */; };
 		CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */; };
 		CE2C2C9F245C1E81001CBD87 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */; };
@@ -76,6 +77,7 @@
 /* Begin PBXFileReference section */
 		9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DocotorPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.debug.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.debug.xcconfig"; sourceTree = "<group>"; };
+		CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCommonLoaderView.swift; sourceTree = "<group>"; };
 		CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NPCommonLoaderView.xib; sourceTree = "<group>"; };
 		CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,14 @@
 				9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE1E1E49245C492F00A8AE72 /* PatientCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */,
+			);
+			path = PatientCell;
 			sourceTree = "<group>";
 		};
 		CE2C2C87245C1E12001CBD87 /* View */ = {
@@ -331,6 +341,7 @@
 		CE2C2D03245C2A23001CBD87 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				CE1E1E49245C492F00A8AE72 /* PatientCell */,
 				CE2C2D04245C2A40001CBD87 /* SideMenuCell */,
 			);
 			path = CustomCell;
@@ -645,6 +656,7 @@
 				CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */,
 				CE2C2CA6245C1E81001CBD87 /* ImagePicker.swift in Sources */,
 				CE2C2CBC245C2063001CBD87 /* NSManagedObjectContextExtension.swift in Sources */,
+				CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */,
 				CE2C2D0A245C2FAC001CBD87 /* viewControllerExtension.swift in Sources */,
 				CE2C2CC6245C2173001CBD87 /* BBDrawerController.swift in Sources */,
 				CE2C2D07245C2A40001CBD87 /* MenuTableCell.swift in Sources */,
