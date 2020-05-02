@@ -47,8 +47,15 @@ class ViewController: UIViewController {
     @IBAction func didTapButtonGoogleLogin(_ sender: Any) {
     }
     @IBAction func didTapButtonSignup(_ sender: Any) {
-        let signupVc = self.storyboard?.instantiateViewController(identifier: "SignuUpViewController") as! SignuUpViewController
-        self.navigationController?.pushViewController(signupVc, animated: true)
+        
+           if #available(iOS 13.0, *) {
+           let signupVc = self.storyboard?.instantiateViewController(identifier: "SignuUpViewController") as! SignuUpViewController
+             self.navigationController?.pushViewController(signupVc, animated: true)
+
+                } else {
+                    let signupVc = UIViewController.instantiateFrom("Menu", "SignuUpViewController") as! SignuUpViewController
+                    self.navigationController?.pushViewController(signupVc, animated: true)
+                }
     }
     
 }

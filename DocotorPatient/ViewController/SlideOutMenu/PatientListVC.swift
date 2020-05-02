@@ -29,6 +29,17 @@ class PatientListVC: UIViewController {
     @IBAction func didTapButtonAudoiCall(_ sender: Any) {
     }
     @IBAction func didTapButtonVideoCall(_ sender: Any) {
+        
+           if #available(iOS 13.0, *) {
+                    let videoCallVC = self.storyboard?.instantiateViewController(identifier: "VideoCallVC") as! VideoCallVC
+                    
+                    self.navigationController?.pushViewController(videoCallVC, animated: true)
+
+                } else {
+                    let videoCallVC = UIViewController.instantiateFrom("Menu", "VideoCallVC") as! VideoCallVC
+                 
+                    self.navigationController?.pushViewController(videoCallVC, animated: true)
+                }
     }
     
 }
