@@ -1,38 +1,33 @@
 //
-//  PatientListVC.swift
+//  CallHistoryVC.swift
 //  DocotorPatient
 //
-//  Created by Bhavesh on 01/05/20.
+//  Created by Bhavesh on 02/05/20.
 //  Copyright © 2020 Bhavesh. All rights reserved.
 //
 
 import UIKit
 
-class PatientListVC: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+class CallHistoryVC: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
 
-    @IBAction func didTapButtonMenu(_ sender: Any) {
+    @IBAction func didTapButtonSideMenu(_ sender: Any) {
         sideMenuController()?.openDrawer()
     }
     @IBAction func didTapButtonSearch(_ sender: Any) {
     }
-    @IBAction func didTapButtonAddPatient(_ sender: Any) {
-    }
-    @IBAction func didTapButtonAudoiCall(_ sender: Any) {
-    }
-    @IBAction func didTapButtonVideoCall(_ sender: Any) {
+    @IBAction func didTapButtonCall(_ sender: Any) {
     }
     
 }
-extension PatientListVC : UITableViewDataSource,UITableViewDelegate {
+extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
@@ -42,7 +37,7 @@ extension PatientListVC : UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "PatientListCell") as! PatientListCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "CallHistoryCell") as! CallHistoryCell
         return cell
     }
 }

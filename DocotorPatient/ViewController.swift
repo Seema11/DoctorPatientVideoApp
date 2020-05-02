@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     @IBAction func didTapButtonForgotPassword(_ sender: Any) {
     }
     @IBAction func didTapButtonLogin(_ sender: Any) {
+        Constant.appDelegate.showDrawerView()
     }
     
     @IBAction func didTapButtonFBLogin(_ sender: Any) {

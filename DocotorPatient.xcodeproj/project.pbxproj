@@ -55,6 +55,13 @@
 		CE959231245AF90500F4BBF6 /* DocotorPatientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959230245AF90500F4BBF6 /* DocotorPatientUITests.swift */; };
 		CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959243245AFAAB00F4BBF6 /* Constant.swift */; };
 		CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */; };
+		CECE4255245D29A400AEEA58 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4254245D29A400AEEA58 /* EditProfileVC.swift */; };
+		CECE4257245D29CA00AEEA58 /* AddNewPatientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4256245D29CA00AEEA58 /* AddNewPatientVC.swift */; };
+		CECE4259245D29EC00AEEA58 /* CallHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */; };
+		CECE425B245D2A0300AEEA58 /* CallRecordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE425A245D2A0300AEEA58 /* CallRecordingVC.swift */; };
+		CECE425F245D2E5200AEEA58 /* CallRecordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE425E245D2E5200AEEA58 /* CallRecordingCell.swift */; };
+		CECE4261245D2E6100AEEA58 /* CallHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4260245D2E6100AEEA58 /* CallHistoryCell.swift */; };
+		CECE4264245D33E000AEEA58 /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4263245D33E000AEEA58 /* CustomTextfield.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +140,13 @@
 		CE959232245AF90500F4BBF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE959243245AFAAB00F4BBF6 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignuUpViewController.swift; sourceTree = "<group>"; };
+		CECE4254245D29A400AEEA58 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		CECE4256245D29CA00AEEA58 /* AddNewPatientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPatientVC.swift; sourceTree = "<group>"; };
+		CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryVC.swift; sourceTree = "<group>"; };
+		CECE425A245D2A0300AEEA58 /* CallRecordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRecordingVC.swift; sourceTree = "<group>"; };
+		CECE425E245D2E5200AEEA58 /* CallRecordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRecordingCell.swift; sourceTree = "<group>"; };
+		CECE4260245D2E6100AEEA58 /* CallHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryCell.swift; sourceTree = "<group>"; };
+		CECE4263245D33E000AEEA58 /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		EBC34095A2712DFAA16E0650 /* Pods-DocotorPatient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.release.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +336,10 @@
 				CE2C2CE9245C2906001CBD87 /* Menu.storyboard */,
 				CE2C2CEA245C2906001CBD87 /* MenuViewController.swift */,
 				CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */,
+				CECE4254245D29A400AEEA58 /* EditProfileVC.swift */,
+				CECE4256245D29CA00AEEA58 /* AddNewPatientVC.swift */,
+				CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */,
+				CECE425A245D2A0300AEEA58 /* CallRecordingVC.swift */,
 			);
 			path = SlideOutMenu;
 			sourceTree = "<group>";
@@ -329,6 +347,7 @@
 		CE2C2D02245C2A1A001CBD87 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				CECE4262245D33C900AEEA58 /* CustomTextfield */,
 				CE2C2C90245C1E81001CBD87 /* GIFProgressHUD */,
 				CE2C2C9D245C1E81001CBD87 /* ImagePicker */,
 				CE2C2C8D245C1E81001CBD87 /* NoDataView */,
@@ -341,6 +360,8 @@
 		CE2C2D03245C2A23001CBD87 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				CECE425D245D2E2C00AEEA58 /* CallRecording Cell */,
+				CECE425C245D2E1500AEEA58 /* CallHistoryCell */,
 				CE1E1E49245C492F00A8AE72 /* PatientCell */,
 				CE2C2D04245C2A40001CBD87 /* SideMenuCell */,
 			);
@@ -449,6 +470,30 @@
 				CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CECE425C245D2E1500AEEA58 /* CallHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				CECE4260245D2E6100AEEA58 /* CallHistoryCell.swift */,
+			);
+			path = CallHistoryCell;
+			sourceTree = "<group>";
+		};
+		CECE425D245D2E2C00AEEA58 /* CallRecording Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CECE425E245D2E5200AEEA58 /* CallRecordingCell.swift */,
+			);
+			path = "CallRecording Cell";
+			sourceTree = "<group>";
+		};
+		CECE4262245D33C900AEEA58 /* CustomTextfield */ = {
+			isa = PBXGroup;
+			children = (
+				CECE4263245D33E000AEEA58 /* CustomTextfield.swift */,
+			);
+			path = CustomTextfield;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,11 +680,14 @@
 				CE2C2CB7245C2063001CBD87 /* DateExtension.swift in Sources */,
 				CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */,
 				CE2C2CC8245C2173001CBD87 /* BBMainControllerSegue.swift in Sources */,
+				CECE4264245D33E000AEEA58 /* CustomTextfield.swift in Sources */,
+				CECE4261245D2E6100AEEA58 /* CallHistoryCell.swift in Sources */,
 				CE2C2CD1245C225C001CBD87 /* ServerConstant.swift in Sources */,
 				CE2C2CC1245C2063001CBD87 /* ViewExtension.swift in Sources */,
 				CE2C2CA4245C1E81001CBD87 /* SimpleDropDownCellView.swift in Sources */,
 				CE2C2CCE245C2180001CBD87 /* LocationManager.swift in Sources */,
 				CE2C2CBB245C2063001CBD87 /* LabelExtension.swift in Sources */,
+				CECE425F245D2E5200AEEA58 /* CallRecordingCell.swift in Sources */,
 				CE2C2CBA245C2063001CBD87 /* KeyboardLayoutConstraint.swift in Sources */,
 				CE2C2CA8245C1FC7001CBD87 /* GeneralUtility.swift in Sources */,
 				CE2C2CC7245C2173001CBD87 /* BBDrawerControllerSegue.swift in Sources */,
@@ -647,8 +695,10 @@
 				CE2C2C9F245C1E81001CBD87 /* NoDataView.swift in Sources */,
 				CE2C2CBF245C2063001CBD87 /* TableViewExtension.swift in Sources */,
 				CE2C2CC0245C2063001CBD87 /* UserDefaultsExtension.swift in Sources */,
+				CECE4257245D29CA00AEEA58 /* AddNewPatientVC.swift in Sources */,
 				CE2C2D0C245C324D001CBD87 /* PatientListVC.swift in Sources */,
 				CE2C2CB8245C2063001CBD87 /* DictionaryExtension.swift in Sources */,
+				CECE4255245D29A400AEEA58 /* EditProfileVC.swift in Sources */,
 				CE2C2CA2245C1E81001CBD87 /* GIFProgressHUD.m in Sources */,
 				CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */,
 				CE2C2CBD245C2063001CBD87 /* NSManagedObjectExtension.swift in Sources */,
@@ -658,6 +708,7 @@
 				CE2C2CBC245C2063001CBD87 /* NSManagedObjectContextExtension.swift in Sources */,
 				CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */,
 				CE2C2D0A245C2FAC001CBD87 /* viewControllerExtension.swift in Sources */,
+				CECE4259245D29EC00AEEA58 /* CallHistoryVC.swift in Sources */,
 				CE2C2CC6245C2173001CBD87 /* BBDrawerController.swift in Sources */,
 				CE2C2D07245C2A40001CBD87 /* MenuTableCell.swift in Sources */,
 				CE2C2CB9245C2063001CBD87 /* FontExtension.swift in Sources */,
@@ -667,6 +718,7 @@
 				CE2C2CA3245C1E81001CBD87 /* UIImage+GIFImage.m in Sources */,
 				CE2C2CBE245C2063001CBD87 /* StringExtension.swift in Sources */,
 				CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */,
+				CECE425B245D2A0300AEEA58 /* CallRecordingVC.swift in Sources */,
 				CE2C2CFD245C2906001CBD87 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

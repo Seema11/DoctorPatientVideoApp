@@ -151,6 +151,55 @@ extension MenuViewController: UITableViewDelegate {
             if let drawer = self.sideMenuController(), drawer.drawerState == .opened {
                 drawer.setDrawerState(.closed, animated: true)
             }
+            
+            if indexPath.row == 0 {
+                if #available(iOS 13.0, *) {
+                    let patientListVc = self.storyboard?.instantiateViewController(identifier: "PatientListVC") as! PatientListVC
+                    self.nav?.pushViewController(patientListVc, animated: true)
+                } else {
+                    let patientListVc = UIViewController.instantiateFrom("Menu", "PatientListVC") as! PatientListVC
+                    self.nav?.pushViewController(patientListVc, animated: true)
+                    // Fallback on earlier versions
+                }
+            }   else if indexPath.row == 1 {
+                if #available(iOS 13.0, *) {
+                    let addNewPatientVC = self.storyboard?.instantiateViewController(identifier: "AddNewPatientVC") as! AddNewPatientVC
+                    self.nav?.pushViewController(addNewPatientVC, animated: true)
+                } else {
+                    let addNewPatientVC = UIViewController.instantiateFrom("Menu", "AddNewPatientVC") as! AddNewPatientVC
+                    self.nav?.pushViewController(addNewPatientVC, animated: true)
+                    // Fallback on earlier versions
+                }
+            }   else if indexPath.row == 2 {
+                if #available(iOS 13.0, *) {
+                    let callhistoryVc = self.storyboard?.instantiateViewController(identifier: "CallHistoryVC") as! CallHistoryVC
+                    self.nav?.pushViewController(callhistoryVc, animated: true)
+                } else {
+                    let callhistoryVc = UIViewController.instantiateFrom("Menu", "CallHistoryVC") as! CallHistoryVC
+                    self.nav?.pushViewController(callhistoryVc, animated: true)
+                    // Fallback on earlier versions
+                }
+            }   else if indexPath.row == 3 {
+                if #available(iOS 13.0, *) {
+                    let callRecordingVc = self.storyboard?.instantiateViewController(identifier: "CallRecordingVC") as! CallRecordingVC
+                    self.nav?.pushViewController(callRecordingVc, animated: true)
+                } else {
+                    let callRecordingVc = UIViewController.instantiateFrom("Menu", "CallRecordingVC") as! CallRecordingVC
+                    self.nav?.pushViewController(callRecordingVc, animated: true)
+                    // Fallback on earlier versions
+                }
+            }   else if indexPath.row == 4 {
+                if #available(iOS 13.0, *) {
+                    let editProfileVc = self.storyboard?.instantiateViewController(identifier: "EditProfileVC") as! EditProfileVC
+                    self.nav?.pushViewController(editProfileVc, animated: true)
+                } else {
+                    let editProfileVc = UIViewController.instantiateFrom("Menu", "EditProfileVC") as! EditProfileVC
+                    self.nav?.pushViewController(editProfileVc, animated: true)
+                    // Fallback on earlier versions
+                }
+            } else if indexPath.row == 5 {
+                self.logoutUser()
+            }
         }
     }
 }
@@ -159,6 +208,7 @@ extension MenuViewController {
     {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
+        Constant.appDelegate.loginViewController()
     }
     func performAPiCallForLogoutUser()  {
        
