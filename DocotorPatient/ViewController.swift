@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     }
     @IBAction func didTapButtonLogin(_ sender: Any) {
         
-        if let password = textfielduserName.text,
+        if let password = textfieldPassword.text,
             let login = textfielduserName.text {
             self.login(fullName: "", login: login, password: password)
         } else {
@@ -108,30 +108,60 @@ extension ViewController {
     /**
      *  login
      */
-    private func login(fullName: String, login: String, password: String = LoginConstant.defaultPassword) {
+    private func login(fullName: String, login: String, password: String) {
         beginConnect()
         GeneralUtility.showProcessing()
             QBRequest.logIn(withUserLogin: self.textfielduserName.text!, password: self.textfieldPassword.text!, successBlock: { (response, user) in
-                        QBChat.instance.connect(withUserID: user.id, password: user.password!, completion: { (error) in
-                                    user.password = password
-                                    user.updatedAt = Date()
-                                    Profile.synchronize(user)
-        
-                                    if user.fullName != fullName {
-                                        self.updateFullName(fullName: fullName, login: login)
-                                    } else {
-                                        self.connectToChat(user: user)
-                                    }
-                        })
-                }, errorBlock: { (response) in
-                    self.handleError(response.error as? Error, domain: ErrorDomain.logIn)
-                      if response.status == QBResponseStatusCode.unAuthorized {
-                                        // Clean profile
-                                        Profile.clearProfile()
-                        self.defaultConfiguration()
-                                   
+                
+                
+                let currentUser: QBUUser = user
+                  currentUser.email = login
+                  currentUser.password = password
+                  currentUser.updatedAt = Date()
+                  Profile.update(currentUser)
+                
+                QBChat.instance.connect(withUserID: currentUser.id, password: currentUser.password!, completion: { (error) in
+                    GeneralUtility.endProcessing()
+                    if error == nil {
+                      print("connected")
+                        GeneralUtility.endProcessing()
+                        //did Login action
+                        Constant.appDelegate.showDrawerView()
+                    } else {
+                        if error?._code == QBResponseStatusCode.unAuthorized.rawValue {
+                                                                     // Clean profile
+                            GeneralUtility.endProcessing()
+                            Profile.clearProfile()
+                            self.defaultConfiguration()
+                        } else {
+                            self.handleError(error, domain: ErrorDomain.logIn)
+                           self.disconnectUser()
+                        }
+                          print(error as Any)
                     }
                 })
+        })
+//                        QBChat.instance.connect(withUserID: user.id, password: user.password!, completion: { (error) in
+//                                    user.password = password
+//                                    user.updatedAt = Date()
+//                                    Profile.synchronize(user)
+//
+//
+////                                    if user.fullName != fullName {
+////                                        self.updateFullName(fullName: fullName, login: login)
+////                                    } else {
+//                                        self.connectToChat(user: user)
+//                             //       }
+//                        })
+//                }, errorBlock: { (response) in
+//                    self.handleError(response.error as? Error, domain: ErrorDomain.logIn)
+//                      if response.status == QBResponseStatusCode.unAuthorized {
+//                                        // Clean profile
+//                                        Profile.clearProfile()
+//                        self.defaultConfiguration()
+//
+//                    }
+//                })
     }
     
     private func updateFullName(fullName: String, login: String) {
@@ -156,7 +186,7 @@ extension ViewController {
     
     private func connectToChat(user: QBUUser) {
           QBChat.instance.connect(withUserID: user.id,
-                                  password: LoginConstant.defaultPassword,
+                                  password: textfieldPassword.text!,
                                   completion: { [weak self] error in
                                       if let error = error {
                                           if error._code == QBResponseStatusCode.unAuthorized.rawValue {
@@ -166,7 +196,7 @@ extension ViewController {
                                               self?.defaultConfiguration()
                                           } else {
                                               self?.handleError(error, domain: ErrorDomain.logIn)
-                                            self!.disconnectUser()
+                                            self?.disconnectUser()
                                           }
                                       } else {
                                           GeneralUtility.endProcessing()
@@ -208,45 +238,4 @@ extension ViewController {
            }
            inputEnabled = true
        }
-    
-    private func disconnectUser() {
-           QBChat.instance.disconnect(completionBlock: { error in
-               if let error = error {
-                   SVProgressHUD.showError(withStatus: error.localizedDescription)
-                   return
-               }
-               self.logOut()
-           })
-       }
-       
-       private func unregisterSubscription(forUniqueDeviceIdentifier uuidString: String) {
-           QBRequest.unregisterSubscription(forUniqueDeviceIdentifier: uuidString, successBlock: { response in
-               self.disconnectUser()
-           }, errorBlock: { error in
-               if let error = error.error {
-                   SVProgressHUD.showError(withStatus: error.localizedDescription)
-                   return
-               }
-               SVProgressHUD.dismiss()
-           })
-       }
-       
-       private func logOut() {
-           QBRequest.logOut(successBlock: { [weak self] response in
-               //ClearProfile
-               Profile.clearProfile()
-            GeneralUtility.endProcessing()
-               //Dismiss Settings view controller
-               self?.dismiss(animated: false)
-               
-//               DispatchQueue.main.async(execute: {
-//                   self?.navigationController?.popToRootViewController(animated: false)
-//               })
-           }) { response in
-               debugPrint("QBRequest.logOut error\(response)")
-           }
-       }
-    
 }
-
-git add DocotorPatient/AppDelegate.swift  DocotorPatient/Info.plist  DocotorPatient/ServiceLayer/ServerCommunicationManager.swift DocotorPatient/Utilities/Constant/Constant.swift DocotorPatient/ViewController.swift DocotorPatient/ViewController/Authentication/SignuUpViewController.swift Podfile

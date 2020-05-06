@@ -583,7 +583,7 @@ extension UsersViewController: SettingsViewControllerDelegate {
         }
         let uuidString = identifierForVendor.uuidString
         #if targetEnvironment(simulator)
-        disconnectUser()
+        self.disconnectUser()
         #else
         QBRequest.subscriptions(successBlock: { (response, subscriptions) in
             
@@ -605,43 +605,5 @@ extension UsersViewController: SettingsViewControllerDelegate {
             }
         }
         #endif
-    }
-    
-    private func disconnectUser() {
-        QBChat.instance.disconnect(completionBlock: { error in
-            if let error = error {
-                SVProgressHUD.showError(withStatus: error.localizedDescription)
-                return
-            }
-            self.logOut()
-        })
-    }
-    
-    private func unregisterSubscription(forUniqueDeviceIdentifier uuidString: String) {
-        QBRequest.unregisterSubscription(forUniqueDeviceIdentifier: uuidString, successBlock: { response in
-            self.disconnectUser()
-        }, errorBlock: { error in
-            if let error = error.error {
-                SVProgressHUD.showError(withStatus: error.localizedDescription)
-                return
-            }
-            SVProgressHUD.dismiss()
-        })
-    }
-    
-    private func logOut() {
-        QBRequest.logOut(successBlock: { [weak self] response in
-            //ClearProfile
-            Profile.clearProfile()
-            SVProgressHUD.dismiss()
-            //Dismiss Settings view controller
-            self?.dismiss(animated: false)
-            
-            DispatchQueue.main.async(execute: {
-                self?.navigationController?.popToRootViewController(animated: false)
-            })
-        }) { response in
-            debugPrint("QBRequest.logOut error\(response)")
-        }
     }
 }

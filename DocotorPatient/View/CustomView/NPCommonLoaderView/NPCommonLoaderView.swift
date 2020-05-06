@@ -78,7 +78,7 @@ class NPCommonLoaderView: UIView {
         Bundle.main.loadNibNamed(String(describing: NPCommonLoaderView.self), owner: self, options: nil)
         self.addSubview(self.viewMainContent)
         self.viewMainContent.frame = self.bounds
-        self.activityIndicatorView.color = Constant.Color.DarkBlue
+        self.activityIndicatorView.color = Constant.Color.GreenButton
         self.viewMainContent.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     

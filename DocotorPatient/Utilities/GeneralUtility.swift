@@ -17,6 +17,8 @@ import Foundation
 import UIKit
 import MobileCoreServices
 import AVFoundation
+import Quickblox
+import QuickbloxWebRTC
 
 struct GeneralUtility {
     
@@ -233,4 +235,36 @@ extension UIView {
             toastLabel.removeFromSuperview()
         })
     }
+}
+extension UIViewController {
+           func disconnectUser() {
+            GeneralUtility.showProcessing()
+                   QBChat.instance.disconnect(completionBlock: { error in
+                       if let error = error {
+                        GeneralUtility.endProcessing()
+                           GeneralUtility.showAlert(message: error.localizedDescription)
+                           return
+                       }
+                       self.logOut()
+                   })
+               }
+               
+               private func logOut() {
+                   QBRequest.logOut(successBlock: { [weak self] response in
+                       //ClearProfile
+                       Profile.clearProfile()
+                    GeneralUtility.endProcessing()
+                       //Dismiss Settings view controller
+                       self?.dismiss(animated: false)
+                       Constant.appDelegate.loginViewController()
+        //               DispatchQueue.main.async(execute: {
+        //                   self?.navigationController?.popToRootViewController(animated: false)
+        //               })
+                   }) { response in
+                    GeneralUtility.endProcessing()
+                    GeneralUtility.showAlert(message: response.error.debugDescription)
+                       debugPrint("QBRequest.logOut error\(response)")
+                   }
+               }
+
 }

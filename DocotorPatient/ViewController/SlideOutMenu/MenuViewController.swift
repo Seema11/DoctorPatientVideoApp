@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import PopupDialog 
+import PopupDialog
+import Quickblox
+import QuickbloxWebRTC
 
 struct MenuItem {
     let title: String
@@ -208,7 +210,8 @@ extension MenuViewController {
     {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
-        Constant.appDelegate.loginViewController()
+        self.disconnectUser()
+        
     }
     func performAPiCallForLogoutUser()  {
        

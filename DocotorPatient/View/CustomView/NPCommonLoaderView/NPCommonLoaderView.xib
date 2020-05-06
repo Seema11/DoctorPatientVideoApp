@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NPCommonLoaderView" customModule="DeliverIt" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NPCommonLoaderView" customModule="DocotorPatient" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicatorView" destination="2zV-1M-YiB" id="IoV-0Q-lc1"/>
                 <outlet property="labelTitle" destination="TIf-zd-JZb" id="g5p-IO-VzP"/>
@@ -38,7 +38,7 @@
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                            <color key="value" name="PrimaryBlue"/>
+                                            <color key="value" name="GreenButton"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballTrianglePath"/>
                                     </userDefinedRuntimeAttributes>
@@ -46,7 +46,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3F-Pj-KFx">
                                     <rect key="frame" x="52" y="72" width="43" height="53.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIf-zd-JZb" customClass="QLKLabelBold" customModule="DeliverIt" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIf-zd-JZb" customClass="QLKLabelBold" customModule="DocotorPatient" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="15" width="43" height="23.5"/>
                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" name="DarkBlue"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="M3F-Pj-KFx" firstAttribute="centerX" secondItem="XJc-xh-y0b" secondAttribute="centerX" id="EKL-ZI-gI9"/>
                                 <constraint firstItem="2zV-1M-YiB" firstAttribute="top" secondItem="XJc-xh-y0b" secondAttribute="top" constant="22" id="Ny8-97-vfI"/>
@@ -97,11 +97,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="DarkBlue">
-            <color red="0.054999999701976776" green="0.054999999701976776" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="PrimaryBlue">
-            <color red="0.0" green="0.42699998617172241" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="GreenButton">
+            <color red="0.019999999552965164" green="0.6470000147819519" blue="0.54500001668930054" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
