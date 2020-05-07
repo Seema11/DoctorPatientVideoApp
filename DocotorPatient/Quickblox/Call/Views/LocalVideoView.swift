@@ -18,7 +18,7 @@ class LocalVideoView: UIView {
     weak var delegate: LocalVideoViewDelegate?
     var videoLayer: AVCaptureVideoPreviewLayer?
     
-    private let image = UIImage(named: "switchCamera")
+    private let image = UIImage(named: "rotate-cemera-btn 50-45")
     
     lazy private var switchCameraBtn: UIButton = {
         let switchCameraBtn = UIButton(type: .custom)

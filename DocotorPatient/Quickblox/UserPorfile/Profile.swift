@@ -81,7 +81,7 @@ class Profile: NSObject  {
     }
     
     var fullName: String {
-        return user!.fullName!
+        return user!.fullName ?? ""
     }
     
     var tags: [String]? {

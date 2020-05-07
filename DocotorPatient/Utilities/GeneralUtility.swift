@@ -248,6 +248,18 @@ extension UIViewController {
                        self.logOut()
                    })
                }
+    
+     func unregisterSubscription(forUniqueDeviceIdentifier uuidString: String) {
+           QBRequest.unregisterSubscription(forUniqueDeviceIdentifier: uuidString, successBlock: { response in
+               self.disconnectUser()
+           }, errorBlock: { error in
+               if let error = error.error {
+                GeneralUtility.showAlert(message: error.localizedDescription)
+                   return
+               }
+            GeneralUtility.endAllProcessing()
+           })
+       }
                
                private func logOut() {
                    QBRequest.logOut(successBlock: { [weak self] response in

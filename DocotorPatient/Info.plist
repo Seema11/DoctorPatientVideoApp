@@ -27,9 +27,13 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>We need your camera permission for Video Call</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need your permission for Voice Call</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
+		<string>remote-notification</string>
+		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

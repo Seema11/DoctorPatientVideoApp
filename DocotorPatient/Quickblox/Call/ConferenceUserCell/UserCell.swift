@@ -75,8 +75,7 @@ class UserCell: UICollectionViewCell {
         }
     }
     
-    let unmutedImage = UIImage(named: "ic-qm-videocall-dynamic-off")!
-    let mutedImage = UIImage(named: "ic-qm-videocall-dynamic-on")!
+    let unmutedImage = UIImage(named: "rotate-cemera-btn 50-45")!//  let mutedImage = UIImage(named: "rotate-cemera-btn 50-45")!
     
     //MARK: - Life Cycle
     override func awakeFromNib() {
@@ -84,7 +83,7 @@ class UserCell: UICollectionViewCell {
         backgroundColor = UIColor.clear
         bitrateLabel.backgroundColor = UIColor(red: 0.9441, green: 0.9441, blue: 0.9441, alpha: 0.350031672297297)
         muteButton.setImage(unmutedImage, for: .normal)
-        muteButton.setImage(mutedImage, for: .selected)
+       // muteButton.setImage(mutedImage, for: .selected)
         muteButton.isHidden = true
         muteButton.isSelected = false
     }

@@ -410,7 +410,18 @@ extension PatientListVC {
                         
                         CallKitManager.instance.startCall(withUserIDs: opponentsIDs, session: session, uuid: uuid)
                         
-                        if let callViewController = self.storyboard?.instantiateViewController(withIdentifier: UsersSegueConstant.call) as? CallViewController {
+                        
+                        let vc : CallViewController?
+                        
+                        if #available(iOS 13.0, *) {
+                            vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "CallViewController") as? CallViewController
+                        } else {
+                            
+                            vc = UIViewController.instantiateFrom("Call", "CallViewController") as? CallViewController
+                            // Fallback on earlier versions
+                        }
+                        
+                        if let callViewController = vc {
                             callViewController.session = self.session
                             callViewController.usersDataSource = self.dataSource
                             callViewController.callUUID = uuid

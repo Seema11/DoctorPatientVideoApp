@@ -119,7 +119,7 @@ extension ViewController {
                   currentUser.password = password
                   currentUser.updatedAt = Date()
                   Profile.update(currentUser)
-                
+                                
                 QBChat.instance.connect(withUserID: currentUser.id, password: currentUser.password!, completion: { (error) in
                     GeneralUtility.endProcessing()
                     if error == nil {
@@ -172,7 +172,7 @@ extension ViewController {
             user.updatedAt = Date()
         
             Profile.update(user)
-            self?.connectToChat(user: user)
+        //    self?.connectToChat(user: user)
             
             }, errorBlock: { [weak self] response in
                 self?.handleError(response.error?.error, domain: ErrorDomain.signUp)

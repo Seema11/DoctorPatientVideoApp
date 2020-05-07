@@ -39,14 +39,14 @@ class ButtonsFactory {
     class func videoEnable() -> CustomButton {
         let button: CustomButton = self.button(withFrame: ButtonsFactoryConstants.rect, backgroundColor:ButtonsFactoryConstants.backgroundColor, selectedColor: ButtonsFactoryConstants.selectedColor)
         button.pushed = true
-        button.iconView = self.iconView(withNormalImage: "camera_on_ic", selectedImage: "camera_off_ic")
+        button.iconView = self.iconView(withNormalImage: "mute_video", selectedImage: "mute_video")
         return button
     }
     
     class func audioEnable() -> CustomButton {
         let button: CustomButton = self.button(withFrame: ButtonsFactoryConstants.rect, backgroundColor: ButtonsFactoryConstants.backgroundColor, selectedColor: ButtonsFactoryConstants.selectedColor)
         button.pushed = true
-        button.iconView = self.iconView(withNormalImage: "mute_on_ic", selectedImage: "mute_off_ic")
+        button.iconView = self.iconView(withNormalImage: "mute_audio", selectedImage: "mute_audio")
         return button
     }
     
@@ -71,7 +71,8 @@ class ButtonsFactory {
     
     class func decline() -> CustomButton {
         let button: CustomButton = self.button(withFrame: ButtonsFactoryConstants.declineRect, backgroundColor: ButtonsFactoryConstants.declineColor, selectedColor: ButtonsFactoryConstants.selectedColor)
-        button.iconView = self.iconView(withNormalImage: "decline-ic", selectedImage: "decline-ic")
+    //    button.iconView = self.iconView(withNormalImage: "call-End-btn 50-50", selectedImage: "call-End-btn 50-50")
+         button.iconView = self.iconView(withNormalImage: "", selectedImage: "")
         return button
     }
     

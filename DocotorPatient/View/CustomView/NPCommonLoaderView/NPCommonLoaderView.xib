@@ -26,7 +26,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYp-S8-tHV">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJc-xh-y0b">
+                        <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJc-xh-y0b">
                             <rect key="frame" x="114" y="260" width="147" height="126"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zV-1M-YiB" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
@@ -61,7 +61,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="M3F-Pj-KFx" firstAttribute="centerX" secondItem="XJc-xh-y0b" secondAttribute="centerX" id="EKL-ZI-gI9"/>
                                 <constraint firstItem="2zV-1M-YiB" firstAttribute="top" secondItem="XJc-xh-y0b" secondAttribute="top" constant="22" id="Ny8-97-vfI"/>
