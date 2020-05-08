@@ -47,6 +47,15 @@ class PatientListVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func setupView() {
+          QBRTCClient.instance().add(self)
+         if Reachability.instance.networkConnectionStatus() != NetworkConnectionStatus.notConnection {
+             loadUsers()
+         }
+         voipRegistry.delegate = self
+         voipRegistry.desiredPushTypes = Set<PKPushType>([.voIP])
+     }
+    
     @objc func loadUsers() {
         let firstPage = QBGeneralResponsePage(currentPage: 1, perPage: 100)
         QBRequest.users(withExtendedRequest: ["order": "desc date updated_at"],
@@ -59,15 +68,6 @@ class PatientListVC: UIViewController {
                 GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
                 debugPrint("[UsersViewController] loadUsers error: \(self.errorMessage(response: response) ?? "")")
         })
-    }
-    
-    func setupView() {
-         QBRTCClient.instance().add(self)
-        if Reachability.instance.networkConnectionStatus() != NetworkConnectionStatus.notConnection {
-            loadUsers()
-        }
-        voipRegistry.delegate = self
-        voipRegistry.desiredPushTypes = Set<PKPushType>([.voIP])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,12 +104,14 @@ class PatientListVC: UIViewController {
     @IBAction func didTapButtonAudoiCall(_ sender: UIButton) {
         
         let selectUser : QBUUser = userList[sender.tag]
+         self.dataSource.selectedUsers = [selectUser]
         let opid : NSNumber = NSNumber(value: selectUser.id)
         self.call(with: .audio, op_id: [opid])
     }
     @IBAction func didTapButtonVideoCall(_ sender: UIButton) {
         
        let selectUser : QBUUser = userList[sender.tag]
+        self.dataSource.selectedUsers = [selectUser]
                let opid : NSNumber = NSNumber(value: selectUser.id)
                self.call(with: .video, op_id: [opid])
         

@@ -40,13 +40,25 @@ enum MediaType {
 
 enum EnumWebService {
     case misc
+    case registration([String : Any])
+    case login([String : Any])
+    case addPatient([String : Any])
+    case patientList([String : Any])
+    case addCallHistory([String : Any])
+    case callHistory([String : Any])
+    case editProfile([String : Any])
     
     var url : String {
         var apiName = ""
         switch self {
         case .misc:                    apiName = ""
-        default:
-            apiName = ServerConstant.WebService.apiURL
+        case .registration:            apiName = ServerConstant.WebService.Registration.name
+        case .login:                   apiName = ServerConstant.WebService.Login.name
+        case .addPatient:              apiName = ServerConstant.WebService.AddPatient.name
+        case .editProfile:             apiName = ServerConstant.WebService.EditProfile.name
+        case .patientList:             apiName = ServerConstant.WebService.PatientList.name
+        case .addCallHistory:          apiName = ServerConstant.WebService.AddCallHistory.name
+        case .callHistory:             apiName = ServerConstant.WebService.CallHistory.name
         }
         
         return "\(ServerConstant.WebService.apiURL)\(apiName)"
@@ -54,44 +66,58 @@ enum EnumWebService {
     
     var encoding : ParameterEncoding {
         switch self{
-        case .misc:                   return URLEncoding.queryString
-        case .misc:                   return URLEncoding.httpBody
-        default:                      return JSONEncoding.default
+     //   case .misc:                   return URLEncoding.queryString
+   //     case .misc:                   return URLEncoding.httpBody
+        default:                      return URLEncoding.default
         }
     }
     
     var httpMethod : HTTPMethod {
         switch self {
-        case .misc:                             return HTTPMethod.get
-        case .misc:                              return HTTPMethod.delete
+    //    case .misc:                                return HTTPMethod.get
+       // case .misc:                                return HTTPMethod.delete
         default:                                   return HTTPMethod.post
         }
     }
     
     var isMultipart : Bool {
         switch self{
-        case .misc:            return true
-    default:                                  return false
+        case .login,
+             .registration:           return true
+        default:                      return false
        }
     }
     var mediaType: MediaType {
          switch self {
          case .misc:    return MediaType.image
     
-         default:                      return MediaType.none
+         default:       return MediaType.none
          }
      }
     
     var httpHeaders : HTTPHeaders {
         switch self {
         case .misc:            return ServerCommunicationManager.getDefaultlHeader()
-        default:                        return ServerCommunicationManager.getAuthotizationTokenHeader()
+        default:               return ServerCommunicationManager.getDefaultlHeader()
         }
     }
      
     var parameters : [String : Any]? {
         switch self {
         case .misc: return nil
+        case .registration(let parameter):
+            return parameter
+        case .login(let parameter):
+            return parameter
+        case .addPatient(let parameter):
+            return parameter
+        case .editProfile(let paramater):
+            return paramater
+        case .addCallHistory(let parameter):
+            return parameter
+        case .callHistory(let parameter) :
+            return parameter
+            
 //        case .userSignIn(let email, let password, let fcmToken):
 //            var parameter = [String : Any].init()
 //            parameter.updateValue(email, forKey: ServerConstant.WebService.SignIn.Request.email)
@@ -99,8 +125,6 @@ enum EnumWebService {
 //            parameter.updateValue(fcmToken, forKey: ServerConstant.WebService.SignIn.Request.fcmToken)
 //
 //        return parameter
-            
-    
             
         default:
             return nil
@@ -111,15 +135,15 @@ enum EnumWebService {
 class ServerCommunicationManager {
     
     typealias APICompletion = (Bool,String,Int,Any?,Error?) -> Void
-    let manager : Session
+    let manager : SessionManager
     init() {
-        self.manager = Alamofire.Session.default
+        self.manager = Alamofire.SessionManager.default
     }
 }
 extension ServerCommunicationManager {
     
    fileprivate class func getAuthotizationTokenHeader() -> HTTPHeaders {
-        var httpHeader = HTTPHeaders.init()
+    let httpHeader = HTTPHeaders.init()
       //  httpHeader.updateValue(Constant.appDelegate.autorization!, forKey: "Authorization")
         return httpHeader
     
@@ -127,7 +151,7 @@ extension ServerCommunicationManager {
     
    fileprivate class func getDefaultlHeader() -> HTTPHeaders {
         var httpheader = HTTPHeaders.init()
-   //     httpheader.updateValue("application/json", forKey: "Content-Type")
+        httpheader.updateValue("application/json", forKey: "Content-Type")
         return httpheader
     }
 }
@@ -137,25 +161,23 @@ extension ServerCommunicationManager {
     @discardableResult
     func apiCall(forWebService webService: EnumWebService, completion:@escaping APICompletion) -> DataRequest? {
         
-        if Reachability.isConnectedToNetwork(){
+        if (Reachability.isConnectedToNetwork()) {
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
             }
             
-            
             if webService.isMultipart == true {
-                   self.multipartFormRequest(webService: webService, completion: completion)
+                self.multipartFormRequest(webService: webService, completion: completion)
             } else {
-                #if DEBUG
-       //         print("************* Request Parameters: *************\n\(JSON(webService.parameters ?? [:]).rawString() ?? "")\n***********************************************\n")
-                #endif
+                print("************* Request Parameters: *************\n\(JSON(webService.parameters ?? [:]).rawString() ?? "")\n***********************************************\n")
                 let dataRequest = self.apiCall(withURL: webService.url, method: webService.httpMethod, parameters: webService.parameters, encoding: webService.encoding, headers: webService.httpHeaders, completion: completion, webService: webService)
                 return dataRequest
             }
         } else {
             print("Internet connection not available.")
-            GeneralUtility.endAllProcessing()
-            GeneralUtility.showAlert(message: "Check Internet Connection")
+          //  completion(false, "", 0, nil, nil)
+            GeneralUtility.endProcessing()
+            GeneralUtility.showAlert(message: "Please check your network connection")
         }
         return nil
         
@@ -163,12 +185,12 @@ extension ServerCommunicationManager {
     
     fileprivate func apiCall(withURL stringURL: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, encoding: ParameterEncoding = JSONEncoding.default, headers: HTTPHeaders? = nil, completion:@escaping APICompletion, webService: EnumWebService = .misc) -> DataRequest {
         
-        let dataRequest = self.manager.request(stringURL, method: method, parameters: parameters, encoding: encoding, headers: headers).validate(statusCode: [StatusCode.OK.code , StatusCode.Created.code]).responseJSON { (dataResponse) in
+        let dataRequest = self.manager.request(stringURL, method: method, parameters: parameters, encoding: encoding, headers: headers).validate(statusCode: [StatusCode.OK.code]).responseJSON { (dataResponse) in
             
             let tastInterval = (dataResponse.metrics?.taskInterval ?? DateInterval.init())
-            #if DEBUG
+            
             print("\n************* Task Interval: *************\nRequest URL:\t\(dataResponse.request?.url?.absoluteString ?? "")\nTask Interval:\t\(tastInterval)\nDuration:\t\t\(tastInterval.duration)\n******************************************\n")
-            #endif
+            
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
@@ -178,7 +200,6 @@ extension ServerCommunicationManager {
             switch dataResponse.result {
                 
             case .success(let value):
-                //     ServerCommunicationManager.saveToken(dataResponse: dataResponse)
                 self.handleSuccess(webService: webService, value: value, completion: { (status, message, response, error) in
                     completion(status, message, statusCode, response, error)
                 })
@@ -189,11 +210,7 @@ extension ServerCommunicationManager {
             }
             
         }
-        
-        #if DEBUG
-        print("*********** curl request: ***********\n\(dataRequest.description)\n*************************************")
-        #endif
-        
+        print("*********** curl request: ***********\n\(dataRequest.debugDescription)\n*************************************")
         return dataRequest
         
     }
@@ -232,45 +249,42 @@ extension ServerCommunicationManager {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             
-//            switch encodingResult {
-//                
-//            case .success(let upload, _, _):
-//                
-//                let dataRequest = upload.validate(statusCode: [StatusCode.OK.code]).responseJSON { dataResponse in
-//                    
-//                    let statusCode = dataResponse.response?.statusCode ?? 0
-//                    
-//                    switch dataResponse.result {
-//                    case .success(let value):
-//                        self.handleSuccess(webService: webService, value: value, completion: { (status, message, response, error) in
-//                            completion(status, message, statusCode, response, error)
-//                        })
-//                        break
-//                    case .failure(let error):
-//                        self.handleError(dataResponse: dataResponse, error: error, completion: completion)
-//                        break
-//                    }
-//                    
-//                }
-//                print("*********** curl request: ***********\n\(dataRequest.debugDescription)\n*************************************")
-//                break
-//                
-//            case .failure(let error):
-//                self.handleError(error: error)
-//                completion(false, error.localizedDescription, 0, nil, error)
-//                break
-//            }
+            switch encodingResult {
+            case .success(let upload, _, _):
+                
+                let dataRequest = upload.validate(statusCode: [StatusCode.OK.code]).responseJSON { dataResponse in
+                    
+                    let statusCode = dataResponse.response?.statusCode ?? 0
+                    
+                    switch dataResponse.result {
+                    case .success(let value):
+                        self.handleSuccess(webService: webService, value: value, completion: { (status, message, response, error) in
+                            completion(status, message, statusCode, response, error)
+                        })
+                        break
+                    case .failure(let error):
+                        self.handleError(dataResponse: dataResponse, error: error, completion: completion)
+                        break
+                    }
+                    
+                }
+                print("*********** curl request: ***********\n\(dataRequest.debugDescription)\n*************************************")
+                
+            case .failure(let error):
+                self.handleError(error: error)
+                completion(false, error.localizedDescription, 0, nil, error)
+            }
             
         }
         
     }
+    
 }
 
 extension ServerCommunicationManager {
-    func handleSuccess(webService:EnumWebService,value : Any,completion:@escaping(Bool,String,Any?,Error?) -> Void) {
-        
-        let responseJSON = JSON(value)// JSON(value)
-        
+    
+    func handleSuccess(webService: EnumWebService, value: Any, completion:@escaping (Bool, String, Any?, Error?) -> Void) {
+        let responseJSON = JSON(value)
         print("************* Response: *************\n\(responseJSON)\n*************************************\n")
         
         let message = self.errorMessage(fromResponse: responseJSON)
@@ -297,34 +311,24 @@ extension ServerCommunicationManager {
             }
             return
         }
-        if let responseDictionary = responseJSON.dictionaryObject {
-           self.setAuthorizationTokenData(dictionary: responseDictionary)
-        }
         
         completion(true, message, data, nil)
         return
         
     }
     
-    // Set Authorization Token
-    
-    func setAuthorizationTokenData(dictionary:[String : Any]) {
-        if dictionary.keys.contains("token") {
-            print(dictionary["token"])
-       //     UserDefaults.saveString(dictionary["token"] as? String, forKey: Constant.UserDefaultsKey.authorization)
-        } else {
-          // does not contain key
-        }
+    func handleError(error: Error?) {
+        print("Error: \n\(error?.localizedDescription ?? "")\n")
     }
     
-    func handleError(error:Error?) {
-         print("Error: \n\(error?.localizedDescription ?? "")\n")
-    }
-    func handleError(dataResponse : DataResponse<Any,AFError>,error:Error,completion:@escaping APICompletion)  {
+    func handleError(dataResponse: DataResponse<Any>, error: Error, completion:@escaping APICompletion) {
         self.handleError(error: error)
         let statusCode = dataResponse.response?.statusCode ?? 0
+        
+        // IF statuscode 401
+        
         if statusCode == StatusCode.Unauthorized.code {
-         // here code for 401 error check logout code
+           // self.performLogout()
             return
         }
         if let responseData = dataResponse.data {
@@ -346,6 +350,7 @@ extension ServerCommunicationManager {
         completion(false, error.localizedDescription, statusCode, nil, error)
         return
     }
+    
 }
 
 extension ServerCommunicationManager {
@@ -380,6 +385,7 @@ extension ServerCommunicationManager {
             }
         }
         return ""
+        
     }
     
     func getErrorMessage(fromErrorDictionary errorDictionary: [String: Any]?) -> String? {

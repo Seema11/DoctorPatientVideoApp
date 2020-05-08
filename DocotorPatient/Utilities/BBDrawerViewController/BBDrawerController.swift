@@ -235,8 +235,7 @@ open class BBDrawerController: UIViewController {
             guard let drawerViewController = drawerViewController else { return }
             addChild(drawerViewController)
 
-            drawerViewController.view.layer.shadowColor   = UIColor.black.cgColor
-            drawerViewController.view.layer.shadowOpacity = 0.4
+            drawerViewController.view.layer.shadowColor = UIColor.black.cgColor;            drawerViewController.view.layer.shadowOpacity = 0.4
             drawerViewController.view.layer.shadowRadius  = 5.0
             drawerViewController.view.translatesAutoresizingMaskIntoConstraints = false
             _containerView.addSubview(drawerViewController.view)

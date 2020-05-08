@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (4.9.1)
   - DropDown (2.3.13)
   - DynamicBlurView (4.1.0)
   - Firebase/Core (6.23.0):
@@ -107,7 +107,7 @@ PODS:
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 4.9.1)
   - DropDown
   - Firebase/Core
   - Firebase/Messaging
@@ -159,7 +159,7 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
@@ -191,6 +191,6 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: be7d3f4066b3a5567c2774e00c35ddfadf47cff9
+PODFILE CHECKSUM: c7870a2d392d68070d390f502a016167fe364101
 
 COCOAPODS: 1.9.1

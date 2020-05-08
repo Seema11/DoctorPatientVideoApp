@@ -40,8 +40,9 @@ class SignuUpViewController: UIViewController {
     }
     @IBAction func didTapButtonSignUp(_ sender: Any) {
         
-        if let fullName = textfieldUserName.text,
+            if let fullName = textfieldUserName.text,
             let login = textfieldEmailAddress.text,let passowrd = textfieldPassword.text {
+           
                        let user = QBUUser()
                        user.login = login
                        user.fullName = fullName
@@ -60,5 +61,24 @@ class SignuUpViewController: UIViewController {
     @IBAction func didTapButtonLogin(_ sender: Any) {
         
         self.navigationController?.popViewController(animated: true)
+    }
+}
+extension SignuUpViewController {
+    func performApiCallforSigup() {
+        GeneralUtility.showProcessing()
+        let parameter : [String:Any] = ["email":self.textfieldEmailAddress.text!,"username":self.textfieldUserName.text!,"password":self.textfieldPassword.text!]
+        
+        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.registration(parameter)) { (status, message, statusCode, response, error) in
+            GeneralUtility.endProcessing()
+            if (status) {
+                GeneralUtility.showAlert(message: message)
+                Constant.appDelegate.loginViewController()
+            } else {
+                GeneralUtility.endProcessing()
+                GeneralUtility.showAlert(message: message)
+            }
+            
+            
+        }
     }
 }

@@ -150,8 +150,8 @@ enum StatusCode {
 
 struct ServerConstant {
     
-  //  static let domain = "http://localhost:9000/"
-    static let domain = "http://139.59.93.55:9000/"
+    //  static let domain = "http://localhost:9000/"
+    static let domain = "http://yashikainfotech.website/doctorapi/api/"
     
     struct WebService {
         
@@ -210,6 +210,62 @@ struct ServerConstant {
                 }
             }
         }
+        struct Registration {
+            static let name = "registration.php"
+            struct Request {
+                static let email = "email"
+                static let username = "username"
+                static let password = "password"
+            }
+        }
+        struct Login {
+            static let name = "login.php"
+            struct Request {
+                static let username = "username"
+                static let password = "password"
+            }
+        }
+        struct AddPatient {
+            static let name = ""
+            struct Request {
+            }
+        }
+        struct PatientList {
+                   static let name = ""
+                   struct Request {
+                    
+                   }
+               }
+        struct AddCallHistory {
+            static let name = "insert.php"
+            struct Request {
+                static let userid = "userid"
+                static let username = "username"
+                static let email = "email"
+                static let phoneno = "phoneno"
+                static let title = "title"
+            }
+        }
+        struct CallHistory {
+            static let name = "viewcallhistory.php"
+            struct Request {
+                static let userid = "userid"
+                static let patientid = "patientid"
+            }
+        }
+        struct EditProfile {
+            static let name = "edit.php"
+            struct Request {
+                static let userid = "userid"
+                static let username = "username"
+                static let email = "email"
+                static let phoneno = "phoneno"
+                static let title = "title"
+                static let profileimage = "profileimage"
+                
+            }
+        }
+        
     }
     
     struct WebPage {

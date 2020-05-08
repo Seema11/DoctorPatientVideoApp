@@ -10,6 +10,7 @@ import UIKit
 import Quickblox
 import QuickbloxWebRTC
 import SVProgressHUD
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -55,6 +56,7 @@ class ViewController: UIViewController {
         
         if let password = textfieldPassword.text,
             let login = textfielduserName.text {
+         //   self.performApiCallforLogin()
             self.login(fullName: "", login: login, password: password)
         } else {
             GeneralUtility.showAlert(message: "Username and password is not null")
@@ -113,7 +115,6 @@ extension ViewController {
         GeneralUtility.showProcessing()
             QBRequest.logIn(withUserLogin: self.textfielduserName.text!, password: self.textfieldPassword.text!, successBlock: { (response, user) in
                 
-                
                 let currentUser: QBUUser = user
                   currentUser.email = login
                   currentUser.password = password
@@ -127,6 +128,7 @@ extension ViewController {
                         GeneralUtility.endProcessing()
                         //did Login action
                         Constant.appDelegate.showDrawerView()
+                        //self.performApiCallforLogin()
                     } else {
                         if error?._code == QBResponseStatusCode.unAuthorized.rawValue {
                                                                      // Clean profile
@@ -140,7 +142,14 @@ extension ViewController {
                           print(error as Any)
                     }
                 })
-        })
+        }, errorBlock: { (response) in
+            GeneralUtility.endProcessing()
+            self.handleError(response.error as? Error, domain: ErrorDomain.logIn)
+             if response.status == QBResponseStatusCode.unAuthorized {
+                                                // Clean profile
+                GeneralUtility.showAlert(message: "User Not Found")
+                }
+            })
 //                        QBChat.instance.connect(withUserID: user.id, password: user.password!, completion: { (error) in
 //                                    user.password = password
 //                                    user.updatedAt = Date()
@@ -201,7 +210,7 @@ extension ViewController {
                                       } else {
                                           GeneralUtility.endProcessing()
                                           //did Login action
-                                         Constant.appDelegate.showDrawerView()
+                                        self?.performApiCallforLogin()
                                         //  self?.performSegue(withIdentifier: LoginConstant.showUsers, sender: nil)
                                       }
           })
@@ -238,4 +247,46 @@ extension ViewController {
            }
            inputEnabled = true
        }
+}
+extension ViewController {
+    func performApiCallforLogin() {
+        GeneralUtility.showProcessing()
+        let parameter : [String:Any] = ["username":self.textfielduserName.text!,"password":self.textfieldPassword.text!]
+
+        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.login(parameter)) { (status, message, statusCode, response, error) in
+            GeneralUtility.endProcessing()
+            if (status) {
+                Constant.appDelegate.showDrawerView()
+            } else {
+                GeneralUtility.endProcessing()
+                GeneralUtility.showAlert(message: message)
+            }
+
+
+        }
+    }
+//    func performApiCallforLogin() {
+//        let url = "http://yashikainfotech.website/doctorapi/api/login.php"
+//
+//               let parameters = [
+//                   "username":"Demo40",
+//                   "password":"123456"
+//                   ] as [String : Any]
+//
+//               Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
+//                   switch response.result {
+//                   case .success:
+//                       if let value = response.result.value {
+//                           print(value)
+//                           let data : NSDictionary = value as! NSDictionary
+//                        Constant.appDelegate.showDrawerView()
+//
+//                       }
+//                   case .failure(let error):
+//                       print(error)
+//                       GeneralUtility.showAlert(message: error.localizedDescription)
+//                   }
+//               }
+//
+//           }
 }
