@@ -42,13 +42,14 @@ class SignuUpViewController: UIViewController {
         
             if let fullName = textfieldUserName.text,
             let login = textfieldEmailAddress.text,let passowrd = textfieldPassword.text {
-           
+                GeneralUtility.showProcessing()
                        let user = QBUUser()
                        user.login = login
                        user.fullName = fullName
                        user.password = passowrd
 
                        QBRequest.signUp(user, successBlock: { (response, user) in
+                        GeneralUtility.endProcessing()
                         GeneralUtility.showAlert(message: "User Successfully created")
                             self.navigationController?.popViewController(animated: true)
                        }, errorBlock: { (response) in

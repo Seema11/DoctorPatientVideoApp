@@ -71,11 +71,11 @@ class ViewController: UIViewController {
     @IBAction func didTapButtonSignup(_ sender: Any) {
         
            if #available(iOS 13.0, *) {
-           let signupVc = self.storyboard?.instantiateViewController(identifier: "SignuUpViewController") as! SignuUpViewController
+             let signupVc = self.storyboard?.instantiateViewController(identifier: "SignuUpViewController") as! SignuUpViewController
              self.navigationController?.pushViewController(signupVc, animated: true)
 
                 } else {
-                    let signupVc = UIViewController.instantiateFrom("Menu", "SignuUpViewController") as! SignuUpViewController
+                    let signupVc = UIViewController.instantiateFrom("Main", "SignuUpViewController") as! SignuUpViewController
                     self.navigationController?.pushViewController(signupVc, animated: true)
                 }
     }
