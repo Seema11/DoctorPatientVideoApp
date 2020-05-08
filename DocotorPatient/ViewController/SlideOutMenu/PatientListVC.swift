@@ -309,16 +309,27 @@ extension PatientListVC: QBRTCClientDelegate {
                                                             return
                                                         }
                                                         
-                                                        if let callViewController = self.storyboard?.instantiateViewController(withIdentifier: UsersSegueConstant.call) as? CallViewController {
-                                                            callViewController.session = session
-                                                            callViewController.usersDataSource = self.dataSource
-                                                            callViewController.callUUID = self.callUUID
-                                                            self.navViewController = UINavigationController(rootViewController: callViewController)
+                                                        
+                                                        let callViewController : CallViewController?
+                                                                              
+                                                                              if #available(iOS 13.0, *) {
+                                                                                  callViewController  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "CallViewController") as? CallViewController
+                                                                              } else {
+                                                                                  
+                                                                                  callViewController = UIViewController.instantiateFrom("Call", "CallViewController") as? CallViewController
+                                                                                  // Fallback on earlier versions
+                                                                              }
+                                                        
+                                                      
+                                                        callViewController?.session = session
+                                                        callViewController?.usersDataSource = self.dataSource
+                                                        callViewController?.callUUID = self.callUUID
+                                                        self.navViewController = UINavigationController(rootViewController: callViewController!)
                                                  
                                                                 self.navViewController.modalTransitionStyle = .crossDissolve
                                                                 self.present(self.navViewController , animated: false)
                                                         
-                                                        }
+                                                        
                 }, completion: { (end) in
                     debugPrint("[UsersViewController] endCall")
             })
