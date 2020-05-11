@@ -76,6 +76,7 @@ extension Constant {
             static let isLogin = "isLogin"
             static let _id = "_id"
             static let password = "password"
+            static let userLoginData = "UserLoginData"
         }
 }
 struct LoginConstant {
@@ -109,6 +110,6 @@ struct LoginStatusConstant {
 
 struct LoginNameRegularExtention {
     static let user = "^[^_][\\w\\u00C0-\\u1FFF\\u2C00-\\uD7FF\\s]{2,19}$"
-    static let passord = "^[a-zA-Z][a-zA-Z0-9]{7,14}$"
+    static let passord = "^[a-zA-Z][a-zA-Z0-9]{4,14}$"
 }
 

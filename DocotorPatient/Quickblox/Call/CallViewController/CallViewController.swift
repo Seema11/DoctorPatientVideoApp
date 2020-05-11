@@ -11,29 +11,29 @@ import Quickblox
 import QuickbloxWebRTC
 import SVProgressHUD
 
-enum CallViewControllerState : Int {
-    case disconnected
-    case connecting
-    case connected
-    case disconnecting
-}
-
-struct CallStateConstant {
-    static let disconnected = "Disconnected"
-    static let connecting = "Connecting..."
-    static let connected = "Connected"
-    static let disconnecting = "Disconnecting..."
-}
-
-struct CallConstant {
-    static let opponentCollectionViewCellIdentifier = "OpponentCollectionViewCellIdentifier"
-    static let unknownUserLabel = "Unknown user"
-    static let sharingViewControllerIdentifier = "SharingViewController"
-    static let refreshTimeInterval: TimeInterval = 1.0
-    
-    static let memoryWarning = NSLocalizedString("MEMORY WARNING: leaving out of call. Please, reduce the quality of the video settings", comment: "")
-    static let sessionDidClose = NSLocalizedString("Session did close due to time out", comment: "")
-}
+//enum CallViewControllerState : Int {
+//    case disconnected
+//    case connecting
+//    case connected
+//    case disconnecting
+//}
+//
+//struct CallStateConstant {
+//    static let disconnected = "Disconnected"
+//    static let connecting = "Connecting..."
+//    static let connected = "Connected"
+//    static let disconnecting = "Disconnecting..."
+//}
+//
+//struct CallConstant {
+//    static let opponentCollectionViewCellIdentifier = "OpponentCollectionViewCellIdentifier"
+//    static let unknownUserLabel = "Unknown user"
+//    static let sharingViewControllerIdentifier = "SharingViewController"
+//    static let refreshTimeInterval: TimeInterval = 1.0
+//    
+//    static let memoryWarning = NSLocalizedString("MEMORY WARNING: leaving out of call. Please, reduce the quality of the video settings", comment: "")
+//    static let sessionDidClose = NSLocalizedString("Session did close due to time out", comment: "")
+//}
 
 class CallViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     //MARK: - IBOutlets

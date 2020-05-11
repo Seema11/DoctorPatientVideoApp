@@ -39,25 +39,7 @@ class SignuUpViewController: UIViewController {
                }
     }
     @IBAction func didTapButtonSignUp(_ sender: Any) {
-        
-            if let fullName = textfieldUserName.text,
-            let login = textfieldEmailAddress.text,let passowrd = textfieldPassword.text {
-                GeneralUtility.showProcessing()
-                       let user = QBUUser()
-                       user.login = login
-                       user.fullName = fullName
-                       user.password = passowrd
-
-                       QBRequest.signUp(user, successBlock: { (response, user) in
-                        GeneralUtility.endProcessing()
-                        GeneralUtility.showAlert(message: "User Successfully created")
-                            self.navigationController?.popViewController(animated: true)
-                       }, errorBlock: { (response) in
-                        GeneralUtility.showAlert(message: response.error!.debugDescription)
-                       })
-        } else {
-            GeneralUtility.showAlert(message: "Value is not be null")
-        }
+        performApiCallforSigup()
     }
     @IBAction func didTapButtonLogin(_ sender: Any) {
         
@@ -72,8 +54,7 @@ extension SignuUpViewController {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.registration(parameter)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                GeneralUtility.showAlert(message: message)
-                Constant.appDelegate.loginViewController()
+                self.signuInQb()
             } else {
                 GeneralUtility.endProcessing()
                 GeneralUtility.showAlert(message: message)
@@ -81,5 +62,27 @@ extension SignuUpViewController {
             
             
         }
+    }
+    func signuInQb() {
+        if let fullName = textfieldUserName.text,
+                 let login = textfieldEmailAddress.text,let passowrd = textfieldPassword.text {
+                     GeneralUtility.showProcessing()
+                            let user = QBUUser()
+                            user.login = login
+                            user.fullName = fullName
+                            user.password = passowrd
+
+                            QBRequest.signUp(user, successBlock: { (response, user) in
+                             GeneralUtility.endProcessing()
+                             GeneralUtility.showAlert(message: "User Successfully created")
+                                 self.navigationController?.popViewController(animated: true)
+                            }, errorBlock: { (response) in
+                             GeneralUtility.endProcessing()
+                             GeneralUtility.showAlert(message: response.error!.debugDescription)
+                            })
+             } else {
+                       GeneralUtility.endProcessing()
+                 GeneralUtility.showAlert(message: "Value is not be null")
+             }
     }
 }

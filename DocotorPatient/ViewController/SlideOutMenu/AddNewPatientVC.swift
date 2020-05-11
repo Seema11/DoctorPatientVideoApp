@@ -12,13 +12,13 @@ class AddNewPatientVC: UIViewController {
 
     @IBOutlet weak var imageViewProfile: UIImageView!
     
-    @IBOutlet weak var textfieldUserName: UITextField!
+    @IBOutlet weak var textfieldUserName: CustomTextfield!
     
-    @IBOutlet weak var textfieldEmail: UITextField!
+    @IBOutlet weak var textfieldEmail: CustomTextfield!
     
-    @IBOutlet weak var textfiledPhoneNumber: UITextField!
+    @IBOutlet weak var textfiledPhoneNumber: CustomTextfield!
     
-    @IBOutlet weak var textfieldTitle: UITextField!
+    @IBOutlet weak var textfieldTitle: CustomTextfield!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,11 @@ class AddNewPatientVC: UIViewController {
     @IBAction func didTapButtonSave(_ sender: Any) {
     }
     @IBAction func didTapButtonAdd(_ sender: Any) {
+        self.textfieldUserName.text = ""
+        self.textfieldEmail.text = ""
+        self.textfiledPhoneNumber.text = ""
+        self.textfieldTitle.text = ""
+        self.imageViewProfile.image = nil
     }
     
     /*

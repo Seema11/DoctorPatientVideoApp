@@ -35,7 +35,6 @@ class ViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -56,8 +55,8 @@ class ViewController: UIViewController {
         
         if let password = textfieldPassword.text,
             let login = textfielduserName.text {
-         //   self.performApiCallforLogin()
-            self.login(fullName: "", login: login, password: password)
+            self.performApiCallforLogin()
+          //  self.login(fullName: "", login: login, password: password)
         } else {
             GeneralUtility.showAlert(message: "Username and password is not null")
         }
@@ -113,8 +112,8 @@ extension ViewController {
     private func login(fullName: String, login: String, password: String) {
         beginConnect()
         GeneralUtility.showProcessing()
-            QBRequest.logIn(withUserLogin: self.textfielduserName.text!, password: self.textfieldPassword.text!, successBlock: { (response, user) in
-                
+            QBRequest.logIn(withUserLogin: login, password: self.textfieldPassword.text!, successBlock: { (response, user) in
+               // print(user.fullName)
                 let currentUser: QBUUser = user
                   currentUser.email = login
                   currentUser.password = password
@@ -256,13 +255,19 @@ extension ViewController {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.login(parameter)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                Constant.appDelegate.showDrawerView()
+                 if let dictionary = response as? [String: Any] {
+                    let userData = UserModel.mappedObject(dictionary)
+                    if let email = userData.email {
+                         self.login(fullName: self.textfielduserName.text!, login: email, password: self.textfieldPassword.text!)
+                    } else {
+                        GeneralUtility.showAlert(message: "Email id is nil")
+                    }
+                }
+               // Constant.appDelegate.showDrawerView()
             } else {
                 GeneralUtility.endProcessing()
                 GeneralUtility.showAlert(message: message)
             }
-
-
         }
     }
 //    func performApiCallforLogin() {

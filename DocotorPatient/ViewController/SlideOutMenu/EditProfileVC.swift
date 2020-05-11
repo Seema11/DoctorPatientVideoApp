@@ -34,5 +34,13 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func didTapButtonAdd(_ sender: Any) {
+        if #available(iOS 13.0, *) {
+        let signupVc = self.storyboard?.instantiateViewController(identifier: "AddNewPatientVC") as! AddNewPatientVC
+        self.navigationController?.pushViewController(signupVc, animated: true)
+
+           } else {
+               let signupVc = UIViewController.instantiateFrom("Menu", "AddNewPatientVC") as! AddNewPatientVC
+               self.navigationController?.pushViewController(signupVc, animated: true)
+           }
     }
 }

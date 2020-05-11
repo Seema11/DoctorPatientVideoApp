@@ -152,7 +152,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0X-RV-MjQ">
                                 <rect key="frame" x="0.0" y="44" width="320" height="504"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WIU-DA-R4v">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WIU-DA-R4v">
                                         <rect key="frame" x="19" y="8" width="282" height="488"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
@@ -262,7 +262,7 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="lightGrey"/>
                                                             <constraints>
                                                                 <constraint firstItem="Y8j-e9-rPO" firstAttribute="centerY" secondItem="lTo-pD-n2Y" secondAttribute="centerY" id="Hph-3s-Ixn"/>
                                                                 <constraint firstItem="Y8j-e9-rPO" firstAttribute="top" secondItem="lTo-pD-n2Y" secondAttribute="top" constant="5" id="Qrp-z3-ueB"/>
@@ -477,6 +477,12 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dentist gynecologist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNa-IO-LbK">
+                                                    <rect key="frame" x="0.0" y="170" width="235" height="18"/>
+                                                    <fontDescription key="fontDescription" name="CodecColdTrial-Bold" family="Codec Cold Trial" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -487,7 +493,11 @@
                                                 <constraint firstItem="Mzm-O3-Xgn" firstAttribute="centerX" secondItem="Kre-9x-XTS" secondAttribute="centerX" id="NXY-oA-GK1"/>
                                                 <constraint firstItem="YCu-Vs-ACj" firstAttribute="centerY" secondItem="Mzm-O3-Xgn" secondAttribute="centerY" id="R1x-nE-OaT"/>
                                                 <constraint firstAttribute="trailing" secondItem="YCu-Vs-ACj" secondAttribute="trailing" constant="15" id="SnT-6Z-qSS"/>
+                                                <constraint firstItem="SNa-IO-LbK" firstAttribute="centerX" secondItem="va3-Ut-hbh" secondAttribute="centerX" id="Vyl-NK-P85"/>
+                                                <constraint firstItem="SNa-IO-LbK" firstAttribute="leading" secondItem="Kre-9x-XTS" secondAttribute="leading" id="ban-Wy-Kil"/>
                                                 <constraint firstItem="va3-Ut-hbh" firstAttribute="centerX" secondItem="Kre-9x-XTS" secondAttribute="centerX" id="eTV-nn-W6J"/>
+                                                <constraint firstAttribute="trailing" secondItem="SNa-IO-LbK" secondAttribute="trailing" id="iC5-mF-tLU"/>
+                                                <constraint firstItem="SNa-IO-LbK" firstAttribute="top" secondItem="va3-Ut-hbh" secondAttribute="bottom" constant="2" id="ryj-hR-Vfz"/>
                                                 <constraint firstItem="mHZ-lz-dvt" firstAttribute="top" secondItem="4iU-SS-lVM" secondAttribute="top" constant="14" id="uLl-Lt-25B"/>
                                                 <constraint firstItem="va3-Ut-hbh" firstAttribute="top" secondItem="4iU-SS-lVM" secondAttribute="bottom" constant="22" id="wqw-7X-8Up"/>
                                             </constraints>
@@ -498,7 +508,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" name="LightBlue"/>
+                                <color key="backgroundColor" red="0.46274509803921571" green="0.83529411764705885" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="HoL-Og-g2l" secondAttribute="trailing" constant="-9" id="Oug-aj-PCQ"/>
                                     <constraint firstItem="mzJ-GV-0TY" firstAttribute="leading" secondItem="e9G-p3-Yad" secondAttribute="leading" id="Qty-dh-njE"/>
@@ -650,7 +660,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mXu-Jo-dT4">
                                 <rect key="frame" x="40" y="194" width="240" height="166"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5j-VM-Heb">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5j-VM-Heb" customClass="CustomTextfield" customModule="DocotorPatient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="Vqo-Pr-yBM"/>
@@ -658,7 +668,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3FI-XE-bdA">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3FI-XE-bdA" customClass="CustomTextfield" customModule="DocotorPatient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44" width="240" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="wzB-QX-RWY"/>
@@ -666,7 +676,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hyr-ay-iK0">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hyr-ay-iK0" customClass="CustomTextfield" customModule="DocotorPatient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="240" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="rJh-vb-7dn"/>
@@ -674,7 +684,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OL6-f8-otr">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OL6-f8-otr" customClass="CustomTextfield" customModule="DocotorPatient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="132" width="240" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="ahd-xL-h30"/>
@@ -721,10 +731,10 @@
                     </view>
                     <connections>
                         <outlet property="imageViewProfile" destination="nyD-DB-feF" id="B9t-p5-clo"/>
-                        <outlet property="textfieldEmail" destination="3FI-XE-bdA" id="5ib-dq-EZf"/>
-                        <outlet property="textfieldTitle" destination="OL6-f8-otr" id="4cW-2C-U8L"/>
-                        <outlet property="textfieldUserName" destination="P5j-VM-Heb" id="c82-VK-phq"/>
-                        <outlet property="textfiledPhoneNumber" destination="hyr-ay-iK0" id="utp-Yi-ZIc"/>
+                        <outlet property="textfieldEmail" destination="3FI-XE-bdA" id="1PF-ad-ce4"/>
+                        <outlet property="textfieldTitle" destination="OL6-f8-otr" id="A7u-LO-COD"/>
+                        <outlet property="textfieldUserName" destination="P5j-VM-Heb" id="gP3-2b-gax"/>
+                        <outlet property="textfiledPhoneNumber" destination="hyr-ay-iK0" id="AT8-kW-Twy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJq-GX-xWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -810,7 +820,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VQ-OF-Z9t">
                                                 <rect key="frame" x="71.5" y="0.0" width="45" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="mute-video-btn 50-50"/>
+                                                <state key="normal" image="mute_video"/>
                                                 <connections>
                                                     <action selector="didTapButtonVideoPause:" destination="GGY-GB-WXU" eventType="touchUpInside" id="9lc-r6-ajM"/>
                                                 </connections>
@@ -818,7 +828,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OA3-bM-fD3">
                                                 <rect key="frame" x="143.5" y="0.0" width="45" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="mute-audio-btn 50-50"/>
+                                                <state key="normal" image="mute_audio"/>
                                                 <connections>
                                                     <action selector="didTapButtonAudioMute:" destination="GGY-GB-WXU" eventType="touchUpInside" id="CWa-ws-xYB"/>
                                                 </connections>
@@ -848,16 +858,18 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLo-zG-u2G">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="187"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="T2Z-VC-JLq">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="T2Z-VC-JLq" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="137"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="137" id="mMV-14-ioy"/>
                                                         </constraints>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Type your Notes..."/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="HVx-S1-jZ0">
                                                         <rect key="frame" x="5" y="145" width="250" height="30"/>
@@ -1437,7 +1449,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTX-OV-B6N">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rvf-GK-67Z">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rvf-GK-67Z">
                                         <rect key="frame" x="19" y="8" width="282" height="508"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
@@ -1516,7 +1528,7 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="lightGrey"/>
                                                             <constraints>
                                                                 <constraint firstItem="guC-mG-tpJ" firstAttribute="centerY" secondItem="8Hv-tc-HCY" secondAttribute="centerY" id="Brw-It-JU8"/>
                                                                 <constraint firstItem="Saz-vd-Pn9" firstAttribute="centerY" secondItem="8Hv-tc-HCY" secondAttribute="centerY" id="QG2-yu-DcW"/>
@@ -1678,7 +1690,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9G-HV-Ppu">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f3W-5r-iAl">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f3W-5r-iAl">
                                         <rect key="frame" x="19" y="8" width="282" height="508"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
@@ -1726,7 +1738,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="lightGrey"/>
                                                             <constraints>
                                                                 <constraint firstItem="5GQ-Gh-6Ul" firstAttribute="leading" secondItem="OTG-Ir-P5n" secondAttribute="leading" constant="8" id="1ug-2S-txK"/>
                                                                 <constraint firstAttribute="trailing" secondItem="L4X-2L-sne" secondAttribute="trailing" constant="10" id="CGs-vK-817"/>
@@ -1802,8 +1814,8 @@
         <image name="line.horizontal.3" catalog="system" width="64" height="32"/>
         <image name="man" width="95" height="114"/>
         <image name="menu 50-33" width="37.5" height="24.5"/>
-        <image name="mute-audio-btn 50-50" width="37.5" height="37.5"/>
-        <image name="mute-video-btn 50-50" width="37.5" height="37.5"/>
+        <image name="mute_audio" width="37.5" height="37.5"/>
+        <image name="mute_video" width="37.5" height="37.5"/>
         <image name="notes-btn 50-50" width="37.5" height="37.5"/>
         <image name="online_sign" width="43" height="43"/>
         <image name="rotate-cemera-btn 50-45" width="37.5" height="34"/>
@@ -1819,6 +1831,9 @@
         </namedColor>
         <namedColor name="White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lightGrey">
+            <color red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

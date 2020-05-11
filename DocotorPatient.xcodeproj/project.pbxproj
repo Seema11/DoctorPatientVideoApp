@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */; };
+		CE1C65AA2469711F00697F6A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C65A92469711F00697F6A /* UserModel.swift */; };
 		CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */; };
 		CE2C2C8B245C1E52001CBD87 /* NPCommonLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */; };
 		CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */; };
@@ -137,6 +138,7 @@
 /* Begin PBXFileReference section */
 		9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DocotorPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.debug.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.debug.xcconfig"; sourceTree = "<group>"; };
+		CE1C65A92469711F00697F6A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCommonLoaderView.swift; sourceTree = "<group>"; };
 		CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NPCommonLoaderView.xib; sourceTree = "<group>"; };
@@ -299,6 +301,14 @@
 				9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE1C65A8246970E300697F6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE1C65A92469711F00697F6A /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CE1E1E49245C492F00A8AE72 /* PatientCell */ = {
@@ -822,11 +832,9 @@
 			children = (
 				CE4B1C1224627A71000144D9 /* Quickblox */,
 				CE2C2CD2245C22BA001CBD87 /* ServiceLayer */,
+				CE95923E245AFA1E00F4BBF6 /* Utilities */,
 				CE2C2C87245C1E12001CBD87 /* View */,
 				CE959245245B0B0700F4BBF6 /* ViewController */,
-				CE95923E245AFA1E00F4BBF6 /* Utilities */,
-				CE959212245AF8FF00F4BBF6 /* ViewController.swift */,
-				CE959214245AF8FF00F4BBF6 /* Main.storyboard */,
 				CE95921C245AF90500F4BBF6 /* Info.plist */,
 				CE65AC23246418C700B777BB /* SupportingFile */,
 			);
@@ -854,6 +862,7 @@
 		CE95923E245AFA1E00F4BBF6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CE1C65A8246970E300697F6A /* Model */,
 				CE2C2CA7245C1FC7001CBD87 /* GeneralUtility.swift */,
 				CE2C2CC9245C2180001CBD87 /* Manager */,
 				CE2C2CC2245C2173001CBD87 /* BBDrawerViewController */,
@@ -884,6 +893,8 @@
 		CE959246245B0B1300F4BBF6 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				CE959214245AF8FF00F4BBF6 /* Main.storyboard */,
+				CE959212245AF8FF00F4BBF6 /* ViewController.swift */,
 				CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */,
 			);
 			path = Authentication;
@@ -1162,6 +1173,7 @@
 				CE4B1C7624627A72000144D9 /* VideoSettingsViewController.swift in Sources */,
 				CE2C2CC1245C2063001CBD87 /* ViewExtension.swift in Sources */,
 				CE2C2CA4245C1E81001CBD87 /* SimpleDropDownCellView.swift in Sources */,
+				CE1C65AA2469711F00697F6A /* UserModel.swift in Sources */,
 				CE4B1C6324627A72000144D9 /* StatsView.swift in Sources */,
 				CE2C2CCE245C2180001CBD87 /* LocationManager.swift in Sources */,
 				CE4B1C6424627A72000144D9 /* CallKitManager.swift in Sources */,
