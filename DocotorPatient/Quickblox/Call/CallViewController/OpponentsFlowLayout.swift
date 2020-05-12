@@ -109,7 +109,7 @@ class OpponentsFlowLayout: UICollectionViewFlowLayout {
         }
         
         let width = Double(size.width) * scale
-        let height = Double(size.height) / rows
+        let height = Double(size.height) / 1
         let slip = Double(index + shift)
         
         let row = (slip / side).rounded(.down)
