@@ -432,13 +432,13 @@ extension PatientListVC {
                         CallKitManager.instance.startCall(withUserIDs: opponentsIDs, session: session, uuid: uuid)
                         
                         
-                        let vc : CallViewController?
+                        let vc : VideoCallVC?
                         
                         if #available(iOS 13.0, *) {
-                            vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "CallViewController") as? CallViewController
+                            vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
                         } else {
                             
-                            vc = UIViewController.instantiateFrom("Call", "CallViewController") as? CallViewController
+                            vc = UIViewController.instantiateFrom("Menu", "VideoCallVC") as? VideoCallVC
                             // Fallback on earlier versions
                         }
                         

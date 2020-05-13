@@ -10,58 +10,27 @@ import UIKit
 import AVFoundation
 import Quickblox
 import QuickbloxWebRTC
-import SVProgressHUD
 
-enum CallViewControllerState : Int {
-    case disconnected
-    case connecting
-    case connected
-    case disconnecting
-}
 
-struct CallStateConstant {
-    static let disconnected = "Disconnected"
-    static let connecting = "Connecting..."
-    static let connected = "Connected"
-    static let disconnecting = "Disconnecting..."
-}
-
-struct CallConstant {
-    static let opponentCollectionViewCellIdentifier = "OpponentCollectionViewCellIdentifier"
-    static let unknownUserLabel = "Unknown user"
-    static let sharingViewControllerIdentifier = "SharingViewController"
-    static let refreshTimeInterval: TimeInterval = 1.0
-    
-    static let memoryWarning = NSLocalizedString("MEMORY WARNING: leaving out of call. Please, reduce the quality of the video settings", comment: "")
-    static let sessionDidClose = NSLocalizedString("Session did close due to time out", comment: "")
-}
 enum CameraType {
     case front
     case back
 }
+
 var camera = CameraType.back
 
 
 class VideoCallVC: UIViewController {
-
+    
+    @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var textViewEdit: UITextView!
     @IBOutlet weak var labelVideoPause: UILabel!
+    @IBOutlet weak var localVideo: UIView!
+    @IBOutlet weak var opponentView: QBRTCRemoteVideoView!
+    
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutHeightButtonsView: NSLayoutConstraint!
     
-    @IBOutlet weak var localVideoUIView: UIView!
-    @IBOutlet weak var oppinentVideoView: UIView!
-    //Camera Capture requiered properties
-    var videoDataOutput: AVCaptureVideoDataOutput!
-    var videoDataOutputQueue: DispatchQueue!
-    var previewLayer:AVCaptureVideoPreviewLayer!
-    var captureDevice : AVCaptureDevice!
-    //    var session = AVCaptureSession()
-    
-    var videoPause : Bool = false
-    
-    //MARK: - Properties
-    weak var usersDataSource: UsersDataSource?
     
     //MARK: - Internal Properties
     private var timeDuration: TimeInterval = 0.0
@@ -69,10 +38,16 @@ class VideoCallVC: UIViewController {
     private var callTimer: Timer?
     private var beepTimer: Timer?
     
+    
+     weak var usersDataSource: UsersDataSource?
     //Camera
-    var session: QBRTCSession?
+   // var session: QBRTCSession?
     var callUUID: UUID?
-    private var cameraCapture: QBRTCCameraCapture?
+    var videoPause : Bool = false
+    
+    //Camera
+    var videoCapture: QBRTCCameraCapture?
+    var session: QBRTCSession?
     
     //Containers
     private var users = [User]()
@@ -80,56 +55,79 @@ class VideoCallVC: UIViewController {
     private var statsUserID: UInt?
     
     //Views
-    lazy private var dynamicButton: CustomButton = {
-        let dynamicButton = ButtonsFactory.dynamicEnable()
-        return dynamicButton
-    }()
+       lazy private var dynamicButton: CustomButton = {
+           let dynamicButton = ButtonsFactory.dynamicEnable()
+           return dynamicButton
+       }()
+       
+       lazy private var audioEnabled: CustomButton = {
+           let audioEnabled = ButtonsFactory.audioEnable()
+           return audioEnabled
+       }()
+       
+       private var localVideoView: LocalVideoView?
+       
+       lazy private var statsView: StatsView = {
+           let statsView = StatsView()
+           return statsView
+       }()
+       
+       private lazy var statsItem = UIBarButtonItem(title: "Stats",
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(updateStatsView))
+       
+       
+       //States
+       private var shouldGetStats = false
+       private var didStartPlayAndRecord = false
+       private var muteVideo = false {
+           didSet {
+               session?.localMediaStream.videoTrack.isEnabled = !muteVideo
+           }
+       }
+       
+       private var state = CallViewControllerState.connected {
+           didSet {
+               switch state {
+               case .disconnected:
+                   title = CallStateConstant.disconnected
+               case .connecting:
+                   title = CallStateConstant.connecting
+               case .connected:
+                   title = CallStateConstant.connected
+               case .disconnecting:
+                   title = CallStateConstant.disconnecting
+               }
+           }
+       }
     
-    lazy private var audioEnabled: CustomButton = {
-        let audioEnabled = ButtonsFactory.audioEnable()
-        return audioEnabled
-    }()
-    
-    private var localVideoView: LocalVideoView?
-    
-    lazy private var statsView: StatsView = {
-        let statsView = StatsView()
-        return statsView
-    }()
-    
-    private lazy var statsItem = UIBarButtonItem(title: "Stats",
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(updateStatsView))
-    
-    
-    //States
-    private var shouldGetStats = false
-    private var didStartPlayAndRecord = false
-    private var muteVideo = false {
-        didSet {
-            session?.localMediaStream.videoTrack.isEnabled = !muteVideo
-        }
-    }
-    
-    private var state = CallViewControllerState.connected {
-        didSet {
-            switch state {
-            case .disconnected:
-                title = CallStateConstant.disconnected
-            case .connecting:
-                title = CallStateConstant.connecting
-            case .connected:
-                title = CallStateConstant.connected
-            case .disconnecting:
-                title = CallStateConstant.disconnecting
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpView()
+     //   QBRTCClient.instance().add(self as! QBRTCClientDelegate)
+              
+              let videoFormat = QBRTCVideoFormat()
+              videoFormat.frameRate = 30
+              videoFormat.pixelFormat = .format420f
+              videoFormat.width = 640
+              videoFormat.height = 480
+              
+              // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
+              self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
+              
+              // add video capture to session's local media stream
+              self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
+              
+              self.videoCapture?.previewLayer.frame = self.previewView.bounds
+              self.videoCapture?.startSession()
+              
+              self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
+              
+        
+      //  self.setupAVCapture()
+     //   self.setUpView()
     }
     
     func setUpView()  {
@@ -139,52 +137,70 @@ class VideoCallVC: UIViewController {
         
         QBRTCClient.instance().add(self as QBRTCClientDelegate)
         QBRTCAudioSession.instance().addDelegate(self)
-        
+              
         let profile = Profile()
         
         guard profile.isFull == true, let currentConferenceUser = Profile.currentUser() else {
-            return
-        }
-        
-        let audioSession = QBRTCAudioSession.instance()
-        if audioSession.isInitialized == false {
-            audioSession.initialize { configuration in
-                // adding blutetooth support
-                configuration.categoryOptions.insert(.allowBluetooth)
-                configuration.categoryOptions.insert(.allowBluetoothA2DP)
-                configuration.categoryOptions.insert(.duckOthers)
-                // adding airplay support
-                configuration.categoryOptions.insert(.allowAirPlay)
-                guard let session = self.session else { return }
-                if session.conferenceType == .video {
-                    // setting mode to video chat to enable airplay audio and speaker only
-                    configuration.mode = AVAudioSession.Mode.videoChat.rawValue
-                }
-            }
-        }
+                  return
+              }
+              
+              let audioSession = QBRTCAudioSession.instance()
+              if audioSession.isInitialized == false {
+                  audioSession.initialize { configuration in
+                      // adding blutetooth support
+                      configuration.categoryOptions.insert(.allowBluetooth)
+                      configuration.categoryOptions.insert(.allowBluetoothA2DP)
+                      configuration.categoryOptions.insert(.duckOthers)
+                      // adding airplay support
+                      configuration.categoryOptions.insert(.allowAirPlay)
+                      guard let session = self.session else { return }
+                      if session.conferenceType == .video {
+                          // setting mode to video chat to enable airplay audio and speaker only
+                          configuration.mode = AVAudioSession.Mode.videoChat.rawValue
+                      }
+                  }
+              }
+        configureGUI()
         
     }
+
+    override var shouldAutorotate: Bool {
+        if (UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft ||
+        UIDevice.current.orientation == UIDeviceOrientation.landscapeRight ||
+        UIDevice.current.orientation == UIDeviceOrientation.unknown) {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
     @IBAction func didTapButtonMinimize(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func didTapButtonCall(_ sender: Any) {
+        
         self.session?.hangUp(["hangup": "hang up"])
-      //  self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
     }
     @IBAction func didTapButtonCamera(_ sender: Any) {
+        
     }
-    
     @IBAction func didTapButtonVideoPause(_ sender: Any) {
         if (self.muteVideo) {
             self.muteVideo = !muteVideo
             self.localVideoView?.isHidden = !muteVideo
-        }
+                           }
         
     }
     @IBAction func didTapButtonAudioMute(_ sender: Any) {
-        if let muteAudio = self.session?.localMediaStream.audioTrack.isEnabled {
-                              self.session?.localMediaStream.audioTrack.isEnabled = !muteAudio
-      }
+        
+        self.audioEnabled.pressed = !self.audioEnabled.pressed
+        
+//          let previousDevice = QBRTCAudioSession.instance().currentAudioDevice
+//        let device = previousDevice == .speaker ? QBRTCAudioDevice.receiver : QBRTCAudioDevice.speaker
+//        QBRTCAudioSession.instance().currentAudioDevice = device
+        
     }
     @IBAction func didTapButtonNotes(_ sender: Any) {
         self.constarintLayoutHeightTextView.constant = 187
@@ -201,91 +217,81 @@ class VideoCallVC: UIViewController {
     }
     @IBAction func didTapButtonSmily(_ sender: Any) {
     }
-    func didTapButtonLoudSpeaker() {
-        let previousDevice = QBRTCAudioSession.instance().currentAudioDevice
-                                let device = previousDevice == .speaker ? QBRTCAudioDevice.receiver : QBRTCAudioDevice.speaker
-                                QBRTCAudioSession.instance().currentAudioDevice = device
+}
+
+extension VideoCallVC {
+
+     //MARK - Setup
+     func configureGUI() {
+         // when conferenceType is nil, it means that user connected to the session as a listener
+         if let conferenceType = session?.conferenceType {
+             switch conferenceType {
+             case .video:
+                 break
+             case .audio:
+                 if UIDevice.current.userInterfaceIdiom == .phone {
+                     QBRTCAudioSession.instance().currentAudioDevice = .receiver
+                     dynamicButton.pressed = false
+                 }
+             }
+
+             session?.localMediaStream.audioTrack.isEnabled = true;
+             
+             CallKitManager.instance.onMicrophoneMuteAction = { [weak self] in
+                 guard let self = self else {return}
+                 self.audioEnabled.pressed = !self.audioEnabled.pressed
+             }
+             
+         }
+                  
+         let mask: UIView.AutoresizingMask = [.flexibleWidth,
+                                              .flexibleHeight,
+                                              .flexibleLeftMargin,
+                                              .flexibleRightMargin,
+                                              .flexibleTopMargin,
+                                              .flexibleBottomMargin]
+         // stats view
+         statsView.frame = view.bounds
+         statsView.autoresizingMask = mask
+         statsView.isHidden = true
+         statsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(updateStatsState)))
+         view.addSubview(statsView)
+         
+         // add button to enable stats view
+         state = .connecting
+     }
+    func reloadAcceptCall() {
+    
+        let videoFormat = QBRTCVideoFormat()
+        videoFormat.frameRate = 30
+        videoFormat.pixelFormat = .format420f
+        videoFormat.width = 640
+        videoFormat.height = 480
+        
+        // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
+        self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
+        
+        // add video capture to session's local media stream
+        self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
+        
+        self.videoCapture?.previewLayer.frame = self.localVideo.bounds
+        self.videoCapture?.startSession()
+        
+        self.localVideo.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
+        
+     //    let remoteVideoTrack = self.session?.remoteVideoTrack(withUserID: 108764506)
+        
     }
     
-}
-extension VideoCallVC {
-       
-       override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           
-           //MARK: - Reachability
-           let updateConnectionStatus: ((_ status: NetworkConnectionStatus) -> Void)? = { [weak self] status in
-               let notConnection = status == .notConnection
-               if notConnection == true {
-                   self?.cancelCallAlertWith(UsersAlertConstant.checkInternet)
-               }
-           }
-           Reachability.instance.networkStatusBlock = { status in
-               updateConnectionStatus?(status)
-           }
-           
-           if cameraCapture?.hasStarted == false {
-               cameraCapture?.startSession(nil)
-           }
-           session?.localMediaStream.videoTrack.videoCapture = cameraCapture
-           reloadContent()
-       }
-       
-       override func didReceiveMemoryWarning() {
-           super.didReceiveMemoryWarning()
-           state = CallViewControllerState.disconnecting
-           cancelCallAlertWith(CallConstant.memoryWarning)
-       }
-       
-       //MARK - Setup
-       func configureGUI() {
-           // when conferenceType is nil, it means that user connected to the session as a listener
-           if let conferenceType = session?.conferenceType {
-               switch conferenceType {
-               case .video: break
-                 
-               case .audio:
-                   if UIDevice.current.userInterfaceIdiom == .phone {
-                       QBRTCAudioSession.instance().currentAudioDevice = .receiver
-                       dynamicButton.pressed = false
-                   }
-               }
-               session?.localMediaStream.audioTrack.isEnabled = true;
-               
-               CallKitManager.instance.onMicrophoneMuteAction = { [weak self] in
-                   guard let self = self else {return}
-                   self.audioEnabled.pressed = !self.audioEnabled.pressed
-               }
-         }
-                
-           let mask: UIView.AutoresizingMask = [.flexibleWidth,
-                                                .flexibleHeight,
-                                                .flexibleLeftMargin,
-                                                .flexibleRightMargin,
-                                                .flexibleTopMargin,
-                                                .flexibleBottomMargin]
-           
-           // stats view
-           statsView.frame = view.bounds
-           statsView.autoresizingMask = mask
-           statsView.isHidden = true
-           statsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(updateStatsState)))
-           view.addSubview(statsView)
-           
-           // add button to enable stats view
-           state = .connecting
-       }
-       
-       // MARK: Transition to size
-       override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-           super.viewWillTransition(to: size, with: coordinator)
-           coordinator.animate(alongsideTransition: { [weak self] context in
-               self?.reloadContent()
-           })
-       }
-       
-       // MARK: - Actions
-       func startCall() {
+    // MARK: Transition to size
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] context in
+            self?.reloadAcceptCall()
+        })
+        
+    }
+    func startCall() {
            //Begin play calling sound
            beepTimer = Timer.scheduledTimer(timeInterval: QBRTCConfig.dialingTimeInterval(),
                                             target: self,
@@ -301,6 +307,7 @@ extension VideoCallVC {
        func acceptCall() {
            SoundProvider.stopSound()
            //Accept call
+          self.reloadAcceptCall()
            let userInfo = ["acceptCall": "userInfo"]
            session?.acceptCall(userInfo)
        }
@@ -308,7 +315,7 @@ extension VideoCallVC {
        private func closeCall() {
            
            CallKitManager.instance.endCall(with: callUUID)
-           cameraCapture?.stopSession(nil)
+           videoCapture?.stopSession(nil)
            
            let audioSession = QBRTCAudioSession.instance()
            if audioSession.isInitialized == true,
@@ -347,130 +354,123 @@ extension VideoCallVC {
        //MARK: - Internal Methods
        private func zoomUser(userID: UInt) {
            statsUserID = userID
-           reloadContent()
+        
            navigationItem.rightBarButtonItem = statsItem
        }
        
        private func unzoomUser() {
            statsUserID = nil
-           reloadContent()
            navigationItem.rightBarButtonItem = nil
        }
-       
-       private func userView(userID: UInt) -> UIView? {
-           
-           let profile = Profile()
-           
-           if profile.isFull == true, profile.ID == userID,
-               session?.conferenceType != .audio {
-               
-               if cameraCapture?.hasStarted == false {
-                   cameraCapture?.startSession(nil)
-                   session?.localMediaStream.videoTrack.videoCapture = cameraCapture
-               }
-               //Local preview
-               if let result = videoViews[userID] as? LocalVideoView {
-                   return result
-               } else if let previewLayer = cameraCapture?.previewLayer {
-                   let localVideoView = LocalVideoView(previewlayer: previewLayer)
-                   videoViews[userID] = localVideoView
-                   localVideoView.delegate = self
-                   self.localVideoView = localVideoView
-                   
-                   return localVideoView
-               }
-               
-           } else if let remoteVideoTraсk = session?.remoteVideoTrack(withUserID: NSNumber(value: userID)) {
-               
-               if let result = videoViews[userID] as? QBRTCRemoteVideoView {
-                   result.setVideoTrack(remoteVideoTraсk)
-                   return result
-               } else {
-                   //Opponents
-                   let remoteVideoView = QBRTCRemoteVideoView(frame: CGRect(x: 2.0, y: 2.0, width: 2.0, height: 2.0))
-                   remoteVideoView.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
-                   videoViews[userID] = remoteVideoView
-                   remoteVideoView.setVideoTrack(remoteVideoTraсk)
-                   
-                   return remoteVideoView
-               }
-           }
-           return nil
-       }
-       
-//       private func userCell(userID: UInt) -> UserCell? {
-//           let indexPath = userIndexPath(userID: userID)
-//           guard let cell = opponentsCollectionView.cellForItem(at: indexPath) as? UserCell  else {
-//               return nil
-//           }
-//           return cell
-//       }
-       
-       private func createConferenceUser(userID: UInt) -> User {
-           guard let usersDataSource = self.usersDataSource,
-               let user = usersDataSource.user(withID: userID) else {
-                   let user = QBUUser()
-                   user.id = userID
-                   return User(user: user)
-           }
-           return User(user: user)
-       }
-       
-       private func userIndexPath(userID: UInt) -> IndexPath {
-           guard let index = users.index(where: { $0.userID == userID }), index != NSNotFound else {
-               return IndexPath(row: 0, section: 0)
-           }
-           return IndexPath(row: index, section: 0)
-       }
-       
-       func reloadContent() {
-           videoViews.values.forEach{ $0.removeFromSuperview() }
-       }
-       
-       // MARK: - Helpers
-       private func cancelCallAlertWith(_ title: String) {
-           let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-           let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
-               self.closeCall()
-           }
-           alert.addAction(cancelAction)
-           present(alert, animated: false) {
-           }
-       }
-       
-       // MARK: - Timers actions
-       @objc func playCallingSound(_ sender: Any?) {
-           SoundProvider.playSound(type: .calling)
-       }
-       
-       @objc func refreshCallTime(_ sender: Timer?) {
-           timeDuration += CallConstant.refreshTimeInterval
-           title = "Call time - \(string(withTimeDuration: timeDuration))"
-       }
-       
-       func string(withTimeDuration timeDuration: TimeInterval) -> String {
-           let hours = Int(timeDuration / 3600)
-           let minutes = Int(timeDuration / 60)
-           let seconds = Int(timeDuration) % 60
-           
-           var timeStr = ""
-           if hours > 0 {
-               let minutes = Int((timeDuration - Double(3600 * hours)) / 60);
-               timeStr = "\(hours):\(minutes):\(seconds)"
-           } else {
-               if (seconds < 10) {
-                   timeStr = "\(minutes):0\(seconds)"
-               } else {
-                   timeStr = "\(minutes):\(seconds)"
-               }
-           }
-           return timeStr
-       }
+    
+    private func userView(userID: UInt) -> UIView? {
+        
+        let profile = Profile()
+        
+        if profile.isFull == true, profile.ID == userID,
+            session?.conferenceType != .audio {
+            
+            if videoCapture?.hasStarted == false {
+                videoCapture?.startSession(nil)
+                session?.localMediaStream.videoTrack.videoCapture = videoCapture
+            }
+            //Local preview
+            if let result = videoViews[userID] as? LocalVideoView {
+                return result
+            } else if let previewLayer = videoCapture?.previewLayer {
+                let localVideoView = LocalVideoView(previewlayer: previewLayer)
+                videoViews[userID] = localVideoView
+                localVideoView.delegate = self
+                self.localVideoView = localVideoView
+                
+                return localVideoView
+            }
+            
+        } else if let remoteVideoTraсk = session?.remoteVideoTrack(withUserID: NSNumber(value: userID)) {
+            
+            if let result = videoViews[userID] as? QBRTCRemoteVideoView {
+                result.setVideoTrack(remoteVideoTraсk)
+                return result
+            } else {
+                //Opponents
+                let remoteVideoView = QBRTCRemoteVideoView(frame: CGRect(x: 2.0, y: 2.0, width: 2.0, height: 2.0))
+                remoteVideoView.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
+                videoViews[userID] = remoteVideoView
+                 self.opponentView.setVideoTrack(remoteVideoTraсk)
+              //  remoteVideoView.setVideoTrack(remoteVideoTraсk)
+                self.previewView = remoteVideoView
+                return remoteVideoView
+            }
+        }
+        return nil
+    }
+     
+     private func createConferenceUser(userID: UInt) -> User {
+         guard let usersDataSource = self.usersDataSource,
+             let user = usersDataSource.user(withID: userID) else {
+                 let user = QBUUser()
+                 user.id = userID
+                 return User(user: user)
+         }
+         return User(user: user)
+     }
+     
+     private func userIndexPath(userID: UInt) -> IndexPath {
+         guard let index = users.index(where: { $0.userID == userID }), index != NSNotFound else {
+             return IndexPath(row: 0, section: 0)
+         }
+         return IndexPath(row: index, section: 0)
+     }
+     
+     func reloadContent() {
+         videoViews.values.forEach{ $0.removeFromSuperview() }
+     }
+     
+     // MARK: - Helpers
+     private func cancelCallAlertWith(_ title: String) {
+         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+         let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+             self.closeCall()
+         }
+         alert.addAction(cancelAction)
+         present(alert, animated: false) {
+         }
+     }
+     
+     // MARK: - Timers actions
+     @objc func playCallingSound(_ sender: Any?) {
+         SoundProvider.playSound(type: .calling)
+     }
+     
+     @objc func refreshCallTime(_ sender: Timer?) {
+         timeDuration += CallConstant.refreshTimeInterval
+         title = "Call time - \(string(withTimeDuration: timeDuration))"
+     }
+     
+     func string(withTimeDuration timeDuration: TimeInterval) -> String {
+         let hours = Int(timeDuration / 3600)
+         let minutes = Int(timeDuration / 60)
+         let seconds = Int(timeDuration) % 60
+         
+         var timeStr = ""
+         if hours > 0 {
+             let minutes = Int((timeDuration - Double(3600 * hours)) / 60);
+             timeStr = "\(hours):\(minutes):\(seconds)"
+         } else {
+             if (seconds < 10) {
+                 timeStr = "\(minutes):0\(seconds)"
+             } else {
+                 timeStr = "\(minutes):\(seconds)"
+             }
+         }
+         return timeStr
+     }
 }
+
 extension VideoCallVC: LocalVideoViewDelegate {
     // MARK: LocalVideoViewDelegate
     func localVideoView(_ localVideoView: LocalVideoView, pressedSwitchButton sender: UIButton?) {
-        guard let cameraCapture = self.cameraCapture else {
+        guard let cameraCapture = self.videoCapture else {
             return
         }
         let newPosition: AVCaptureDevice.Position = cameraCapture.position == .back ? .front : .back
@@ -487,6 +487,7 @@ extension VideoCallVC: LocalVideoViewDelegate {
         cameraCapture.position = newPosition
     }
 }
+
 extension VideoCallVC: QBRTCAudioSessionDelegate {
     //MARK: QBRTCAudioSessionDelegate
     func audioSession(_ audioSession: QBRTCAudioSession, didChangeCurrentAudioDevice updatedAudioDevice: QBRTCAudioDevice) {
@@ -519,6 +520,7 @@ extension VideoCallVC: QBRTCClientDelegate {
             user.bitrate = report.videoReceivedBitrateTracker.bitrate
             
             let userIndexPath = self.userIndexPath(userID: user.userID)
+            
         }
 
         guard let selectedUserID = statsUserID,
@@ -542,7 +544,7 @@ extension VideoCallVC: QBRTCClientDelegate {
             unzoomUser()
         }
         
-        guard let index = users.index(where: { $0.userID == userID.uintValue }) else {
+        guard let index = users.firstIndex(where: { $0.userID == userID.uintValue }) else {
             return
         }
         let user = users[index]
@@ -570,10 +572,12 @@ extension VideoCallVC: QBRTCClientDelegate {
             return
         }
         
-        if let index = users.index(where: { $0.userID == userID.uintValue }) {
+        if let index = users.firstIndex(where: { $0.userID == userID.uintValue }) {
             let user = users[index]
             user.connectionState = state
             let userIndexPath = self.userIndexPath(userID:userID.uintValue)
+           
+               // self.connectionState = user.connectionState
         } else {
             let user = createConferenceUser(userID: userID.uintValue)
             user.connectionState = state
@@ -594,7 +598,9 @@ extension VideoCallVC: QBRTCClientDelegate {
         if session != self.session {
             return
         }
+       
         reloadContent()
+        self.reloadAcceptCall()
     }
     
     /**

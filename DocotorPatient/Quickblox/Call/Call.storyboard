@@ -141,6 +141,11 @@
                                     <outlet property="delegate" destination="Wpm-Ud-a52" id="Y8L-kx-1kQ"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" id="pv3-eH-dpm">
+                                <rect key="frame" x="100" y="211" width="120" height="146"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -158,6 +163,7 @@
                     <connections>
                         <outlet property="opponentsCollectionView" destination="VGE-Qc-V5u" id="FA2-G2-Pow"/>
                         <outlet property="toolbar" destination="nvl-aP-B6G" id="GEn-4J-gzj"/>
+                        <outlet property="vdeoviewlocal" destination="pv3-eH-dpm" id="3ny-c5-8In"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rE-te-Yi0" userLabel="First Responder" sceneMemberID="firstResponder"/>

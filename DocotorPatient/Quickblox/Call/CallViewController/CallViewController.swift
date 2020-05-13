@@ -11,32 +11,34 @@ import Quickblox
 import QuickbloxWebRTC
 import SVProgressHUD
 
-//enum CallViewControllerState : Int {
-//    case disconnected
-//    case connecting
-//    case connected
-//    case disconnecting
-//}
-//
-//struct CallStateConstant {
-//    static let disconnected = "Disconnected"
-//    static let connecting = "Connecting..."
-//    static let connected = "Connected"
-//    static let disconnecting = "Disconnecting..."
-//}
-//
-//struct CallConstant {
-//    static let opponentCollectionViewCellIdentifier = "OpponentCollectionViewCellIdentifier"
-//    static let unknownUserLabel = "Unknown user"
-//    static let sharingViewControllerIdentifier = "SharingViewController"
-//    static let refreshTimeInterval: TimeInterval = 1.0
-//    
-//    static let memoryWarning = NSLocalizedString("MEMORY WARNING: leaving out of call. Please, reduce the quality of the video settings", comment: "")
-//    static let sessionDidClose = NSLocalizedString("Session did close due to time out", comment: "")
-//}
+enum CallViewControllerState : Int {
+    case disconnected
+    case connecting
+    case connected
+    case disconnecting
+}
+
+struct CallStateConstant {
+    static let disconnected = "Disconnected"
+    static let connecting = "Connecting..."
+    static let connected = "Connected"
+    static let disconnecting = "Disconnecting..."
+}
+
+struct CallConstant {
+    static let opponentCollectionViewCellIdentifier = "OpponentCollectionViewCellIdentifier"
+    static let unknownUserLabel = "Unknown user"
+    static let sharingViewControllerIdentifier = "SharingViewController"
+    static let refreshTimeInterval: TimeInterval = 1.0
+    
+    static let memoryWarning = NSLocalizedString("MEMORY WARNING: leaving out of call. Please, reduce the quality of the video settings", comment: "")
+    static let sessionDidClose = NSLocalizedString("Session did close due to time out", comment: "")
+}
 
 class CallViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     //MARK: - IBOutlets
+    
+    @IBOutlet weak var vdeoviewlocal: UIView!
     @IBOutlet private weak var opponentsCollectionView: UICollectionView!
     @IBOutlet private weak var toolbar: ToolBar!
     
@@ -137,6 +139,7 @@ class CallViewController: UIViewController, UICollectionViewDelegateFlowLayout {
             }
         }
         
+    //    self.vdeoviewlocal.isHidden = true
         configureGUI()
         let settings = Settings()
         guard let session = self.session else { return }
@@ -239,6 +242,8 @@ class CallViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                         QBRTCAudioSession.instance().currentAudioDevice = device
                     })
                 }
+            @unknown default:
+                fatalError()
             }
 
             session?.localMediaStream.audioTrack.isEnabled = true;
@@ -305,6 +310,7 @@ class CallViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     func acceptCall() {
         SoundProvider.stopSound()
         //Accept call
+        self.setLocalVideoView()
         let userInfo = ["acceptCall": "userInfo"]
         session?.acceptCall(userInfo)
     }
@@ -495,6 +501,7 @@ extension CallViewController: LocalVideoViewDelegate {
         
         localVideoView.superview?.layer.add(animation, forKey: nil)
         cameraCapture.position = newPosition
+        self.vdeoviewlocal = localVideoView
     }
 }
 
@@ -689,7 +696,6 @@ extension CallViewController: UICollectionViewDataSource {
         }
 
         cell.videoView = userView(userID: user.userID)
-        
         cell.name = ""
         cell.connectionState = .unknown
         guard let currentUser = QBSession.current.currentUser, user.userID != currentUser.id else {
@@ -732,4 +738,24 @@ extension CallViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    func setLocalVideoView()  {
+             let videoFormat = QBRTCVideoFormat()
+               videoFormat.frameRate = 30
+               videoFormat.pixelFormat = .format420f
+               videoFormat.width = 50
+               videoFormat.height = 50
+               
+               // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
+               self.cameraCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
+               
+               // add video capture to session's local media stream
+               self.session?.localMediaStream.videoTrack.videoCapture = self.cameraCapture
+               
+               self.cameraCapture?.previewLayer.frame = self.vdeoviewlocal.bounds
+               self.cameraCapture?.startSession()
+               
+              self.vdeoviewlocal.layer.insertSublayer(self.cameraCapture!.previewLayer, at: 0)
+    }
+    
 }
