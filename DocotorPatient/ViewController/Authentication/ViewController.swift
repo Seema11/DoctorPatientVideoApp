@@ -114,33 +114,52 @@ extension ViewController {
         GeneralUtility.showProcessing()
             QBRequest.logIn(withUserLogin: login, password: self.textfieldPassword.text!, successBlock: { (response, user) in
                // print(user.fullName)
+                
                 let currentUser: QBUUser = user
                   currentUser.email = login
                   currentUser.password = password
                   currentUser.updatedAt = Date()
                   Profile.update(currentUser)
-                                
-                QBChat.instance.connect(withUserID: currentUser.id, password: currentUser.password!, completion: { (error) in
-                    GeneralUtility.endProcessing()
-                    if error == nil {
-                      print("connected")
-                        GeneralUtility.endProcessing()
+                 Profile.synchronize(user)
+                
+                let dictionary = ["ID" : currentUser.id,
+                                  "facebookID" : currentUser.facebookID ?? "",
+                                  "full name" : currentUser.fullName ?? "",
+                                  "email" : currentUser.email ?? "",
+                                  "login" : currentUser.login ?? "",
+                                  "phone" : currentUser.phone ?? "",
+                                  "password" : currentUser.password ?? ""] as [String : Any]
+                
+                //MARK:USERDEFAULT DATA
+                
+                UserDefaults.savedictionary(dictionary, forKey: Constant.UserDefaultsKey.QBUserData)
+                
+                 GeneralUtility.endProcessing()
                         //did Login action
-                        Constant.appDelegate.showDrawerView()
-                        //self.performApiCallforLogin()
-                    } else {
-                        if error?._code == QBResponseStatusCode.unAuthorized.rawValue {
-                                                                     // Clean profile
-                            GeneralUtility.endProcessing()
-                            Profile.clearProfile()
-                            self.defaultConfiguration()
-                        } else {
-                            self.handleError(error, domain: ErrorDomain.logIn)
-                           self.disconnectUser()
-                        }
-                          print(error as Any)
-                    }
-                })
+                 Constant.appDelegate.showDrawerView()
+                
+                
+//                QBChat.instance.connect(withUserID: currentUser.id, password: currentUser.password!, completion: { (error) in
+//                    GeneralUtility.endProcessing()
+//                    if error == nil {
+//                      print("connected")
+//                        GeneralUtility.endProcessing()
+//                        //did Login action
+//                        Constant.appDelegate.showDrawerView()
+//                        //self.performApiCallforLogin()
+//                    } else {
+//                        if error?._code == QBResponseStatusCode.unAuthorized.rawValue {
+//                                                                     // Clean profile
+//                            GeneralUtility.endProcessing()
+//                            Profile.clearProfile()
+//                            self.defaultConfiguration()
+//                        } else {
+//                            self.handleError(error, domain: ErrorDomain.logIn)
+//                           self.disconnectUser()
+//                        }
+//                          print(error as Any)
+//                    }
+//                })
         }, errorBlock: { (response) in
             GeneralUtility.endProcessing()
             self.handleError(response.error as? Error, domain: ErrorDomain.logIn)
@@ -149,27 +168,6 @@ extension ViewController {
                 GeneralUtility.showAlert(message: "User Not Found")
                 }
             })
-//                        QBChat.instance.connect(withUserID: user.id, password: user.password!, completion: { (error) in
-//                                    user.password = password
-//                                    user.updatedAt = Date()
-//                                    Profile.synchronize(user)
-//
-//
-////                                    if user.fullName != fullName {
-////                                        self.updateFullName(fullName: fullName, login: login)
-////                                    } else {
-//                                        self.connectToChat(user: user)
-//                             //       }
-//                        })
-//                }, errorBlock: { (response) in
-//                    self.handleError(response.error as? Error, domain: ErrorDomain.logIn)
-//                      if response.status == QBResponseStatusCode.unAuthorized {
-//                                        // Clean profile
-//                                        Profile.clearProfile()
-//                        self.defaultConfiguration()
-//
-//                    }
-//                })
     }
     
     private func updateFullName(fullName: String, login: String) {
@@ -256,6 +254,11 @@ extension ViewController {
             GeneralUtility.endProcessing()
             if (status) {
                  if let dictionary = response as? [String: Any] {
+                   
+                           //MARK:USERDEFAULT DATA
+                    
+                    UserDefaults.savedictionary(dictionary, forKey: Constant.UserDefaultsKey.userLoginData)
+                    
                     let userData = UserModel.mappedObject(dictionary)
                     if let email = userData.email {
                          self.login(fullName: self.textfielduserName.text!, login: email, password: self.textfieldPassword.text!)
@@ -264,6 +267,7 @@ extension ViewController {
                     }
                 }
                // Constant.appDelegate.showDrawerView()
+              
             } else {
                 GeneralUtility.endProcessing()
                 GeneralUtility.showAlert(message: message)

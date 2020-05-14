@@ -71,7 +71,7 @@
                                         <rect key="frame" x="8" y="0.0" width="44" height="44"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu 50-33" translatesAutoresizingMaskIntoConstraints="NO" id="vLm-Q3-5Wt">
-                                                <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                <rect key="frame" x="12" y="12" width="20" height="20.000000000000007"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="QCH-M4-ehR"/>
@@ -966,7 +966,6 @@
                         <outlet property="constarintLayoutHeightButtonsView" destination="v5U-DO-NfY" id="i55-Gj-yNX"/>
                         <outlet property="constarintLayoutHeightTextView" destination="Cc2-dU-6Mk" id="Kx2-XF-fyk"/>
                         <outlet property="labelVideoPause" destination="nfy-lb-p46" id="ofv-2F-eTA"/>
-                        <outlet property="localVideo" destination="zCK-pU-icB" id="fAZ-Lu-chd"/>
                         <outlet property="opponentView" destination="TGN-4Z-rHY" id="Qn6-Eh-PBU"/>
                         <outlet property="previewView" destination="KhT-h4-2Or" id="TRI-Oy-R9o"/>
                         <outlet property="textViewEdit" destination="T2Z-VC-JLq" id="qdk-xI-gNO"/>
@@ -1338,6 +1337,7 @@
                         <viewLayoutGuide key="safeArea" id="EPe-Fd-bgv"/>
                     </view>
                     <connections>
+                        <outlet property="buttonChangePassword" destination="TAi-XH-O1o" id="Ncb-bW-Elb"/>
                         <outlet property="imageViewProfile" destination="csB-m1-tXB" id="ROc-qz-X4d"/>
                         <outlet property="textfieldEmail" destination="13g-r4-Ok8" id="dbs-HS-2ZC"/>
                         <outlet property="textfieldPassword" destination="9mn-d6-LNX" id="VDv-id-5UQ"/>
@@ -1365,7 +1365,7 @@
                                         <rect key="frame" x="8" y="0.0" width="44" height="44"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu 50-33" translatesAutoresizingMaskIntoConstraints="NO" id="5h4-vb-gwL">
-                                                <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                <rect key="frame" x="12" y="12" width="20" height="20.000000000000007"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="5h4-vb-gwL" secondAttribute="height" multiplier="1:1" id="2Dg-GC-sL0"/>
@@ -1606,7 +1606,7 @@
                                         <rect key="frame" x="8" y="0.0" width="44" height="44"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu 50-33" translatesAutoresizingMaskIntoConstraints="NO" id="QOL-Be-788">
-                                                <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                <rect key="frame" x="12" y="12" width="20" height="20.000000000000007"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QOL-Be-788" secondAttribute="height" multiplier="1:1" id="JNY-qF-LSo"/>

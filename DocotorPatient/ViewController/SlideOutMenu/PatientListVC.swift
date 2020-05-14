@@ -12,7 +12,7 @@ import PushKit
 import QuickbloxWebRTC
 
 
-class PatientListVC: UIViewController {
+class PatientListVC: BaseViewController {
 
     var userList : [QBUUser] = []
     
@@ -43,6 +43,7 @@ class PatientListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.connectUser()
         self.setupView()
         // Do any additional setup after loading the view.
     }
@@ -54,6 +55,8 @@ class PatientListVC: UIViewController {
          }
          voipRegistry.delegate = self
          voipRegistry.desiredPushTypes = Set<PKPushType>([.voIP])
+        
+        perfromApiCallForPatientList()
      }
     
     @objc func loadUsers() {
@@ -479,6 +482,19 @@ extension PatientListVC {
                         GeneralUtility.showAlert(message: UsersAlertConstant.shouldLogin)
                     }
                 }
+            }
+        }
+    }
+}
+extension PatientListVC {
+    func perfromApiCallForPatientList() {
+        GeneralUtility.showProcessing()
+        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.patientList(["userid" : self.userData?.id ?? ""])) { (status, message, statusCode, response, error) in
+            GeneralUtility.endProcessing()
+            if (status) {
+               print(response)
+            } else {
+                GeneralUtility.showAlert(message: message)
             }
         }
     }

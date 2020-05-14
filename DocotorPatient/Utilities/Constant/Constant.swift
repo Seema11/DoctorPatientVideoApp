@@ -77,6 +77,7 @@ extension Constant {
             static let _id = "_id"
             static let password = "password"
             static let userLoginData = "UserLoginData"
+            static let QBUserData = "QBUserData"
         }
 }
 struct LoginConstant {

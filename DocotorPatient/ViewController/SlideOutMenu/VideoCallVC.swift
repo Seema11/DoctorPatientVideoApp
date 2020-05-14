@@ -25,7 +25,6 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var textViewEdit: UITextView!
     @IBOutlet weak var labelVideoPause: UILabel!
-    @IBOutlet weak var localVideo: UIView!
     @IBOutlet weak var opponentView: QBRTCRemoteVideoView!
     
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
@@ -67,15 +66,6 @@ class VideoCallVC: UIViewController {
        
        private var localVideoView: LocalVideoView?
        
-       lazy private var statsView: StatsView = {
-           let statsView = StatsView()
-           return statsView
-       }()
-       
-       private lazy var statsItem = UIBarButtonItem(title: "Stats",
-                                                    style: .plain,
-                                                    target: self,
-                                                    action: #selector(updateStatsView))
        
        
        //States
@@ -223,6 +213,9 @@ extension VideoCallVC {
 
      //MARK - Setup
      func configureGUI() {
+        
+        self.navigationController?.navigationBar.isHidden = true
+        
          // when conferenceType is nil, it means that user connected to the session as a listener
          if let conferenceType = session?.conferenceType {
              switch conferenceType {
@@ -250,12 +243,6 @@ extension VideoCallVC {
                                               .flexibleRightMargin,
                                               .flexibleTopMargin,
                                               .flexibleBottomMargin]
-         // stats view
-         statsView.frame = view.bounds
-         statsView.autoresizingMask = mask
-         statsView.isHidden = true
-         statsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(updateStatsState)))
-         view.addSubview(statsView)
          
          // add button to enable stats view
          state = .connecting
@@ -263,10 +250,10 @@ extension VideoCallVC {
     func reloadAcceptCall() {
     
         let videoFormat = QBRTCVideoFormat()
-        videoFormat.frameRate = 30
+     //   videoFormat.frameRate = 30
         videoFormat.pixelFormat = .format420f
-        videoFormat.width = 640
-        videoFormat.height = 480
+       // videoFormat.width = 640
+    //    videoFormat.height = 480
         
         // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
         self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
@@ -274,10 +261,10 @@ extension VideoCallVC {
         // add video capture to session's local media stream
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
         
-        self.videoCapture?.previewLayer.frame = self.localVideo.bounds
+    //    self.videoCapture?.previewLayer.frame = self.localVideo.bounds
         self.videoCapture?.startSession()
         
-        self.localVideo.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
+        self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
         
      //    let remoteVideoTrack = self.session?.remoteVideoTrack(withUserID: 108764506)
         
@@ -339,29 +326,21 @@ extension VideoCallVC {
            QBRTCClient.instance().remove(self as QBRTCClientDelegate)
            QBRTCAudioSession.instance().removeDelegate(self)
            
-           title = "End - \(string(withTimeDuration: timeDuration))"
+         //  title = "End - \(string(withTimeDuration: timeDuration))"
        }
+              
        
-       @objc func updateStatsView() {
-           shouldGetStats = !shouldGetStats
-           statsView.isHidden = !statsView.isHidden
-       }
-       
-       @objc func updateStatsState() {
-           updateStatsView()
-       }
-       
-       //MARK: - Internal Methods
-       private func zoomUser(userID: UInt) {
-           statsUserID = userID
-        
-           navigationItem.rightBarButtonItem = statsItem
-       }
-       
-       private func unzoomUser() {
-           statsUserID = nil
-           navigationItem.rightBarButtonItem = nil
-       }
+//       //MARK: - Internal Methods
+//       private func zoomUser(userID: UInt) {
+//           statsUserID = userID
+//
+//           navigationItem.rightBarButtonItem = statsItem
+//       }
+//
+//       private func unzoomUser() {
+//           statsUserID = nil
+//           navigationItem.rightBarButtonItem = nil
+//       }
     
     private func userView(userID: UInt) -> UIView? {
         
@@ -444,7 +423,7 @@ extension VideoCallVC {
      
      @objc func refreshCallTime(_ sender: Timer?) {
          timeDuration += CallConstant.refreshTimeInterval
-         title = "Call time - \(string(withTimeDuration: timeDuration))"
+      //   title = "Call time - \(string(withTimeDuration: timeDuration))"
      }
      
      func string(withTimeDuration timeDuration: TimeInterval) -> String {
@@ -529,7 +508,6 @@ extension VideoCallVC: QBRTCClientDelegate {
                 return
         }
         let result = report.statsString()
-        statsView.updateStats(result)
     }
     
     /**
@@ -539,11 +517,7 @@ extension VideoCallVC: QBRTCClientDelegate {
         if session != self.session {
             return
         }
-        // remove user from the collection
-        if statsUserID == userID.uintValue {
-            unzoomUser()
-        }
-        
+
         guard let index = users.firstIndex(where: { $0.userID == userID.uintValue }) else {
             return
         }
@@ -598,6 +572,8 @@ extension VideoCallVC: QBRTCClientDelegate {
         if session != self.session {
             return
         }
+        self.previewView.isHidden = true
+        self.opponentView.setVideoTrack(videoTrack)
        
         reloadContent()
         self.reloadAcceptCall()

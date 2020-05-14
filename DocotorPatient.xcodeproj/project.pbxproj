@@ -108,6 +108,9 @@
 		CE959231245AF90500F4BBF6 /* DocotorPatientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959230245AF90500F4BBF6 /* DocotorPatientUITests.swift */; };
 		CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959243245AFAAB00F4BBF6 /* Constant.swift */; };
 		CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */; };
+		CECA458E246D569B00D0CFAC /* QbUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA458D246D569B00D0CFAC /* QbUserModel.swift */; };
+		CECA4590246D5AEC00D0CFAC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA458F246D5AEC00D0CFAC /* BaseViewController.swift */; };
+		CECA4592246D626C00D0CFAC /* PatientListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA4591246D626C00D0CFAC /* PatientListModel.swift */; };
 		CECE4255245D29A400AEEA58 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4254245D29A400AEEA58 /* EditProfileVC.swift */; };
 		CECE4257245D29CA00AEEA58 /* AddNewPatientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4256245D29CA00AEEA58 /* AddNewPatientVC.swift */; };
 		CECE4259245D29EC00AEEA58 /* CallHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */; };
@@ -248,6 +251,9 @@
 		CE959232245AF90500F4BBF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE959243245AFAAB00F4BBF6 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignuUpViewController.swift; sourceTree = "<group>"; };
+		CECA458D246D569B00D0CFAC /* QbUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QbUserModel.swift; sourceTree = "<group>"; };
+		CECA458F246D5AEC00D0CFAC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CECA4591246D626C00D0CFAC /* PatientListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListModel.swift; sourceTree = "<group>"; };
 		CECE4254245D29A400AEEA58 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		CECE4256245D29CA00AEEA58 /* AddNewPatientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPatientVC.swift; sourceTree = "<group>"; };
 		CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryVC.swift; sourceTree = "<group>"; };
@@ -307,6 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				CE1C65A92469711F00697F6A /* UserModel.swift */,
+				CECA458D246D569B00D0CFAC /* QbUserModel.swift */,
+				CECA4591246D626C00D0CFAC /* PatientListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -886,6 +894,7 @@
 			children = (
 				CE2C2CD7245C2906001CBD87 /* SlideOutMenu */,
 				CE959246245B0B1300F4BBF6 /* Authentication */,
+				CECA458F246D5AEC00D0CFAC /* BaseViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1162,6 +1171,7 @@
 				CE2C2CB7245C2063001CBD87 /* DateExtension.swift in Sources */,
 				CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */,
 				CE4B1C7224627A72000144D9 /* SettingSwitchCell.swift in Sources */,
+				CECA458E246D569B00D0CFAC /* QbUserModel.swift in Sources */,
 				CE4B1C7C24627A72000144D9 /* PlaceholderGenerator.swift in Sources */,
 				CE2C2CC8245C2173001CBD87 /* BBMainControllerSegue.swift in Sources */,
 				CECE4266245D517D00AEEA58 /* VideoCallVC.swift in Sources */,
@@ -1221,6 +1231,7 @@
 				CE2C2D07245C2A40001CBD87 /* MenuTableCell.swift in Sources */,
 				CE4B1C7524627A72000144D9 /* SwitchItemModel.swift in Sources */,
 				CE4B1C5D24627A72000144D9 /* UserCell.swift in Sources */,
+				CECA4592246D626C00D0CFAC /* PatientListModel.swift in Sources */,
 				CE4B1C6A24627A72000144D9 /* SessionSettingsViewController.swift in Sources */,
 				CE4B1C7724627A72000144D9 /* ScreenCapture.swift in Sources */,
 				CE4B1C5A24627A72000144D9 /* CallViewController.swift in Sources */,
@@ -1229,6 +1240,7 @@
 				CE2C2CB6245C2063001CBD87 /* ArrayExtension.swift in Sources */,
 				CE4B1C5C24627A72000144D9 /* User.swift in Sources */,
 				CE4B1C6224627A72000144D9 /* LocalVideoView.swift in Sources */,
+				CECA4590246D5AEC00D0CFAC /* BaseViewController.swift in Sources */,
 				CE2C2CD6245C22BA001CBD87 /* ServiceManager.swift in Sources */,
 				CE2C2CCD245C2180001CBD87 /* DropDownManager.swift in Sources */,
 				CE2C2CA3245C1E81001CBD87 /* UIImage+GIFImage.m in Sources */,

@@ -83,7 +83,10 @@ enum EnumWebService {
     var isMultipart : Bool {
         switch self{
         case .login,
-             .registration:           return true
+             .registration,
+             .addPatient,
+             .callHistory,
+             .editProfile:             return true
         default:                      return false
        }
     }

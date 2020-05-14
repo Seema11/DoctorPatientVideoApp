@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewPatientVC: UIViewController {
+class AddNewPatientVC: BaseViewController {
 
     @IBOutlet weak var imageViewProfile: UIImageView!
     
@@ -20,9 +20,10 @@ class AddNewPatientVC: UIViewController {
     
     @IBOutlet weak var textfieldTitle: CustomTextfield!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.imageViewProfile.downloadImage(fromURL: userData?.profileimage, placeHolderImage: UIImage.init(named: "man"), completion: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -30,23 +31,42 @@ class AddNewPatientVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func didTapButtonSave(_ sender: Any) {
+        if let username = self.textfieldUserName.text ,let email = self.textfieldEmail.text,let phone = self.textfiledPhoneNumber.text,let Dtitle = self.textfieldTitle.text {
+            let paramater : [String:Any] = ["userid":userData?.id ?? "",
+                                            "username": username,
+                                            "email": email,
+                                            "phoneno":phone,
+                                            "title":Dtitle]
+            self.performApiCallForAddPatient(paramater: paramater)
+        } else {
+            GeneralUtility.showAlert(message: "Please Fill All Detail")
+        }
+        
     }
     @IBAction func didTapButtonAdd(_ sender: Any) {
+        self.clearTextfield()
+    }
+    func clearTextfield() {
         self.textfieldUserName.text = ""
         self.textfieldEmail.text = ""
         self.textfiledPhoneNumber.text = ""
         self.textfieldTitle.text = ""
         self.imageViewProfile.image = nil
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension AddNewPatientVC {
+    func performApiCallForAddPatient(paramater : [String:Any])  {
+        GeneralUtility.showProcessing()
+        
+        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addPatient(paramater)) { (status, message, statusCode, response, error) in
+            GeneralUtility.endProcessing()
+            if (status) {
+                GeneralUtility.showAlert(message: message)
+                self.clearTextfield()
+            } else {
+                GeneralUtility.showAlert(message: message)
+            }
+        }
     }
-    */
-
 }

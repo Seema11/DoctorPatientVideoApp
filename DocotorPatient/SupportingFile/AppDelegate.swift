@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.setupIQKeyboard()
         self.setupQuickBlox()
+        checkLoginAndSetRootController()
         // Override point for customization after application launch.
         return true
     }
@@ -116,12 +117,13 @@ extension AppDelegate {
 extension AppDelegate {
 
 fileprivate func checkLoginAndSetRootController() {
-    if (UserDefaults.getBool(forKey: Constant.UserDefaultsKey.isLogin)) {
-          print("User logged in")
-       self.showDrawerView()
-      } else {
-        self.loginViewController()
-    }
+    
+    if UserModel.loginUserModel != nil || QbUserModel.QBUserModel != nil {
+            print("User logged in")
+              self.showDrawerView()
+         } else {
+              self.loginViewController()
+         }
   }
 }
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {

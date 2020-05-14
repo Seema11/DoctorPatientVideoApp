@@ -208,6 +208,8 @@ extension MenuViewController: UITableViewDelegate {
 extension MenuViewController {
     func logoutUser()
     {
+        UserDefaults.removeObject(forKey: Constant.UserDefaultsKey.userLoginData)
+        UserDefaults.removeObject(forKey: Constant.UserDefaultsKey.QBUserData)
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
         self.disconnectUser()
