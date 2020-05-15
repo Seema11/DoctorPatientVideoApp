@@ -86,7 +86,8 @@ enum EnumWebService {
              .registration,
              .addPatient,
              .callHistory,
-             .editProfile:             return true
+             .editProfile,
+             .patientList:             return true
         default:                      return false
        }
     }
@@ -114,6 +115,8 @@ enum EnumWebService {
             return parameter
         case .addPatient(let parameter):
             return parameter
+        case .patientList(let paramater):
+            return paramater
         case .editProfile(let paramater):
             return paramater
         case .addCallHistory(let parameter):

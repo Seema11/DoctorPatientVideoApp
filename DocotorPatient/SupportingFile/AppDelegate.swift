@@ -39,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.setupIQKeyboard()
         self.setupQuickBlox()
-        checkLoginAndSetRootController()
+   //     checkLoginAndSetRootController()
+        self.loginViewController()
         // Override point for customization after application launch.
         return true
     }

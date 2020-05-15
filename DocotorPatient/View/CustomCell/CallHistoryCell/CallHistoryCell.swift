@@ -16,6 +16,13 @@ class CallHistoryCell: UITableViewCell {
     @IBOutlet weak var labelPatientTime: UILabel!
     @IBOutlet weak var buttonCall: UIButton!
     
+     static var nib:UINib {
+           return UINib(nibName: identifier, bundle: nil)
+       }
+       
+       static var identifier: String {
+           return String(describing: self)
+       }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,5 +34,9 @@ class CallHistoryCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    func setUpData(response : HistoryModel) {
+        self.labelPatientName.text = response.username
+        self.labelPatientTime.text = "\(String(describing: response.starttime)) - \(String(describing: response.endtime))"
+      }
 
 }

@@ -226,18 +226,18 @@ struct ServerConstant {
             }
         }
         struct AddPatient {
-            static let name = ""
+            static let name = "insert.php"
             struct Request {
             }
         }
         struct PatientList {
-                   static let name = ""
+                   static let name = "view.php"
                    struct Request {
                     
                    }
                }
         struct AddCallHistory {
-            static let name = "insert.php"
+            static let name = "addcallhistory.php"
             struct Request {
                 static let userid = "userid"
                 static let username = "username"

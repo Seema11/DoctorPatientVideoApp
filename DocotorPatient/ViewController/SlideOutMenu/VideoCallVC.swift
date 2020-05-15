@@ -66,8 +66,6 @@ class VideoCallVC: UIViewController {
        
        private var localVideoView: LocalVideoView?
        
-       
-       
        //States
        private var shouldGetStats = false
        private var didStartPlayAndRecord = false
@@ -101,8 +99,8 @@ class VideoCallVC: UIViewController {
               let videoFormat = QBRTCVideoFormat()
               videoFormat.frameRate = 30
               videoFormat.pixelFormat = .format420f
-              videoFormat.width = 640
-              videoFormat.height = 480
+              videoFormat.width = UInt(UIScreen.main.bounds.width)
+              videoFormat.height = UInt(UIScreen.main.bounds.height)
               
               // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
               self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)

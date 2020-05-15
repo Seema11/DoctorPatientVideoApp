@@ -10,6 +10,7 @@
 		3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */; };
 		CE1C65AA2469711F00697F6A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C65A92469711F00697F6A /* UserModel.swift */; };
 		CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */; };
+		CE23849B246E98DF00911FAB /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23849A246E98DF00911FAB /* HistoryModel.swift */; };
 		CE2C2C8B245C1E52001CBD87 /* NPCommonLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */; };
 		CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */; };
 		CE2C2C9F245C1E81001CBD87 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */; };
@@ -143,6 +144,7 @@
 		C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.debug.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1C65A92469711F00697F6A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
+		CE23849A246E98DF00911FAB /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		CE2C2C89245C1E52001CBD87 /* NPCommonLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCommonLoaderView.swift; sourceTree = "<group>"; };
 		CE2C2C8A245C1E52001CBD87 /* NPCommonLoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NPCommonLoaderView.xib; sourceTree = "<group>"; };
 		CE2C2C8E245C1E81001CBD87 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				CE1C65A92469711F00697F6A /* UserModel.swift */,
 				CECA458D246D569B00D0CFAC /* QbUserModel.swift */,
 				CECA4591246D626C00D0CFAC /* PatientListModel.swift */,
+				CE23849A246E98DF00911FAB /* HistoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1211,6 +1214,7 @@
 				CE4B1C8124627A72000144D9 /* CheckView.swift in Sources */,
 				CECE4255245D29A400AEEA58 /* EditProfileVC.swift in Sources */,
 				CE4B1C5824627A72000144D9 /* CallPermissions.swift in Sources */,
+				CE23849B246E98DF00911FAB /* HistoryModel.swift in Sources */,
 				CE2C2CA2245C1E81001CBD87 /* GIFProgressHUD.m in Sources */,
 				CE4B1C6024627A72000144D9 /* ToolBar.swift in Sources */,
 				CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */,

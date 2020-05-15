@@ -41,7 +41,8 @@ class EditProfileVC: BaseViewController {
     }
     
     @IBAction func didTapButttonBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
     @IBAction func didTapButtonSave(_ sender: Any) {
         let options: NSDictionary =  [:]
