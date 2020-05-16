@@ -26,19 +26,27 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var textViewEdit: UITextView!
     @IBOutlet weak var labelVideoPause: UILabel!
     @IBOutlet weak var opponentView: QBRTCRemoteVideoView!
+    @IBOutlet weak var localVideoSubView: UIView!
+    @IBOutlet weak var stackViewTextEdit: UIStackView!
     
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutHeightButtonsView: NSLayoutConstraint!
     
+    @IBOutlet weak var constarintLayoutHeightPreviewView: NSLayoutConstraint!
+    @IBOutlet weak var constarintLayoutWidthPreviewView: NSLayoutConstraint!
+     @IBOutlet weak var constarintLayoutBottomPreviewView: NSLayoutConstraint!
+     @IBOutlet weak var constarintLayoutTrailingPreviewView: NSLayoutConstraint!
     
+    @IBOutlet weak var constraintLayoutStackviewTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var buttonCall: UIButton!
     //MARK: - Internal Properties
     private var timeDuration: TimeInterval = 0.0
     
     private var callTimer: Timer?
     private var beepTimer: Timer?
-    
-    
-     weak var usersDataSource: UsersDataSource?
+
+    weak var usersDataSource: UsersDataSource?
     //Camera
    // var session: QBRTCSession?
     var callUUID: UUID?
@@ -95,33 +103,34 @@ class VideoCallVC: UIViewController {
         super.viewDidLoad()
         self.setUpView()
      //   QBRTCClient.instance().add(self as! QBRTCClientDelegate)
-              
-              let videoFormat = QBRTCVideoFormat()
-              videoFormat.frameRate = 30
-              videoFormat.pixelFormat = .format420f
-              videoFormat.width = UInt(UIScreen.main.bounds.width)
-              videoFormat.height = UInt(UIScreen.main.bounds.height)
-              
-              // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
-              self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
-              
-              // add video capture to session's local media stream
-              self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
-              
-              self.videoCapture?.previewLayer.frame = self.previewView.bounds
-              self.videoCapture?.startSession()
-              
-              self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
-              
         
       //  self.setupAVCapture()
      //   self.setUpView()
+    }
+    
+    func showLocalVideo()  {
+          let videoFormat = QBRTCVideoFormat()
+                    videoFormat.frameRate = 50
+                    videoFormat.pixelFormat = .format420f
+                    videoFormat.width = UInt(UIScreen.main.bounds.width)
+                    videoFormat.height = UInt(UIScreen.main.bounds.height)
+                    // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
+                    self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
+                    
+                    // add video capture to session's local media stream
+                    self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
+                    
+                    self.videoCapture?.previewLayer.frame = self.previewView.bounds
+                    self.videoCapture?.startSession()
+                    
+                    self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
     }
     
     func setUpView()  {
         self.constarintLayoutHeightTextView.constant = 0
         self.constarintLayoutHeightButtonsView.constant = 44
         self.labelVideoPause.isHidden = true
+        self.stackViewTextEdit.isHidden = true
         
         QBRTCClient.instance().add(self as QBRTCClientDelegate)
         QBRTCAudioSession.instance().addDelegate(self)
@@ -172,19 +181,25 @@ class VideoCallVC: UIViewController {
         //self.navigationController?.popViewController(animated: true)
     }
     @IBAction func didTapButtonCamera(_ sender: Any) {
-        
+        if videoCapture?.position == .back
+        {
+            videoCapture?.position = .front
+
+        } else {
+            videoCapture?.position = .back
+
+        }
     }
     @IBAction func didTapButtonVideoPause(_ sender: Any) {
-        if (self.muteVideo) {
-            self.muteVideo = !muteVideo
-            self.localVideoView?.isHidden = !muteVideo
-                           }
         
+        self.muteVideo = !muteVideo
+        self.localVideoView?.isHidden = !muteVideo
     }
+    
     @IBAction func didTapButtonAudioMute(_ sender: Any) {
-        
-        self.audioEnabled.pressed = !self.audioEnabled.pressed
-        
+        if let muteAudio = self.session?.localMediaStream.audioTrack.isEnabled {
+            self.session?.localMediaStream.audioTrack.isEnabled = !muteAudio
+        }
 //          let previousDevice = QBRTCAudioSession.instance().currentAudioDevice
 //        let device = previousDevice == .speaker ? QBRTCAudioDevice.receiver : QBRTCAudioDevice.speaker
 //        QBRTCAudioSession.instance().currentAudioDevice = device
@@ -193,11 +208,16 @@ class VideoCallVC: UIViewController {
     @IBAction func didTapButtonNotes(_ sender: Any) {
         self.constarintLayoutHeightTextView.constant = 187
         self.constarintLayoutHeightButtonsView.constant = 0
+        self.stackViewTextEdit.isHidden = false
+        reloadLocalView()
     }
     
     @IBAction func didTapButtonCheckBox(_ sender: Any) {
         self.constarintLayoutHeightTextView.constant = 0
         self.constarintLayoutHeightButtonsView.constant = 44
+        self.stackViewTextEdit.isHidden = true
+        reloadLocalView()
+        
     }
     
     @IBAction func didTapButtonText(_ sender: Any) {
@@ -218,13 +238,16 @@ extension VideoCallVC {
          if let conferenceType = session?.conferenceType {
              switch conferenceType {
              case .video:
+                self.showLocalVideo()
                  break
              case .audio:
                  if UIDevice.current.userInterfaceIdiom == .phone {
                      QBRTCAudioSession.instance().currentAudioDevice = .receiver
                      dynamicButton.pressed = false
                  }
-             }
+             @unknown default:
+                print("error")
+            }
 
              session?.localMediaStream.audioTrack.isEnabled = true;
              
@@ -248,7 +271,7 @@ extension VideoCallVC {
     func reloadAcceptCall() {
     
         let videoFormat = QBRTCVideoFormat()
-     //   videoFormat.frameRate = 30
+        videoFormat.frameRate = 50
         videoFormat.pixelFormat = .format420f
        // videoFormat.width = 640
     //    videoFormat.height = 480
@@ -262,7 +285,7 @@ extension VideoCallVC {
     //    self.videoCapture?.previewLayer.frame = self.localVideo.bounds
         self.videoCapture?.startSession()
         
-        self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
+        self.localVideoSubView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
         
      //    let remoteVideoTrack = self.session?.remoteVideoTrack(withUserID: 108764506)
         
@@ -292,7 +315,7 @@ extension VideoCallVC {
        func acceptCall() {
            SoundProvider.stopSound()
            //Accept call
-          self.reloadAcceptCall()
+       //   self.reloadAcceptCall()
            let userInfo = ["acceptCall": "userInfo"]
            session?.acceptCall(userInfo)
        }
@@ -327,19 +350,6 @@ extension VideoCallVC {
          //  title = "End - \(string(withTimeDuration: timeDuration))"
        }
               
-       
-//       //MARK: - Internal Methods
-//       private func zoomUser(userID: UInt) {
-//           statsUserID = userID
-//
-//           navigationItem.rightBarButtonItem = statsItem
-//       }
-//
-//       private func unzoomUser() {
-//           statsUserID = nil
-//           navigationItem.rightBarButtonItem = nil
-//       }
-    
     private func userView(userID: UInt) -> UIView? {
         
         let profile = Profile()
@@ -375,7 +385,7 @@ extension VideoCallVC {
                 videoViews[userID] = remoteVideoView
                  self.opponentView.setVideoTrack(remoteVideoTraсk)
               //  remoteVideoView.setVideoTrack(remoteVideoTraсk)
-                self.previewView = remoteVideoView
+               // self.previewView = remoteVideoView
                 return remoteVideoView
             }
         }
@@ -570,13 +580,20 @@ extension VideoCallVC: QBRTCClientDelegate {
         if session != self.session {
             return
         }
-        self.previewView.isHidden = true
+
         self.opponentView.setVideoTrack(videoTrack)
+   //     self.constarintLayoutWidthPreviewView.constant = 108
+    //    self.constarintLayoutHeightPreviewView.constant = 128
+   //     self.constarintLayoutTrailingPreviewView.constant = 16
+      //  self.constarintLayoutBottomPreviewView.constant = self.constraintLayoutStackviewTop.constant
        
         reloadContent()
-        self.reloadAcceptCall()
+        reloadLocalView()
     }
     
+    func reloadLocalView() {
+        self.previewView.frame = CGRect.init(x: self.localVideoSubView.frame.origin.x, y: self.localVideoSubView.frame.origin.y, width: self.localVideoSubView.frame.size.width, height: self.localVideoSubView.frame.size.height)
+    }
     /**
      *  Called in case when connection is established with opponent
      */
