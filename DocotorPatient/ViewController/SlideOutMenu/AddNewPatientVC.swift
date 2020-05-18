@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Quickblox
+import QuickbloxWebRTC
 
 class AddNewPatientVC: BaseViewController {
 
@@ -20,6 +22,7 @@ class AddNewPatientVC: BaseViewController {
     
     @IBOutlet weak var textfieldTitle: CustomTextfield!
     
+    let password = LoginConstant.defaultPassword
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +35,10 @@ class AddNewPatientVC: BaseViewController {
     }
     @IBAction func didTapButtonSave(_ sender: Any) {
         if let username = self.textfieldUserName.text ,let email = self.textfieldEmail.text,let phone = self.textfiledPhoneNumber.text,let Dtitle = self.textfieldTitle.text {
-            let paramater : [String:Any] = ["userid":userData?.id ?? "",
-                                            "username": username,
-                                            "email": email,
-                                            "phoneno":phone,
-                                            "title":Dtitle]
-            self.performApiCallForAddPatient(paramater: paramater)
+             self.signUp(fullName: username, login: email)
         } else {
-            GeneralUtility.showAlert(message: "Please Fill All Detail")
+            self.view.showToast(message: "Enter Username ands Email")
         }
-        
     }
     @IBAction func didTapButtonAdd(_ sender: Any) {
         self.clearTextfield()
@@ -53,8 +50,8 @@ class AddNewPatientVC: BaseViewController {
         self.textfieldTitle.text = ""
         self.imageViewProfile.image = nil
     }
-
 }
+
 extension AddNewPatientVC {
     func performApiCallForAddPatient(paramater : [String:Any])  {
         GeneralUtility.showProcessing()
@@ -68,5 +65,32 @@ extension AddNewPatientVC {
                 GeneralUtility.showAlert(message: message)
             }
         }
+    }
+}
+
+extension AddNewPatientVC {
+    
+    private func signUp(fullName: String, login: String) {
+        let newUser = QBUUser()
+        newUser.login = login
+        newUser.fullName = fullName
+        newUser.password = LoginConstant.defaultPassword
+        QBRequest.signUp(newUser, successBlock: { [weak self] response, user in
+            if let username = self?.textfieldUserName.text ,let email = self?.textfieldEmail.text,let phone =   self?.textfiledPhoneNumber.text,let Dtitle = self?.textfieldTitle.text {
+                let paramater : [String:Any] = ["userid": self?.userData?.id as Any,
+                                                "username": username,
+                                                "email": email,
+                                                "phoneno":phone,
+                                                "title":Dtitle,
+                                                "qbuserId" : "\(user.id)"]
+            self!.performApiCallForAddPatient(paramater: paramater)
+                } else {
+                    GeneralUtility.showAlert(message: "Please Fill All Detail")
+                }
+       
+            }, errorBlock: { [weak self] response in
+                
+                self?.handleError(response.error?.error, domain: ErrorDomain.signUp)
+        })
     }
 }

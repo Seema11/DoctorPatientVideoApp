@@ -36,7 +36,7 @@ class CallHistoryCell: UITableViewCell {
     }
     func setUpData(response : HistoryModel) {
         self.labelPatientName.text = response.username
-        self.labelPatientTime.text = "\(String(describing: response.starttime)) - \(String(describing: response.endtime))"
+        self.labelPatientTime.text = "\(response.starttime ?? "0:0") - \(response.endtime ?? "0"))"
       }
 
 }

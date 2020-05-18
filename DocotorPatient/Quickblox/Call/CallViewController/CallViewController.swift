@@ -759,3 +759,8 @@ extension CallViewController: UICollectionViewDelegate {
     }
     
 }
+extension CallViewController : QBRTCRecorderDelegate {
+    func recorder(_ recorder: QBRTCRecorder, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}

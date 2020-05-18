@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        self.createDirectoryPath()
         self.setupIQKeyboard()
         self.setupQuickBlox()
    //     checkLoginAndSetRootController()
@@ -244,4 +244,21 @@ extension AppDelegate {
       func disconnect(completion: QBChatCompletionBlock? = nil) {
           QBChat.instance.disconnect(completionBlock: completion)
       }
+}
+extension AppDelegate {
+     func createDirectoryPath() {
+      let fileManager = FileManager.default
+        let documentsURL =  fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+        let dataURL = documentsURL.appendingPathComponent("CallRecording")
+        UserDefaults.saveString("\(dataURL)", forKey: "fileUrl")
+        do
+        {
+            try FileManager.default.createDirectory(atPath: dataURL.path, withIntermediateDirectories: true, attributes: nil)
+        }
+        catch let error as NSError
+        {
+            NSLog("Unable to create directory \(error.debugDescription)")
+        }
+    }
 }

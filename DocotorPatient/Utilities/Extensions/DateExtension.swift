@@ -132,11 +132,20 @@ extension Date {
         return dates
     }
     
-    static func getCurrentDate() -> String {
+    static func getCurrentDateddMMyyyy() -> String {
 
           let dateFormatter = DateFormatter()
 
           dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+
+          return dateFormatter.string(from: Date())
+
+      }
+    static func getCurrentDateyyyyMMdd() -> String {
+
+          let dateFormatter = DateFormatter()
+
+          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
           return dateFormatter.string(from: Date())
 

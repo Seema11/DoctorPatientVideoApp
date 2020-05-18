@@ -15,6 +15,9 @@ class BaseViewController: UIViewController {
 
     let userData = UserModel.loginUserModel
     let qbModel = QbUserModel.QBUserModel
+    var startTime : String?
+    var endTime : String?
+    var patientId : String?
     
     //MARK: - Properties
      var dataSource: UsersDataSource = {
@@ -153,6 +156,9 @@ extension BaseViewController {
           return errorMessage
       }
      func prepareCloseCall() {
+        self.endTime = Date.getCurrentDateyyyyMMdd()
+        self.patientId = "5"
+        self.performApiCallforAddHistory()
           self.callUUID = nil
           self.session = nil
           if QBChat.instance.isConnected == false {
@@ -383,7 +389,7 @@ extension BaseViewController {
                             vc = UIViewController.instantiateFrom("Menu", "VideoCallVC") as? VideoCallVC
                             // Fallback on earlier versions
                         }
-                        
+                        self.startTime = Date.getCurrentDateyyyyMMdd()
                         if let callViewController = vc {
                             callViewController.session = self.session
                             callViewController.usersDataSource = self.dataSource
@@ -423,5 +429,24 @@ extension BaseViewController {
                 }
             }
         }
+    }
+}
+extension BaseViewController {
+    func performApiCallforAddHistory()  {
+        GeneralUtility.showProcessing()
+        let parameter : [String:Any] = [ "userid": userData?.id as Any,
+                                         "patientid": self.patientId as Any,
+                                         "starttime": self.startTime as Any,
+                                         "endtime": self.endTime as Any]
+        
+        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addCallHistory(parameter)) { (status, message, statusCode, response, error) in
+            GeneralUtility.endProcessing()
+            if (status) {
+                 GeneralUtility.showAlert(message: message)
+            } else {
+                GeneralUtility.showAlert(message: message)
+            }
+        }
+        
     }
 }

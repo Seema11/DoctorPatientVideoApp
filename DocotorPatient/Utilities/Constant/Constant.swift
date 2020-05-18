@@ -17,6 +17,7 @@ struct Constant {
     static let appDisplayName: String = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? ""
     static let appVersionNumber: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     static let appBuildNumber: String = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String ?? ""
+    static var path : String = UserDefaults.getString(forKey: "fileUrl") ?? ""
     
     static let navigationTitleAppName: String = Constant.appDisplayName
     
@@ -90,7 +91,7 @@ struct LoginConstant {
     static let shouldContainAlphanumeric = NSLocalizedString("Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter.", comment: "")
     static let shouldContainAlphanumericWithoutSpace = NSLocalizedString("Field should contain alphanumeric characters only in a range 8 to 15, without space. The first character must be a letter.", comment: "")
     static let showUsers = "ShowUsersViewController"
-    static let defaultPassword = "quickblox"
+    static let defaultPassword = "123456"
     static let infoSegue = "ShowInfoScreen"
     static let chatServiceDomain = "com.q-municate.chatservice"
     static let errorDomaimCode = -1000

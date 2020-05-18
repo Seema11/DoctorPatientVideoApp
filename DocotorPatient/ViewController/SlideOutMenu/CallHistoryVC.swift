@@ -46,6 +46,7 @@ extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "CallHistoryCell") as! CallHistoryCell
+        cell.setUpData(response: historyData[indexPath.section] as! HistoryModel)
         return cell
     }
 }
@@ -58,8 +59,6 @@ extension CallHistoryVC {
             GeneralUtility.endProcessing()
             if (status){
                 self.handleGetHistoryData(response: response as! [Any])
-                self.historyData = (response as? [[String : Any]])!
-                self.tableView.reloadData()
             } else {
                 GeneralUtility.showAlert(message: message)
             }
@@ -71,6 +70,7 @@ extension CallHistoryVC {
                 let historyModel = HistoryModel.mappedObject(dictionary)
                 self.historyData.append(historyModel)
             }
+            
             self.tableView.reloadData()
             if historyData.count == 0 {
                 self.view.showToast(message: "No History Foud")

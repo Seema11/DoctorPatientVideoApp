@@ -31,8 +31,8 @@ class EditProfileVC: BaseViewController {
     }
     
     func setUpView()  {
-        print(userData)
-          self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         self.textfieldUserName.text = userData?.username
         self.textfieldEmail.text = userData?.email
         self.textfieldPhoneNumber.text = userData?.phoneno

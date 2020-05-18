@@ -27,6 +27,7 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var labelVideoPause: UILabel!
     @IBOutlet weak var opponentView: QBRTCRemoteVideoView!
     @IBOutlet weak var localVideoSubView: UIView!
+    @IBOutlet weak var audioCallView: UIView!
     @IBOutlet weak var stackViewTextEdit: UIStackView!
     
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
@@ -51,6 +52,8 @@ class VideoCallVC: UIViewController {
    // var session: QBRTCSession?
     var callUUID: UUID?
     var videoPause : Bool = false
+    
+    var videoFormat = QBRTCVideoFormat()
     
     //Camera
     var videoCapture: QBRTCCameraCapture?
@@ -109,7 +112,7 @@ class VideoCallVC: UIViewController {
     }
     
     func showLocalVideo()  {
-          let videoFormat = QBRTCVideoFormat()
+                    localVideoView?.delegate = self
                     videoFormat.frameRate = 50
                     videoFormat.pixelFormat = .format420f
                     videoFormat.width = UInt(UIScreen.main.bounds.width)
@@ -131,7 +134,8 @@ class VideoCallVC: UIViewController {
         self.constarintLayoutHeightButtonsView.constant = 44
         self.labelVideoPause.isHidden = true
         self.stackViewTextEdit.isHidden = true
-        
+        self.localVideoSubView.isHidden = true
+        self.audioCallView.isHidden = true
         QBRTCClient.instance().add(self as QBRTCClientDelegate)
         QBRTCAudioSession.instance().addDelegate(self)
               
@@ -187,13 +191,18 @@ class VideoCallVC: UIViewController {
 
         } else {
             videoCapture?.position = .back
-
         }
     }
+    
+    @IBAction func didTapButtonLoudSpeaker(_ sender: Any) {
+        let previousDevice = QBRTCAudioSession.instance().currentAudioDevice
+        let device = previousDevice == .speaker ? QBRTCAudioDevice.receiver : QBRTCAudioDevice.speaker
+        QBRTCAudioSession.instance().currentAudioDevice = device
+    }
+    
     @IBAction func didTapButtonVideoPause(_ sender: Any) {
-        
         self.muteVideo = !muteVideo
-        self.localVideoView?.isHidden = !muteVideo
+         self.localVideoView?.isHidden = !muteVideo
     }
     
     @IBAction func didTapButtonAudioMute(_ sender: Any) {
@@ -209,15 +218,12 @@ class VideoCallVC: UIViewController {
         self.constarintLayoutHeightTextView.constant = 187
         self.constarintLayoutHeightButtonsView.constant = 0
         self.stackViewTextEdit.isHidden = false
-        reloadLocalView()
     }
     
     @IBAction func didTapButtonCheckBox(_ sender: Any) {
         self.constarintLayoutHeightTextView.constant = 0
         self.constarintLayoutHeightButtonsView.constant = 44
         self.stackViewTextEdit.isHidden = true
-        reloadLocalView()
-        
     }
     
     @IBAction func didTapButtonText(_ sender: Any) {
@@ -241,6 +247,7 @@ extension VideoCallVC {
                 self.showLocalVideo()
                  break
              case .audio:
+                 self.audioCallView.isHidden = false
                  if UIDevice.current.userInterfaceIdiom == .phone {
                      QBRTCAudioSession.instance().currentAudioDevice = .receiver
                      dynamicButton.pressed = false
@@ -269,26 +276,25 @@ extension VideoCallVC {
          state = .connecting
      }
     func reloadAcceptCall() {
-    
+        self.videoCapture?.stopSession(nil)
+        self.previewView.isHidden = true
+        self.localVideoSubView.isHidden = false
+        localVideoView?.delegate = self
         let videoFormat = QBRTCVideoFormat()
         videoFormat.frameRate = 50
         videoFormat.pixelFormat = .format420f
-       // videoFormat.width = 640
-    //    videoFormat.height = 480
-        
+        videoFormat.width = UInt(UIScreen.main.bounds.width)
+        videoFormat.height = UInt(UIScreen.main.bounds.height)
         // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
         self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
         
         // add video capture to session's local media stream
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
         
-    //    self.videoCapture?.previewLayer.frame = self.localVideo.bounds
+        self.videoCapture?.previewLayer.frame = self.localVideoSubView.bounds
         self.videoCapture?.startSession()
         
         self.localVideoSubView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
-        
-     //    let remoteVideoTrack = self.session?.remoteVideoTrack(withUserID: 108764506)
-        
     }
     
     // MARK: Transition to size
@@ -315,9 +321,9 @@ extension VideoCallVC {
        func acceptCall() {
            SoundProvider.stopSound()
            //Accept call
-       //   self.reloadAcceptCall()
            let userInfo = ["acceptCall": "userInfo"]
            session?.acceptCall(userInfo)
+           startRecordingCall()
        }
        
        private func closeCall() {
@@ -582,13 +588,8 @@ extension VideoCallVC: QBRTCClientDelegate {
         }
 
         self.opponentView.setVideoTrack(videoTrack)
-   //     self.constarintLayoutWidthPreviewView.constant = 108
-    //    self.constarintLayoutHeightPreviewView.constant = 128
-   //     self.constarintLayoutTrailingPreviewView.constant = 16
-      //  self.constarintLayoutBottomPreviewView.constant = self.constraintLayoutStackviewTop.constant
-       
+        self.reloadAcceptCall()
         reloadContent()
-        reloadLocalView()
     }
     
     func reloadLocalView() {
@@ -626,7 +627,27 @@ extension VideoCallVC: QBRTCClientDelegate {
     func sessionDidClose(_ session: QBRTCSession) {
         if let sessionID = self.session?.id,
             sessionID == session.id {
+            session.recorder?.stopRecord()
             closeCall()
         }
     }
+}
+extension VideoCallVC : QBRTCRecorderDelegate{
+    func recorder(_ recorder: QBRTCRecorder, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func startRecordingCall() {
+           //Start Recording on Caller's Screen
+           let dirPathNoScheme = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+           let dateStr = Date.getCurrentDateddMMyyyy()
+           //add directory path file Scheme;  some operations fail w/out it
+           let dirPath = Constant.path
+           //name your file, make sure you get the ext right .mp3/.wav/.m4a/.mov/.whatever
+           let fileName = "\(dateStr).wav"
+           let pathArray = [dirPath, fileName]
+           let path = URL(string: pathArray.joined(separator: "/"))
+             session?.recorder?.delegate = self
+           session?.recorder?.startRecord(withFileURL: path!)
+       }
 }

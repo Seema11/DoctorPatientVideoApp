@@ -87,7 +87,8 @@ enum EnumWebService {
              .addPatient,
              .callHistory,
              .editProfile,
-             .patientList:             return true
+             .patientList,
+             .addCallHistory:         return true
         default:                      return false
        }
     }
