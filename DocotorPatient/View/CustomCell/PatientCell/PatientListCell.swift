@@ -19,6 +19,16 @@ class PatientListCell: UITableViewCell {
     @IBOutlet weak var buttonVideoCall: UIButton!
     
     @IBOutlet weak var constaintHeightLayoutTime: NSLayoutConstraint!
+    
+    static var nib:UINib {
+              return UINib(nibName: identifier, bundle: nil)
+          }
+          
+          static var identifier: String {
+              return String(describing: self)
+          }
+       
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,5 +39,10 @@ class PatientListCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    func setUpData(response : PatientListModel) {
+          self.labelPatientName.text = response.username
+        self.labelPatientTime.text = response.trn_date
+        }
+
 
 }

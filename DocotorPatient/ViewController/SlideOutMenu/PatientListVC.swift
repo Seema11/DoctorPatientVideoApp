@@ -4,7 +4,7 @@
 //
 //  Created by Bhavesh on 01/05/20.
 //  Copyright © 2020 Bhavesh. All rights reserved.
-//
+//  //    let dic : [String : Any =["ID":selectUser.id,"fullname":selectUser.username,"email":selectUser.email,"login":selectUser.username]
 
 import UIKit
 import Quickblox
@@ -15,6 +15,8 @@ import QuickbloxWebRTC
 class PatientListVC: BaseViewController {
 
     var userList : [QBUUser] = []
+    var patientList : [PatientListModel] = []
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -91,34 +93,42 @@ class PatientListVC: BaseViewController {
     }
     @IBAction func didTapButtonAudoiCall(_ sender: UIButton) {
         
-        let selectUser : QBUUser = userList[sender.tag]
-         self.dataSource.selectedUsers = [selectUser]
-        let opid : NSNumber = NSNumber(value: selectUser.id)
-        self.call(with: .audio, op_id: [opid])
+        let patientdata = patientList[sender.tag]
+        self.patientId = patientdata.id
+        self.callType = "audio"
+        self.patientName = patientdata.username
+        let qbUserId : UInt = UInt(patientdata.qbuserId ?? "0") ?? 0
+        
+        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
+            let selectUser : QBUUser = user
+            self.dataSource.selectedUsers = [selectUser]
+            let opid : NSNumber = NSNumber(value: selectUser.id)
+            print("\(opid)")
+            self.call(with: .audio, op_id: [opid])
+        }) { (response) in
+           GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+        }
     }
     @IBAction func didTapButtonVideoCall(_ sender: UIButton) {
-        
-       let selectUser : QBUUser = userList[sender.tag]
-        self.dataSource.selectedUsers = [selectUser]
-               let opid : NSNumber = NSNumber(value: selectUser.id)
-               self.call(with: .video, op_id: [opid])
-        
-//           if #available(iOS 13.0, *) {
-//                    let videoCallVC = self.storyboard?.instantiateViewController(identifier: "VideoCallVC") as! VideoCallVC
-//
-//                    self.navigationController?.pushViewController(videoCallVC, animated: true)
-//
-//                } else {
-//                    let videoCallVC = UIViewController.instantiateFrom("Menu", "VideoCallVC") as! VideoCallVC
-//
-//                    self.navigationController?.pushViewController(videoCallVC, animated: true)
-//                }
+       let patientdata = patientList[sender.tag]
+       let qbUserId : UInt = UInt(patientdata.qbuserId ?? "0") ?? 0
+       self.patientId = patientdata.id
+       self.callType = "video"
+        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
+            let selectUser : QBUUser = user
+            self.dataSource.selectedUsers = [selectUser]
+            let opid : NSNumber = NSNumber(value: selectUser.id)
+            print("\(opid)")
+            self.call(with: .video, op_id: [opid])
+        }) { (response) in
+            GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+        }
     }
     
 }
 extension PatientListVC : UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.userList.count
+        return self.patientList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,8 +137,9 @@ extension PatientListVC : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "PatientListCell") as! PatientListCell
-        let qbuser : QBUUser = self.userList[indexPath.section]
-        cell.labelPatientName.text = qbuser.login
+        cell.setUpData(response: patientList[indexPath.section])
+      //  let qbuser : QBUUser = self.userList[indexPath.section]
+       // cell.labelPatientName.text = qbuser.login
         cell.buttonAudioCall.tag = indexPath.section
         cell.buttonVideoCall.tag = indexPath.section
         return cell
@@ -142,10 +153,25 @@ extension PatientListVC {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.patientList(["userid" : self.userData?.id as Any])) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-               print(response)
+                self.handleGetHistoryData(response: response as! [Any])
             } else {
                 GeneralUtility.showAlert(message: message)
             }
         }
     }
+    func handleGetHistoryData(response : [Any]) {
+         if let array = response as? [[String: Any]] {
+             array.forEach { (dictionary) in
+                 let patientModel = PatientListModel.mappedObject(dictionary)
+                if !(patientModel.qbuserId!.isEmpty) {
+                 self.patientList.append(patientModel)
+                }
+             }
+             
+             self.tableView.reloadData()
+             if patientList.count == 0 {
+                 self.view.showToast(message: "No Patient Foud")
+             }
+         }
+     }
 }

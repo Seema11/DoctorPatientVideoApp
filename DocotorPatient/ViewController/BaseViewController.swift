@@ -12,39 +12,42 @@ import PushKit
 import QuickbloxWebRTC
 
 class BaseViewController: UIViewController {
-
+    
     let userData = UserModel.loginUserModel
     let qbModel = QbUserModel.QBUserModel
     var startTime : String?
     var endTime : String?
     var patientId : String?
+    var qbuserID : String?
+    var callType : String?
+    var patientName : String?
     
     //MARK: - Properties
-     var dataSource: UsersDataSource = {
+    var dataSource: UsersDataSource = {
         let dataSource = UsersDataSource()
         return dataSource
     }()
-
-     var navViewController: UINavigationController = {
-           let navViewController = UINavigationController()
-           return navViewController
-           
-       }()
     
-      var session: QBRTCSession?
-          var voipRegistry: PKPushRegistry = {
-             let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
-             return voipRegistry
-         }()
+    var navViewController: UINavigationController = {
+        let navViewController = UINavigationController()
+        return navViewController
+        
+    }()
+    
+    var session: QBRTCSession?
+    var voipRegistry: PKPushRegistry = {
+        let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
+        return voipRegistry
+    }()
     var callUUID: UUID?
     var backgroundTask: UIBackgroundTaskIdentifier = {
-             let backgroundTask = UIBackgroundTaskIdentifier.invalid
-             return backgroundTask
-         }()
+        let backgroundTask = UIBackgroundTaskIdentifier.invalid
+        return backgroundTask
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 }
 
@@ -54,54 +57,42 @@ extension BaseViewController {
         QBChat.instance.connect(withUserID: qbModel?.ID ?? 0, password: qbModel?.password ?? "", completion: { (error) in
             GeneralUtility.endProcessing()
             if error == nil {
-              print("connected")
+                print("connected")
                 GeneralUtility.endProcessing()
                 //did Login action
-         //       Constant.appDelegate.showDrawerView()
+                //       Constant.appDelegate.showDrawerView()
                 //self.performApiCallforLogin()
             } else {
                 if error?._code == QBResponseStatusCode.unAuthorized.rawValue {
-                                                             // Clean profile
+                    // Clean profile
                     GeneralUtility.endProcessing()
                     Profile.clearProfile()
                     GeneralUtility.showAlert(message: "Connection Failed")
                 } else {
                     self.handleError(error, domain: ErrorDomain.logIn)
-                  // self.disconnectUser()
+                    // self.disconnectUser()
                 }
-                  print(error as Any)
+                print(error as Any)
             }
         })
     }
-     func handleError(_ error: Error?, domain: ErrorDomain) {
+    func handleError(_ error: Error?, domain: ErrorDomain) {
         GeneralUtility.endProcessing()
-           guard let error = error else {
-               return
-           }
-           var infoText = error.localizedDescription
-        self.view.showToast(message: infoText)
-           if error._code == NSURLErrorNotConnectedToInternet {
-               infoText = LoginConstant.checkInternet
-           }
+        guard let error = error else {
+            return
         }
-    
-}
-extension BaseViewController {
-    func performApiCall(parameter : [String : Any]) {
-        GeneralUtility.showProcessing()
-        ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addCallHistory(parameter)) { (status, message, statusCode, response, error) in
-            GeneralUtility.endProcessing()
-            if (status){
-                
-            } else {
-                GeneralUtility.showAlert(message: message)
-            }
+        var infoText = error.localizedDescription
+        self.view.showToast(message: infoText)
+        if error._code == NSURLErrorNotConnectedToInternet {
+            infoText = LoginConstant.checkInternet
         }
     }
+    
 }
+
 extension BaseViewController {
     
-     func hasConnectivity() -> Bool {
+    func hasConnectivity() -> Bool {
         
         let status = Reachability.instance.networkConnectionStatus()
         guard status != NetworkConnectionStatus.notConnection else {
@@ -116,57 +107,66 @@ extension BaseViewController {
         return true
     }
     
-     func cancelCallAlert() {
-          let alert = UIAlertController(title: UsersAlertConstant.checkInternet, message: nil, preferredStyle: .alert)
-          let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
-
-              CallKitManager.instance.endCall(with: self.callUUID) {
-                  debugPrint("[UsersViewController] endCall")
-                  
-              }
-              self.prepareCloseCall()
-          }
-          alert.addAction(cancelAction)
-          present(alert, animated: false) {
-          }
-      }
-      
-      //Handle Error
-       func errorMessage(response: QBResponse) -> String? {
-          var errorMessage : String
-          if response.status.rawValue == 502 {
-              errorMessage = "Bad Gateway, please try again"
-          } else if response.status.rawValue == 0 {
-              errorMessage = "Connection network error, please try again"
-          } else {
-              guard let qberror = response.error,
-                  let error = qberror.error else {
-                      return nil
-              }
-              
-              errorMessage = error.localizedDescription.replacingOccurrences(of: "(",
-                                                                             with: "",
-                                                                             options:.caseInsensitive,
-                                                                             range: nil)
-              errorMessage = errorMessage.replacingOccurrences(of: ")",
-                                                               with: "",
-                                                               options: .caseInsensitive,
-                                                               range: nil)
-          }
-          return errorMessage
-      }
-     func prepareCloseCall() {
-        self.endTime = Date.getCurrentDateyyyyMMdd()
-        self.patientId = "5"
-        self.performApiCallforAddHistory()
-          self.callUUID = nil
-          self.session = nil
-          if QBChat.instance.isConnected == false {
-              self.connectToChat()
-          }
-      }
+    func cancelCallAlert() {
+        let alert = UIAlertController(title: UsersAlertConstant.checkInternet, message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            
+            CallKitManager.instance.endCall(with: self.callUUID) {
+                debugPrint("[UsersViewController] endCall")
+                
+            }
+            self.prepareCloseCall()
+        }
+        alert.addAction(cancelAction)
+        present(alert, animated: false) {
+        }
+    }
     
-     func connectToChat() {
+    //Handle Error
+    func errorMessage(response: QBResponse) -> String? {
+        var errorMessage : String
+        if response.status.rawValue == 502 {
+            errorMessage = "Bad Gateway, please try again"
+        } else if response.status.rawValue == 0 {
+            errorMessage = "Connection network error, please try again"
+        } else {
+            guard let qberror = response.error,
+                let error = qberror.error else {
+                    return nil
+            }
+            
+            errorMessage = error.localizedDescription.replacingOccurrences(of: "(",
+                                                                           with: "",
+                                                                           options:.caseInsensitive,
+                                                                           range: nil)
+            errorMessage = errorMessage.replacingOccurrences(of: ")",
+                                                             with: "",
+                                                             options: .caseInsensitive,
+                                                             range: nil)
+        }
+        return errorMessage
+    }
+    func prepareCloseCall() {
+        
+        if self.session?.conferenceType == .audio {
+            self.callType = "audio"
+        } else {
+            self.callType = "video"
+        }
+        
+        self.qbuserID = "\(session?.opponentsIDs[0] ?? 0)"
+        
+        self.endTime = Date.getCurrentDateyyyyMMdd()
+    
+        self.performApiCallforAddHistory()
+        self.callUUID = nil
+        self.session = nil
+        if QBChat.instance.isConnected == false {
+            self.connectToChat()
+        }
+    }
+    
+    func connectToChat() {
         let profile = Profile()
         guard profile.isFull == true else {
             return
@@ -256,7 +256,7 @@ extension BaseViewController: QBRTCClientDelegate {
         }
     }
     
-     func reportIncomingCall(withUserIDs userIDs: [NSNumber], outCallerName: String, session: QBRTCSession, uuid: UUID) {
+    func reportIncomingCall(withUserIDs userIDs: [NSNumber], outCallerName: String, session: QBRTCSession, uuid: UUID) {
         if hasConnectivity() {
             CallKitManager.instance.reportIncomingCall(withUserIDs: userIDs,
                                                        outCallerName: outCallerName,
@@ -268,24 +268,25 @@ extension BaseViewController: QBRTCClientDelegate {
                                                         }
                                                         
                                                         
-                                                        let callViewController : CallViewController?
-                                                                              
-                                                                              if #available(iOS 13.0, *) {
-                                                                                  callViewController  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "CallViewController") as? CallViewController
-                                                                              } else {
-                                                                                  
-                                                                                  callViewController = UIViewController.instantiateFrom("Call", "CallViewController") as? CallViewController
-                                                                                  // Fallback on earlier versions
-                                                                              }
+                                                        let vc : VideoCallVC?
+                                                                         
+                                                                         if #available(iOS 13.0, *) {
+                                                                             vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
+                                                                         } else {
+                                                                             
+                                                                             vc = UIViewController.instantiateFrom("Menu", "VideoCallVC") as? VideoCallVC
+                                                                             // Fallback on earlier versions
+                                                                         }
                                                         
-                                                      
+                                                        let callViewController = vc
                                                         callViewController?.session = session
                                                         callViewController?.usersDataSource = self.dataSource
                                                         callViewController?.callUUID = self.callUUID
+                                                        callViewController?.patientName = self.patientName
                                                         self.navViewController = UINavigationController(rootViewController: callViewController!)
-                                                 
-                                                                self.navViewController.modalTransitionStyle = .crossDissolve
-                                                                self.present(self.navViewController , animated: false)
+                                                        
+                                                        self.navViewController.modalTransitionStyle = .crossDissolve
+                                                        self.present(self.navViewController , animated: false)
                                                         
                                                         
                 }, completion: { (end) in
@@ -300,8 +301,8 @@ extension BaseViewController: QBRTCClientDelegate {
         if let sessionID = self.session?.id,
             sessionID == session.id {
             if self.navViewController.presentingViewController?.presentedViewController == self.navViewController {
-                    self.navViewController.view.isUserInteractionEnabled = false
-                    self.navViewController.dismiss(animated: false)
+                self.navViewController.view.isUserInteractionEnabled = false
+                self.navViewController.dismiss(animated: false)
             }
             CallKitManager.instance.endCall(with: self.callUUID) {
                 debugPrint("[UsersViewController] endCall")
@@ -360,7 +361,7 @@ extension BaseViewController: PKPushRegistryDelegate {
 }
 extension BaseViewController {
     
-     func call(with conferenceType: QBRTCConferenceType , op_id : [NSNumber] ) {
+    func call(with conferenceType: QBRTCConferenceType , op_id : [NSNumber] ) {
         
         if session != nil {
             return
@@ -371,19 +372,20 @@ extension BaseViewController {
                 if granted {
                     let opponentsIDs = self.dataSource.ids(forUsers: self.dataSource.selectedUsers)
                     //Create new session
+                    
                     let session = QBRTCClient.instance().createNewSession(withOpponents: opponentsIDs, with: conferenceType)
                     if session.id.isEmpty == false {
                         self.session = session
                         let uuid = UUID()
                         self.callUUID = uuid
-                        
+                
                         CallKitManager.instance.startCall(withUserIDs: opponentsIDs, session: session, uuid: uuid)
                         
                         
                         let vc : VideoCallVC?
                         
                         if #available(iOS 13.0, *) {
-                            vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
+                            vc  = UIStoryboard.init(name: "Menu", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
                         } else {
                             
                             vc = UIViewController.instantiateFrom("Menu", "VideoCallVC") as? VideoCallVC
@@ -394,6 +396,7 @@ extension BaseViewController {
                             callViewController.session = self.session
                             callViewController.usersDataSource = self.dataSource
                             callViewController.callUUID = uuid
+                            callViewController.patientName = self.patientName
                             let nav = UINavigationController(rootViewController: callViewController)
                             nav.modalTransitionStyle = .crossDissolve
                             self.present(nav , animated: false)
@@ -433,18 +436,23 @@ extension BaseViewController {
 }
 extension BaseViewController {
     func performApiCallforAddHistory()  {
-        GeneralUtility.showProcessing()
+
+       // GeneralUtility.showProcessing()
         let parameter : [String:Any] = [ "userid": userData?.id as Any,
-                                         "patientid": self.patientId as Any,
+                                         "patientid": "21",//self.patientId as Any,
                                          "starttime": self.startTime as Any,
-                                         "endtime": self.endTime as Any]
+                                         "endtime": self.endTime as Any,
+                                         "qbuserId": self.qbuserID as Any,
+                                         "calltype": self.callType as Any]
+        
+        print(parameter)
         
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addCallHistory(parameter)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                 GeneralUtility.showAlert(message: message)
+              //  GeneralUtility.showAlert(message: message)
             } else {
-                GeneralUtility.showAlert(message: message)
+               // GeneralUtility.showAlert(message: message)
             }
         }
         

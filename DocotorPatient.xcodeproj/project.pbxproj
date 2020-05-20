@@ -185,6 +185,7 @@
 		CE2C2D06245C2A40001CBD87 /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
 		CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewControllerExtension.swift; sourceTree = "<group>"; };
 		CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListVC.swift; sourceTree = "<group>"; };
+		CE321FCB24739B5B000DC031 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
 		CE3CA5A424657587005179F1 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4B1C1424627A71000144D9 /* CallPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallPermissions.swift; sourceTree = "<group>"; };
 		CE4B1C1624627A71000144D9 /* Call.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Call.storyboard; sourceTree = "<group>"; };
@@ -305,6 +306,7 @@
 		3C1035E9C9ECFCDCBC078A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE321FCB24739B5B000DC031 /* CryptoTokenKit.framework */,
 				CE3CA5A424657587005179F1 /* Alamofire.framework */,
 				9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */,
 			);

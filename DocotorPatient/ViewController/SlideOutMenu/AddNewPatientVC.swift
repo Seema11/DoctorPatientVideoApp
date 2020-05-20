@@ -54,7 +54,6 @@ class AddNewPatientVC: BaseViewController {
 
 extension AddNewPatientVC {
     func performApiCallForAddPatient(paramater : [String:Any])  {
-        GeneralUtility.showProcessing()
         
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addPatient(paramater)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
@@ -71,6 +70,7 @@ extension AddNewPatientVC {
 extension AddNewPatientVC {
     
     private func signUp(fullName: String, login: String) {
+           GeneralUtility.showProcessing()
         let newUser = QBUUser()
         newUser.login = login
         newUser.fullName = fullName
@@ -85,11 +85,12 @@ extension AddNewPatientVC {
                                                 "qbuserId" : "\(user.id)"]
             self!.performApiCallForAddPatient(paramater: paramater)
                 } else {
+                    GeneralUtility.endProcessing()
                     GeneralUtility.showAlert(message: "Please Fill All Detail")
                 }
        
             }, errorBlock: { [weak self] response in
-                
+                   GeneralUtility.endProcessing()
                 self?.handleError(response.error?.error, domain: ErrorDomain.signUp)
         })
     }

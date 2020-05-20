@@ -29,14 +29,16 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var localVideoSubView: UIView!
     @IBOutlet weak var audioCallView: UIView!
     @IBOutlet weak var stackViewTextEdit: UIStackView!
+    @IBOutlet weak var labelCallerName: UILabel!
+    @IBOutlet weak var labelCallTime: UILabel!
     
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutHeightButtonsView: NSLayoutConstraint!
     
     @IBOutlet weak var constarintLayoutHeightPreviewView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutWidthPreviewView: NSLayoutConstraint!
-     @IBOutlet weak var constarintLayoutBottomPreviewView: NSLayoutConstraint!
-     @IBOutlet weak var constarintLayoutTrailingPreviewView: NSLayoutConstraint!
+    @IBOutlet weak var constarintLayoutBottomPreviewView: NSLayoutConstraint!
+    @IBOutlet weak var constarintLayoutTrailingPreviewView: NSLayoutConstraint!
     
     @IBOutlet weak var constraintLayoutStackviewTop: NSLayoutConstraint!
     
@@ -47,6 +49,8 @@ class VideoCallVC: UIViewController {
     private var callTimer: Timer?
     private var beepTimer: Timer?
 
+    var patientName : String?
+    
     weak var usersDataSource: UsersDataSource?
     //Camera
    // var session: QBRTCSession?
@@ -113,17 +117,16 @@ class VideoCallVC: UIViewController {
     
     func showLocalVideo()  {
                     localVideoView?.delegate = self
-                    videoFormat.frameRate = 50
-                    videoFormat.pixelFormat = .format420f
+                   videoFormat.frameRate = 100
+                    videoFormat.pixelFormat = .formatARGB
                     videoFormat.width = UInt(UIScreen.main.bounds.width)
                     videoFormat.height = UInt(UIScreen.main.bounds.height)
                     // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
                     self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
-                    
                     // add video capture to session's local media stream
                     self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
-                    
-                    self.videoCapture?.previewLayer.frame = self.previewView.bounds
+                    self.videoCapture?.previewLayer.videoGravity = .resizeAspect
+                   self.videoCapture?.previewLayer.frame = self.view.bounds//self.previewView.bounds
                     self.videoCapture?.startSession()
                     
                     self.previewView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
@@ -248,6 +251,7 @@ extension VideoCallVC {
                  break
              case .audio:
                  self.audioCallView.isHidden = false
+                 self.labelCallerName.text = self.patientName
                  if UIDevice.current.userInterfaceIdiom == .phone {
                      QBRTCAudioSession.instance().currentAudioDevice = .receiver
                      dynamicButton.pressed = false
@@ -287,7 +291,7 @@ extension VideoCallVC {
         videoFormat.height = UInt(UIScreen.main.bounds.height)
         // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
         self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
-        
+        self.videoCapture?.previewLayer.videoGravity = .resizeAspect
         // add video capture to session's local media stream
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
         
@@ -311,7 +315,7 @@ extension VideoCallVC {
                                             target: self,
                                             selector: #selector(playCallingSound(_:)),
                                             userInfo: nil, repeats: true)
-           playCallingSound(nil)
+           playCallingSound(self)
            //Start call
            let userInfo = ["name": "Test", "url": "http.quickblox.com", "param": "\"1,2,3,4\""]
            
@@ -437,6 +441,7 @@ extension VideoCallVC {
      
      @objc func refreshCallTime(_ sender: Timer?) {
          timeDuration += CallConstant.refreshTimeInterval
+        self.labelCallTime.text = "\(string(withTimeDuration: timeDuration))"
       //   title = "Call time - \(string(withTimeDuration: timeDuration))"
      }
      
@@ -521,7 +526,9 @@ extension VideoCallVC: QBRTCClientDelegate {
             shouldGetStats == true else {
                 return
         }
+        
         let result = report.statsString()
+        self.labelCallTime.text = result
     }
     
     /**
@@ -575,6 +582,7 @@ extension VideoCallVC: QBRTCClientDelegate {
                 reloadContent()
             }
         }
+        
     }
     
     /**

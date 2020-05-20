@@ -17,6 +17,7 @@ class PatientListModel: NSObject,Mappable {
      var title : String?
      var userid : String?
      var roomno : String?
+    var qbuserId : String?
      var trn_date : String?
     
     override init() {
@@ -39,6 +40,7 @@ class PatientListModel: NSObject,Mappable {
           title       <- map["title"]
           userid      <- map["userid"]
           roomno      <- map["roomno"]
+          qbuserId    <- map["qbuserId"]
           trn_date    <- map["trn_date"]
       }
 

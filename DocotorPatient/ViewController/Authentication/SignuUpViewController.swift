@@ -39,7 +39,7 @@ class SignuUpViewController: UIViewController {
                }
     }
     @IBAction func didTapButtonSignUp(_ sender: Any) {
-        performApiCallforSigup()
+        self.signuInQb()
     }
     @IBAction func didTapButtonLogin(_ sender: Any) {
         
@@ -47,14 +47,15 @@ class SignuUpViewController: UIViewController {
     }
 }
 extension SignuUpViewController {
-    func performApiCallforSigup() {
-        GeneralUtility.showProcessing()
-        let parameter : [String:Any] = ["email":self.textfieldEmailAddress.text!,"username":self.textfieldUserName.text!,"password":self.textfieldPassword.text!]
+    func performApiCallforSigup(userId : String) {
+
+        let parameter : [String:Any] = ["email":self.textfieldEmailAddress.text!,"username":self.textfieldUserName.text!,"password":self.textfieldPassword.text!,"qbuserId":userId]
         
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.registration(parameter)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                self.signuInQb()
+               GeneralUtility.showAlert(message: "User Successfully created")
+              self.navigationController?.popViewController(animated: true)
             } else {
                 GeneralUtility.endProcessing()
                 GeneralUtility.showAlert(message: message)
@@ -73,9 +74,9 @@ extension SignuUpViewController {
                             user.password = passowrd
 
                             QBRequest.signUp(user, successBlock: { (response, user) in
-                             GeneralUtility.endProcessing()
-                             GeneralUtility.showAlert(message: "User Successfully created")
-                                 self.navigationController?.popViewController(animated: true)
+                            // GeneralUtility.endProcessing()
+                                self.performApiCallforSigup(userId: "\(user.id)")
+
                             }, errorBlock: { (response) in
                              GeneralUtility.endProcessing()
                              GeneralUtility.showAlert(message: response.error!.debugDescription)

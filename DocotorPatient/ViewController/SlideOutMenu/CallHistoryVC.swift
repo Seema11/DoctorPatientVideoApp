@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Quickblox
 
 class CallHistoryVC: BaseViewController {
     
@@ -15,23 +16,32 @@ class CallHistoryVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.performAPICallforViewHistory()
     }
-
+    
     @IBAction func didTapButtonSideMenu(_ sender: Any) {
         sideMenuController()?.openDrawer()
     }
     @IBAction func didTapButtonSearch(_ sender: Any) {
     }
-    @IBAction func didTapButtonCall(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-                let videoCallVC = self.storyboard?.instantiateViewController(identifier: "VideoCallVC") as! VideoCallVC
-                self.navigationController?.pushViewController(videoCallVC, animated: true)
-            } else {
-                let videoCallVC = UIViewController.instantiateFrom("Menu", "VideoCallVC") as! VideoCallVC
-                self.navigationController?.pushViewController(videoCallVC, animated: true)
-            }
+    @IBAction func didTapButtonCall(_ sender: UIButton) {
+        let selectUser : HistoryModel = historyData[sender.tag] as! HistoryModel
+        let qbuser = QBUUser()
+        qbuser.email = selectUser.email
+        qbuser.id = UInt(selectUser.qbuserId!)!
+        qbuser.fullName = selectUser.username
+        qbuser.login = selectUser.email
+        self.callType = selectUser.calltype
+        self.dataSource.selectedUsers = [qbuser]
+        let opid : NSNumber = NSNumber(value: qbuser.id)
+        
+        if self.callType == "audio" {
+            self.call(with: .audio, op_id: [opid])
+        } else {
+            self.call(with: .video, op_id: [opid])
+        }
+        
     }
     
 }
@@ -47,6 +57,7 @@ extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "CallHistoryCell") as! CallHistoryCell
         cell.setUpData(response: historyData[indexPath.section] as! HistoryModel)
+        cell.buttonCall.tag = indexPath.section
         return cell
     }
 }
@@ -68,9 +79,10 @@ extension CallHistoryVC {
         if let array = response as? [[String: Any]] {
             array.forEach { (dictionary) in
                 let historyModel = HistoryModel.mappedObject(dictionary)
-                self.historyData.append(historyModel)
+//                if !(historyModel.qbuserId!.isEmpty){
+                    self.historyData.append(historyModel)
+//                }
             }
-            
             self.tableView.reloadData()
             if historyData.count == 0 {
                 self.view.showToast(message: "No History Foud")

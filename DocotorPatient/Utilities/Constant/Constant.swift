@@ -91,7 +91,7 @@ struct LoginConstant {
     static let shouldContainAlphanumeric = NSLocalizedString("Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter.", comment: "")
     static let shouldContainAlphanumericWithoutSpace = NSLocalizedString("Field should contain alphanumeric characters only in a range 8 to 15, without space. The first character must be a letter.", comment: "")
     static let showUsers = "ShowUsersViewController"
-    static let defaultPassword = "123456"
+    static let defaultPassword = "12345678"
     static let infoSegue = "ShowInfoScreen"
     static let chatServiceDomain = "com.q-municate.chatservice"
     static let errorDomaimCode = -1000

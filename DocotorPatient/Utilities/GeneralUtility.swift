@@ -19,7 +19,6 @@ import MobileCoreServices
 import AVFoundation
 import Quickblox
 import QuickbloxWebRTC
-import CommonCrypto
 
 struct GeneralUtility {
     
@@ -124,6 +123,24 @@ struct GeneralUtility {
             presentVC?.present(alertController, animated: true, completion: nil)
         }
     }
+   static func generatePassword(passwordLength: Int) -> String {
+        
+        let passwordMaterial : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let passwordMaterialLength = UInt32(passwordMaterial.length)
+        
+        var returnValue = ""
+        
+        for _ in 0 ..< passwordLength {
+            let randomPosition = arc4random_uniform(passwordMaterialLength)
+            var character = passwordMaterial.character(at: Int(randomPosition))
+            returnValue += NSString(characters: &character, length: 1) as String
+        }
+        
+        return returnValue
+    }
+    //USes
+  //  let myPassword = generatePassword(passwordLength: 10)
+  //  print("Secure password: \(myPassword)")
 }
 extension GeneralUtility {
     
@@ -279,19 +296,4 @@ extension UIViewController {
                        debugPrint("QBRequest.logOut error\(response)")
                    }
                }
-    func md5(_ string: String) -> String {
-
-           let context = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-           var digest = Array<UInt8>(repeating:0, count:Int(CC_MD5_DIGEST_LENGTH))
-           CC_MD5_Init(context)
-           CC_MD5_Update(context, string, CC_LONG(string.lengthOfBytes(using: String.Encoding.utf8)))
-           CC_MD5_Final(&digest, context)
-           context.deinitialize(count: 1)
-          var hexString = ""
-           for byte in digest {
-               hexString += String(format:"%02x", byte)
-           }
-
-           return hexString
-       }
 }
