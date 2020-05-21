@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Quickblox
+import QuickbloxWebRTC
 
 class EditProfileVC: BaseViewController {
 
@@ -22,7 +24,6 @@ class EditProfileVC: BaseViewController {
     
     var imagePicker: ImagePicker!
     var imageData: Data?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,8 @@ class EditProfileVC: BaseViewController {
         self.textfieldEmail.text = userData?.email
         self.textfieldPhoneNumber.text = userData?.phoneno
         self.textfieldTitle.text = userData?.title
-        self.imageViewProfile.downloadImage(fromURL: userData?.profileimage, placeHolderImage: UIImage.init(named: "man"), completion: nil)
+        print(ServerConstant.domain + (userData?.profileimage ?? ""))
+        self.imageViewProfile.downloadImage(fromURL: ServerConstant.domain + (userData?.profileimage ?? ""), placeHolderImage: UIImage.init(named: "man"), completion: nil)
     }
     
     @IBAction func didTapButttonBack(_ sender: Any) {
@@ -102,8 +104,11 @@ extension EditProfileVC {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.editProfile(paramater)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                GeneralUtility.showAlert(message: message)
-                self.clearTextfield()
+              if let dictionary = response as? [String: Any] {
+                UserDefaults.removeObject(forKey: Constant.UserDefaultsKey.userLoginData)
+                UserDefaults.savedictionary(dictionary, forKey: Constant.UserDefaultsKey.userLoginData)
+                GeneralUtility.showAlert(message: "Profile Updated Successfully")
+                }
             } else {
                 GeneralUtility.showAlert(message: message)
             }

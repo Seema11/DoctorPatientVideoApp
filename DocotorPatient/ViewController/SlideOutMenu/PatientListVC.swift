@@ -16,10 +16,11 @@ class PatientListVC: BaseViewController {
 
     var userList : [QBUUser] = []
     var patientList : [PatientListModel] = []
-    
-    
+    @IBOutlet weak var buttonMenuView: UIView!
+    @IBOutlet weak var buttonSearchView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var labelNodata: UILabel!
+    @IBOutlet weak var buttonAdd: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.connectUser()
@@ -28,14 +29,26 @@ class PatientListVC: BaseViewController {
     }
     
     func setupView() {
-          QBRTCClient.instance().add(self)
-         if Reachability.instance.networkConnectionStatus() != NetworkConnectionStatus.notConnection {
+        self.labelNodata.isHidden = true
+        
+//        if userData?.isset == "1" {
+//            self.buttonAdd.isHidden = true
+//            self.buttonSearchView.isHidden = true
+//            self.buttonMenuView.isHidden = true
+//        } else {
+//            self.buttonAdd.isHidden = true
+//            self.buttonSearchView.isHidden = true
+//            self.buttonMenuView.isHidden = true
+//        }
+        
+           QBRTCClient.instance().add(self)
+          if Reachability.instance.networkConnectionStatus() != NetworkConnectionStatus.notConnection {
              loadUsers()
-         }
+          }
          voipRegistry.delegate = self
          voipRegistry.desiredPushTypes = Set<PKPushType>([.voIP])
         
-        perfromApiCallForPatientList()
+      //  perfromApiCallForPatientList()
      }
     
     @objc func loadUsers() {
@@ -75,6 +88,11 @@ class PatientListVC: BaseViewController {
            
            navigationController?.isToolbarHidden = true
        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if userData?.isset == "1" { } else {
+            perfromApiCallForPatientList() }
+    }
 
     @IBAction func didTapButtonMenu(_ sender: Any) {
         sideMenuController()?.openDrawer()
@@ -124,8 +142,8 @@ class PatientListVC: BaseViewController {
             GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
         }
     }
-    
 }
+
 extension PatientListVC : UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.patientList.count
@@ -153,14 +171,20 @@ extension PatientListVC {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.patientList(["userid" : self.userData?.id as Any])) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                self.handleGetHistoryData(response: response as! [Any])
+                self.handleGetPatientData(response: response as! [Any])
             } else {
-                GeneralUtility.showAlert(message: message)
+                if error == nil {
+                    self.labelNodata.isHidden = false
+                } else {
+                    GeneralUtility.showAlert(message: message)
+                }
+               
             }
         }
     }
-    func handleGetHistoryData(response : [Any]) {
+    func handleGetPatientData(response : [Any]) {
          if let array = response as? [[String: Any]] {
+            self.patientList.removeAll()
              array.forEach { (dictionary) in
                  let patientModel = PatientListModel.mappedObject(dictionary)
                 if !(patientModel.qbuserId!.isEmpty) {

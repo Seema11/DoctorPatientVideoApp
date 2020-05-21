@@ -22,11 +22,12 @@ class AddNewPatientVC: BaseViewController {
     
     @IBOutlet weak var textfieldTitle: CustomTextfield!
     
-    let password = LoginConstant.defaultPassword
+    let password : String = GeneralUtility.generatePassword(passwordLength: 8)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageViewProfile.downloadImage(fromURL: userData?.profileimage, placeHolderImage: UIImage.init(named: "man"), completion: nil)
+        print(password)
         // Do any additional setup after loading the view.
     }
     
@@ -58,8 +59,8 @@ extension AddNewPatientVC {
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.addPatient(paramater)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status) {
-                GeneralUtility.showAlert(message: message)
                 self.clearTextfield()
+                GeneralUtility.showAlert(message: message)
             } else {
                 GeneralUtility.showAlert(message: message)
             }
@@ -74,7 +75,7 @@ extension AddNewPatientVC {
         let newUser = QBUUser()
         newUser.login = login
         newUser.fullName = fullName
-        newUser.password = LoginConstant.defaultPassword
+        newUser.password = self.password
         QBRequest.signUp(newUser, successBlock: { [weak self] response, user in
             if let username = self?.textfieldUserName.text ,let email = self?.textfieldEmail.text,let phone =   self?.textfiledPhoneNumber.text,let Dtitle = self?.textfieldTitle.text {
                 let paramater : [String:Any] = ["userid": self?.userData?.id as Any,
@@ -82,7 +83,9 @@ extension AddNewPatientVC {
                                                 "email": email,
                                                 "phoneno":phone,
                                                 "title":Dtitle,
-                                                "qbuserId" : "\(user.id)"]
+                                                "password": self?.password as Any,
+                                                "qbuserId" : "\(user.id)",
+                                                "d_qbuserid": self?.userData?.qbuserId as Any]
             self!.performApiCallForAddPatient(paramater: paramater)
                 } else {
                     GeneralUtility.endProcessing()

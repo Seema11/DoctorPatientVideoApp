@@ -11,9 +11,10 @@ import UIKit
 class CallRecordingVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelNoData: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.labelNoData.isHidden = true
     }
 
     @IBAction func didTapButtonSideMenu(_ sender: Any) {

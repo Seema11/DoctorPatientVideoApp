@@ -17,7 +17,7 @@ class PatientListModel: NSObject,Mappable {
      var title : String?
      var userid : String?
      var roomno : String?
-    var qbuserId : String?
+     var qbuserId : String?
      var trn_date : String?
     
     override init() {

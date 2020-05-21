@@ -157,8 +157,8 @@ extension BaseViewController {
         self.qbuserID = "\(session?.opponentsIDs[0] ?? 0)"
         
         self.endTime = Date.getCurrentDateyyyyMMdd()
-    
-        self.performApiCallforAddHistory()
+        if self.userData?.isset != "1" {
+            self.performApiCallforAddHistory() }
         self.callUUID = nil
         self.session = nil
         if QBChat.instance.isConnected == false {
@@ -271,7 +271,7 @@ extension BaseViewController: QBRTCClientDelegate {
                                                         let vc : VideoCallVC?
                                                                          
                                                                          if #available(iOS 13.0, *) {
-                                                                             vc  = UIStoryboard.init(name: "Call", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
+                                                                             vc  = UIStoryboard.init(name: "Menu", bundle: Bundle.main).instantiateViewController(identifier: "VideoCallVC") as? VideoCallVC
                                                                          } else {
                                                                              
                                                                              vc = UIViewController.instantiateFrom("Menu", "VideoCallVC") as? VideoCallVC
@@ -439,10 +439,9 @@ extension BaseViewController {
 
        // GeneralUtility.showProcessing()
         let parameter : [String:Any] = [ "userid": userData?.id as Any,
-                                         "patientid": "21",//self.patientId as Any,
+                                         "patientid": "8",//self.patientId as Any,
                                          "starttime": self.startTime as Any,
                                          "endtime": self.endTime as Any,
-                                         "qbuserId": self.qbuserID as Any,
                                          "calltype": self.callType as Any]
         
         print(parameter)

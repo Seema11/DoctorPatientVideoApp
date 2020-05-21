@@ -100,6 +100,7 @@
 		CE65AC372464190C00B777BB /* calling.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC332464190C00B777BB /* calling.wav */; };
 		CE65AC382464190C00B777BB /* end_of_call.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC342464190C00B777BB /* end_of_call.wav */; };
 		CE65AC392464190C00B777BB /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC352464190C00B777BB /* ringtone.wav */; };
+		CE704D862476ABF4009BDF49 /* DoctorListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704D852476ABF4009BDF49 /* DoctorListVc.swift */; };
 		CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */; };
 		CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959212245AF8FF00F4BBF6 /* ViewController.swift */; };
 		CE959216245AF8FF00F4BBF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE959214245AF8FF00F4BBF6 /* Main.storyboard */; };
@@ -239,6 +240,7 @@
 		CE65AC332464190C00B777BB /* calling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calling.wav; sourceTree = "<group>"; };
 		CE65AC342464190C00B777BB /* end_of_call.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = end_of_call.wav; sourceTree = "<group>"; };
 		CE65AC352464190C00B777BB /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
+		CE704D852476ABF4009BDF49 /* DoctorListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorListVc.swift; sourceTree = "<group>"; };
 		CE95920B245AF8FF00F4BBF6 /* DocotorPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocotorPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE959212245AF8FF00F4BBF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				CECE4258245D29EC00AEEA58 /* CallHistoryVC.swift */,
 				CECE425A245D2A0300AEEA58 /* CallRecordingVC.swift */,
 				CECE4265245D517D00AEEA58 /* VideoCallVC.swift */,
+				CE704D852476ABF4009BDF49 /* DoctorListVc.swift */,
 			);
 			path = SlideOutMenu;
 			sourceTree = "<group>";
@@ -1214,6 +1217,7 @@
 				CE2C2CB8245C2063001CBD87 /* DictionaryExtension.swift in Sources */,
 				CE4B1C7F24627A72000144D9 /* RecordsViewController.swift in Sources */,
 				CE4B1C8124627A72000144D9 /* CheckView.swift in Sources */,
+				CE704D862476ABF4009BDF49 /* DoctorListVc.swift in Sources */,
 				CECE4255245D29A400AEEA58 /* EditProfileVC.swift in Sources */,
 				CE4B1C5824627A72000144D9 /* CallPermissions.swift in Sources */,
 				CE23849B246E98DF00911FAB /* HistoryModel.swift in Sources */,

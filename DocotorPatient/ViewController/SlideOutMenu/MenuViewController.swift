@@ -27,6 +27,8 @@ class MenuViewController: UIViewController {
     var nav: UINavigationController?
     var imagePicker: ImagePicker!
     
+    let userData = UserModel.loginUserModel
+    
     var loginTag : String?
     
     override func viewDidLoad() {
@@ -43,7 +45,7 @@ class MenuViewController: UIViewController {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-       print("view appear")
+        print("view appear")
         self.setUpData()
     }
     
@@ -54,9 +56,9 @@ class MenuViewController: UIViewController {
         //BaseViewController.moveToLoginViewController()
     }
     func dismissViewControllers() {
-
+        
         guard let vc = self.presentingViewController else { return }
-
+        
         while (vc.presentingViewController != nil) {
             vc.dismiss(animated: true, completion: nil)
         }
@@ -64,8 +66,8 @@ class MenuViewController: UIViewController {
 }
 extension MenuViewController: ImagePickerDelegate {
     func didSelectWithUrl(image: UIImage?, fileUrl: URL?) {
-       // let imgName = fileUrl?.lastPathComponent
-      
+        // let imgName = fileUrl?.lastPathComponent
+        
     }
     
     func didSelect(image: UIImage?) {
@@ -75,19 +77,25 @@ extension MenuViewController: ImagePickerDelegate {
 // MARK: Helpers
 extension MenuViewController {
     fileprivate func setupMenuView() {
-
+        
         self.setUpData()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(MenuViewController.tappedMe))
         imageViewProfile.addGestureRecognizer(tap)
         imageViewProfile.isUserInteractionEnabled = true
         
-        menuItems.append(MenuItem(title: "Patient List", icon: UIImage(named: "video-call 50-30")!))
-        menuItems.append(MenuItem(title: "Add New Patient", icon: UIImage(named: "video-call 50-30")!))
-        menuItems.append(MenuItem(title: "Call History", icon: UIImage(named: "video-call 50-30")!))
-        menuItems.append(MenuItem(title: "Call Recording", icon: UIImage(named: "video-call 50-30")!))
-        menuItems.append(MenuItem(title: "Edit Your Profile", icon: UIImage(named: "video-call 50-30")!))
-        menuItems.append(MenuItem(title: "Logout", icon: UIImage(named: "video-call 50-30")!))
+        if userData?.isset == "1" {
+            menuItems.append(MenuItem(title: "Logout", icon: UIImage(named: "video-call 50-30")!))
+        } else {
+            menuItems.append(MenuItem(title: "Patient List", icon: UIImage(named: "video-call 50-30")!))
+            menuItems.append(MenuItem(title: "Add New Patient", icon: UIImage(named: "video-call 50-30")!))
+            menuItems.append(MenuItem(title: "Call History", icon: UIImage(named: "video-call 50-30")!))
+            menuItems.append(MenuItem(title: "Call Recording", icon: UIImage(named: "video-call 50-30")!))
+            menuItems.append(MenuItem(title: "Edit Your Profile", icon: UIImage(named: "video-call 50-30")!))
+            menuItems.append(MenuItem(title: "Logout", icon: UIImage(named: "video-call 50-30")!))
+        }
+        
+        
         
         
         tableView.register(MenuTableCell.nib, forCellReuseIdentifier: MenuTableCell.identifier)
@@ -95,15 +103,24 @@ extension MenuViewController {
         
         
         tableView.tableFooterView = UIView()
-
- //     Cast child controller of parent as UINavigationController
         
+        //     Cast child controller of parent as UINavigationController
+        
+        if userData?.isset == "1" {
             guard let drawerController = parent as? BBDrawerController,
-                      let navController = drawerController.mainViewController as! UINavigationController?
-                      else { return }
-                  nav = navController
-                  nav?.isNavigationBarHidden = true
-                  nav?.performSegue(withIdentifier: "PatientListVC", sender: nil)
+                let navController = drawerController.mainViewController as! UINavigationController?
+                else { return }
+            nav = navController
+            nav?.isNavigationBarHidden = true
+            nav?.performSegue(withIdentifier: "DoctorListVc", sender: nil)
+        } else {
+            guard let drawerController = parent as? BBDrawerController,
+                let navController = drawerController.mainViewController as! UINavigationController?
+                else { return }
+            nav = navController
+            nav?.isNavigationBarHidden = true
+            nav?.performSegue(withIdentifier: "PatientListVC", sender: nil)
+        }
     }
     
     func setUpData() {
@@ -113,18 +130,18 @@ extension MenuViewController {
     @objc func tappedMe()
     {
         if let drawer = self.sideMenuController(), drawer.drawerState == .opened {
-                       drawer.setDrawerState(.closed, animated: true)
-                   }
+            drawer.setDrawerState(.closed, animated: true)
+        }
         
         if #available(iOS 13.0, *) {
-//            let profile = self.storyboard?.instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
-//            profile.loginTag = self.loginTag
-//            self.nav?.pushViewController(profile, animated: true)
-
+            //            let profile = self.storyboard?.instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
+            //            profile.loginTag = self.loginTag
+            //            self.nav?.pushViewController(profile, animated: true)
+            
         } else {
-//            let profile = UIViewController.instantiateFrom("Menu", "ProfileViewController") as! ProfileViewController
-//            profile.loginTag = self.loginTag
-//            self.nav?.pushViewController(profile, animated: true)
+            //            let profile = UIViewController.instantiateFrom("Menu", "ProfileViewController") as! ProfileViewController
+            //            profile.loginTag = self.loginTag
+            //            self.nav?.pushViewController(profile, animated: true)
         }
     }
 }
@@ -155,14 +172,21 @@ extension MenuViewController: UITableViewDelegate {
             }
             
             if indexPath.row == 0 {
-                if #available(iOS 13.0, *) {
-                    let patientListVc = self.storyboard?.instantiateViewController(identifier: "PatientListVC") as! PatientListVC
-                    self.nav?.pushViewController(patientListVc, animated: true)
+                
+                if self.userData?.isset == "1" {
+                    self.logoutUser()
                 } else {
-                    let patientListVc = UIViewController.instantiateFrom("Menu", "PatientListVC") as! PatientListVC
-                    self.nav?.pushViewController(patientListVc, animated: true)
-                    // Fallback on earlier versions
+                    if #available(iOS 13.0, *) {
+                        let patientListVc = self.storyboard?.instantiateViewController(identifier: "PatientListVC") as! PatientListVC
+                        self.nav?.pushViewController(patientListVc, animated: true)
+                    } else {
+                        let patientListVc = UIViewController.instantiateFrom("Menu", "PatientListVC") as! PatientListVC
+                        self.nav?.pushViewController(patientListVc, animated: true)
+                        // Fallback on earlier versions
+                    }
                 }
+                
+                
             }   else if indexPath.row == 1 {
                 if #available(iOS 13.0, *) {
                     let addNewPatientVC = self.storyboard?.instantiateViewController(identifier: "AddNewPatientVC") as! AddNewPatientVC
@@ -216,9 +240,9 @@ extension MenuViewController {
         
     }
     func performAPiCallForLogoutUser()  {
-       
+        
     }
     func performAPiCallForLogoutDriver()  {
-    
+        
     }
 }

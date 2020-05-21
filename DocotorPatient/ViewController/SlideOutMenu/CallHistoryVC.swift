@@ -8,17 +8,51 @@
 
 import UIKit
 import Quickblox
+import QuickbloxWebRTC
+import PushKit
 
 class CallHistoryVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelNodata: UILabel!
     var historyData : [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.labelNodata.isHidden = true
         
+          QBRTCClient.instance().add(self)
+         if Reachability.instance.networkConnectionStatus() != NetworkConnectionStatus.notConnection {
+            //loadUsers()
+         }
+        voipRegistry.delegate = self
+        voipRegistry.desiredPushTypes = Set<PKPushType>([.voIP])
+
         self.performAPICallforViewHistory()
     }
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           
+           //MARK: - Reachability
+           let updateConnectionStatus: ((_ status: NetworkConnectionStatus) -> Void)? = { [weak self] status in
+               let notConnection = status == .notConnection
+               if notConnection == true {
+                   self?.cancelCallAlert()
+               } else {
+                 
+               }
+           }
+           Reachability.instance.networkStatusBlock = { status in
+               updateConnectionStatus?(status)
+           }
+           navigationController?.isToolbarHidden = true
+       }
+       
+       override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+           
+           navigationController?.isToolbarHidden = true
+       }
     
     @IBAction func didTapButtonSideMenu(_ sender: Any) {
         sideMenuController()?.openDrawer()
@@ -71,7 +105,11 @@ extension CallHistoryVC {
             if (status){
                 self.handleGetHistoryData(response: response as! [Any])
             } else {
-                GeneralUtility.showAlert(message: message)
+                if error == nil {
+                    self.labelNodata.isHidden = false
+                } else {
+                    GeneralUtility.showAlert(message: message)
+                }
             }
         }
     }

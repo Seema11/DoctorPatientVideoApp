@@ -19,7 +19,9 @@ class UserModel: NSObject,Mappable {
     var phoneno : String?
     var title : String?
     var profileimage : String?
-    var QBUserId : String?
+    var qbuserId : String?
+    var p_qbuserId : String?
+    var isset : String?
     
     // check userdefault have already userdata or not
     static var loginUserModel: UserModel? {
@@ -53,7 +55,9 @@ class UserModel: NSObject,Mappable {
         phoneno       <- map["phoneno"]
         title         <- map["title"]
         profileimage  <- map["profileimage"]
-        QBUserId      <- map["QBUserId"]
+        qbuserId      <- map["qbuserId"]
+        p_qbuserId    <- map["p_qbuserId"]
+        isset         <- map["isset"]
         
     }
 }
