@@ -62,7 +62,9 @@ extension AddNewPatientVC {
                 self.clearTextfield()
                 GeneralUtility.showAlert(message: message)
             } else {
-                GeneralUtility.showAlert(message: message)
+                if error != nil {
+                     GeneralUtility.showAlert(message: message)
+                }
             }
         }
     }

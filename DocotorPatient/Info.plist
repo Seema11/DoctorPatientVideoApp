@@ -31,14 +31,14 @@
 	<string>We need your camera permission for Video Call</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need your permission for Voice Call</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -47,6 +47,7 @@
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>

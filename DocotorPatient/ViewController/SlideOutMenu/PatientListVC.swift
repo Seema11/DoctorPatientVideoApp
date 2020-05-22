@@ -23,6 +23,7 @@ class PatientListVC: BaseViewController {
     @IBOutlet weak var buttonAdd: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         self.connectUser()
         self.setupView()
         // Do any additional setup after loading the view.
@@ -115,32 +116,65 @@ class PatientListVC: BaseViewController {
         self.patientId = patientdata.id
         self.callType = "audio"
         self.patientName = patientdata.username
-        let qbUserId : UInt = UInt(patientdata.qbuserId ?? "0") ?? 0
         
-        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
-            let selectUser : QBUUser = user
+        QBRequest.users(withIDs: [patientdata.qbuserId!], page: nil, successBlock: { (response, page, users) in
+            print(users)
+            let selectUser : QBUUser = users[0]
             self.dataSource.selectedUsers = [selectUser]
             let opid : NSNumber = NSNumber(value: selectUser.id)
             print("\(opid)")
             self.call(with: .audio, op_id: [opid])
+            
         }) { (response) in
-           GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+            GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
         }
+        
+//        let qbuser = QBUUser()
+//        qbuser.login = patientdata.email
+//        qbuser.fullName = patientdata.username
+//        qbuser.id = UInt(patientdata.qbuserId ?? "0") ?? 0
+//        self.dataSource.selectedUsers = [qbuser]
+//        let opid : NSNumber = NSNumber(value: qbuser.id)
+//        print("\(opid)")
+//        self.call(with: .audio, op_id: [opid])
+        
+//        let qbUserId : UInt = UInt(patientdata.qbuserId ?? "0") ?? 0
+//        print(qbUserId)
+//        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
+//            let selectUser : QBUUser = user
+//            self.dataSource.selectedUsers = [selectUser]
+//            let opid : NSNumber = NSNumber(value: selectUser.id)
+//            print("\(opid)")
+//            self.call(with: .audio, op_id: [opid])
+//        }) { (response) in
+//           GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+//        }
     }
     @IBAction func didTapButtonVideoCall(_ sender: UIButton) {
        let patientdata = patientList[sender.tag]
        let qbUserId : UInt = UInt(patientdata.qbuserId ?? "0") ?? 0
        self.patientId = patientdata.id
        self.callType = "video"
-        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
-            let selectUser : QBUUser = user
-            self.dataSource.selectedUsers = [selectUser]
-            let opid : NSNumber = NSNumber(value: selectUser.id)
-            print("\(opid)")
-            self.call(with: .video, op_id: [opid])
-        }) { (response) in
-            GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
-        }
+        QBRequest.users(withIDs: [patientdata.qbuserId!], page: nil, successBlock: { (response, page, users) in
+                 print(users)
+                 let selectUser : QBUUser = users[0]
+                 self.dataSource.selectedUsers = [selectUser]
+                 let opid : NSNumber = NSNumber(value: selectUser.id)
+                 print("\(opid)")
+                 self.call(with: .video, op_id: [opid])
+                 
+             }) { (response) in
+                 GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+             }
+//        QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
+//            let selectUser : QBUUser = user
+//            self.dataSource.selectedUsers = [selectUser]
+//            let opid : NSNumber = NSNumber(value: selectUser.id)
+//            print("\(opid)")
+//            self.call(with: .video, op_id: [opid])
+//        }) { (response) in
+//            GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+//        }
     }
 }
 

@@ -21,6 +21,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var imageViewProfile: UIImageView!
     @IBOutlet weak var labeluserName: UILabel!
     @IBOutlet weak var labelVersion: UILabel!
+    @IBOutlet weak var labelDoctorTitle: UILabel!
     
     var loginEmail : String?
     var menuItems: [MenuItem] = []
@@ -96,7 +97,17 @@ extension MenuViewController {
         }
         
         
-        
+        if let str = userData?.profileimage {
+                  
+                  if str.contains("http") {
+                             self.imageViewProfile.downloadImage(fromURL: "\(userData?.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                  } else {
+                              self.imageViewProfile.downloadImage(fromURL: "http://yashikainfotech.website/doctorapi/api/\(userData?.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                  }
+                  
+              }
+        self.labeluserName.text = userData?.username
+        self.labelDoctorTitle.text = userData?.title
         
         tableView.register(MenuTableCell.nib, forCellReuseIdentifier: MenuTableCell.identifier)
         tableView.rowHeight = 60

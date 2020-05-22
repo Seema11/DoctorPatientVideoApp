@@ -19,6 +19,7 @@ class UserModel: NSObject,Mappable {
     var phoneno : String?
     var title : String?
     var profileimage : String?
+    var profileimages : String?
     var qbuserId : String?
     var p_qbuserId : String?
     var isset : String?
@@ -55,6 +56,7 @@ class UserModel: NSObject,Mappable {
         phoneno       <- map["phoneno"]
         title         <- map["title"]
         profileimage  <- map["profileimage"]
+        profileimages <- map["profileimages"]
         qbuserId      <- map["qbuserId"]
         p_qbuserId    <- map["p_qbuserId"]
         isset         <- map["isset"]

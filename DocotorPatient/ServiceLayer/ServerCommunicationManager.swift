@@ -168,10 +168,10 @@ extension ServerCommunicationManager {
     @discardableResult
     func apiCall(forWebService webService: EnumWebService, completion:@escaping APICompletion) -> DataRequest? {
         
-        if (Reachability.isConnectedToNetwork()) {
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            }
+       if (Reachability.isConnectedToNetwork()) {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
             
             if webService.isMultipart == true {
                 self.multipartFormRequest(webService: webService, completion: completion)

@@ -261,6 +261,10 @@ extension VideoCallVC {
             }
 
              session?.localMediaStream.audioTrack.isEnabled = true;
+            
+            if let muteAudio = self.session?.localMediaStream.audioTrack.isEnabled {
+                              self.session?.localMediaStream.audioTrack.isEnabled = !muteAudio
+                          }
              
              CallKitManager.instance.onMicrophoneMuteAction = { [weak self] in
                  guard let self = self else {return}
@@ -285,8 +289,8 @@ extension VideoCallVC {
         self.localVideoSubView.isHidden = false
         localVideoView?.delegate = self
         let videoFormat = QBRTCVideoFormat()
-        videoFormat.frameRate = 50
-        videoFormat.pixelFormat = .format420f
+        videoFormat.frameRate = 100
+        videoFormat.pixelFormat = .formatARGB
         videoFormat.width = UInt(UIScreen.main.bounds.width)
         videoFormat.height = UInt(UIScreen.main.bounds.height)
         // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
@@ -295,7 +299,7 @@ extension VideoCallVC {
         // add video capture to session's local media stream
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
         
-        self.videoCapture?.previewLayer.frame = self.localVideoSubView.bounds
+        self.videoCapture?.previewLayer.frame = self.view.bounds //self.localVideoSubView.bounds
         self.videoCapture?.startSession()
         
         self.localVideoSubView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
@@ -313,9 +317,9 @@ extension VideoCallVC {
            //Begin play calling sound
            beepTimer = Timer.scheduledTimer(timeInterval: QBRTCConfig.dialingTimeInterval(),
                                             target: self,
-                                            selector: #selector(playCallingSound(_:)),
+                                            selector: #selector(playCallingSounds(_:)),
                                             userInfo: nil, repeats: true)
-           playCallingSound(self)
+           playCallingSounds(nil)
            //Start call
            let userInfo = ["name": "Test", "url": "http.quickblox.com", "param": "\"1,2,3,4\""]
            
@@ -435,7 +439,7 @@ extension VideoCallVC {
      }
      
      // MARK: - Timers actions
-     @objc func playCallingSound(_ sender: Any?) {
+     @objc func playCallingSounds(_ sender: Any?) {
          SoundProvider.playSound(type: .calling)
      }
      
@@ -655,7 +659,8 @@ extension VideoCallVC : QBRTCRecorderDelegate{
            let fileName = "\(dateStr).wav"
            let pathArray = [dirPath, fileName]
            let path = URL(string: pathArray.joined(separator: "/"))
-             session?.recorder?.delegate = self
+            print(path)
+           session?.recorder?.delegate = self
            session?.recorder?.startRecord(withFileURL: path!)
        }
 }

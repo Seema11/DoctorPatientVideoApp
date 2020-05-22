@@ -13,7 +13,7 @@ import QuickbloxWebRTC
 
 class BaseViewController: UIViewController {
     
-    let userData = UserModel.loginUserModel
+    var userData = UserModel.loginUserModel
     let qbModel = QbUserModel.QBUserModel
     var startTime : String?
     var endTime : String?
@@ -439,7 +439,7 @@ extension BaseViewController {
 
        // GeneralUtility.showProcessing()
         let parameter : [String:Any] = [ "userid": userData?.id as Any,
-                                         "patientid": "8",//self.patientId as Any,
+                                         "patientid": self.patientId as Any,
                                          "starttime": self.startTime as Any,
                                          "endtime": self.endTime as Any,
                                          "calltype": self.callType as Any]

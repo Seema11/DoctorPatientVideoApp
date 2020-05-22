@@ -61,6 +61,7 @@ class CallHistoryVC: BaseViewController {
     }
     @IBAction func didTapButtonCall(_ sender: UIButton) {
         let selectUser : HistoryModel = historyData[sender.tag] as! HistoryModel
+        self.patientId = selectUser.id
         let qbuser = QBUUser()
         qbuser.email = selectUser.email
         qbuser.id = UInt(selectUser.qbuserId!)!
@@ -98,8 +99,7 @@ extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
 extension CallHistoryVC {
     func performAPICallforViewHistory() {
         GeneralUtility.showProcessing()
-        let parameter : [String:Any] = ["userid":userData?.id as Any,
-                                        "patientid" : "0"]
+        let parameter : [String:Any] = ["userid":userData?.id as Any]
         ServiceManager.shared.serverCommunicationManager.apiCall(forWebService: EnumWebService.callHistory(parameter)) { (status, message, statusCode, response, error) in
             GeneralUtility.endProcessing()
             if (status){

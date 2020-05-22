@@ -19,6 +19,7 @@ class HistoryModel: NSObject,Mappable {
     var title : String?
     var qbuserId : String?
     var calltype : String?
+    var id : String?
     override init() {
         super.init()
     }
@@ -41,7 +42,7 @@ class HistoryModel: NSObject,Mappable {
         title       <- map["title"]
         qbuserId    <- map["qbuserId"]
         calltype    <- map["calltype"]
+        id          <- map["id"]
     }
-    
     
 }

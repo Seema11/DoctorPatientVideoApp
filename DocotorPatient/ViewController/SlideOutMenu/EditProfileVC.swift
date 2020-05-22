@@ -39,7 +39,26 @@ class EditProfileVC: BaseViewController {
         self.textfieldPhoneNumber.text = userData?.phoneno
         self.textfieldTitle.text = userData?.title
         print(ServerConstant.domain + (userData?.profileimage ?? ""))
-        self.imageViewProfile.downloadImage(fromURL: ServerConstant.domain + (userData?.profileimage ?? ""), placeHolderImage: UIImage.init(named: "man"), completion: nil)
+        
+        if let str = userData?.profileimage {
+            
+            if str.contains("http") {
+                       self.imageViewProfile.downloadImage(fromURL: "\(userData?.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+            } else {
+                        self.imageViewProfile.downloadImage(fromURL: "http://yashikainfotech.website/doctorapi/api/\(userData?.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+            }
+            
+        } else {
+            if let str = userData?.profileimages {
+                       
+                       if str.contains("http") {
+                                  self.imageViewProfile.downloadImage(fromURL: "\(userData?.profileimages ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                       } else {
+                                   self.imageViewProfile.downloadImage(fromURL: "http://yashikainfotech.website/doctorapi/api/\(userData?.profileimages ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                       }
+            }
+        }
+ 
     }
     
     @IBAction func didTapButttonBack(_ sender: Any) {
@@ -92,7 +111,8 @@ extension EditProfileVC {
     func performApiCallForEditUserProfile()  {
         GeneralUtility.showProcessing()
         
-        let imageString = self.imageData?.base64EncodedString()
+        var imageString = self.imageData?.base64EncodedString()
+        imageString = "data:image/png;base64,\(imageString ?? "")"
         
         let paramater : [String : Any] = ["userid":userData?.id! as Any,
                                           "username":self.textfieldUserName.text!,
@@ -107,6 +127,7 @@ extension EditProfileVC {
               if let dictionary = response as? [String: Any] {
                 UserDefaults.removeObject(forKey: Constant.UserDefaultsKey.userLoginData)
                 UserDefaults.savedictionary(dictionary, forKey: Constant.UserDefaultsKey.userLoginData)
+                self.userData = UserModel.loginUserModel
                 GeneralUtility.showAlert(message: "Profile Updated Successfully")
                 }
             } else {

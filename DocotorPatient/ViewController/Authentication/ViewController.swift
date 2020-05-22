@@ -254,9 +254,7 @@ extension ViewController {
             GeneralUtility.endProcessing()
             if (status) {
                  if let dictionary = response as? [String: Any] {
-                   
                            //MARK:USERDEFAULT DATA
-                    
                     UserDefaults.savedictionary(dictionary, forKey: Constant.UserDefaultsKey.userLoginData)
                     
                     let userData = UserModel.mappedObject(dictionary)
