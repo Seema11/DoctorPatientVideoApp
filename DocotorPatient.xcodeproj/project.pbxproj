@@ -48,6 +48,15 @@
 		CE2C2D08245C2A40001CBD87 /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C2D06245C2A40001CBD87 /* MenuTableCell.xib */; };
 		CE2C2D0A245C2FAC001CBD87 /* viewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */; };
 		CE2C2D0C245C324D001CBD87 /* PatientListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */; };
+		CE3A25BB2478F40C0085B477 /* StunList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25AF2478F40B0085B477 /* StunList.plist */; };
+		CE3A25BC2478F40C0085B477 /* DEVUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B12478F40B0085B477 /* DEVUsers.plist */; };
+		CE3A25BD2478F40C0085B477 /* PRODUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B22478F40B0085B477 /* PRODUsers.plist */; };
+		CE3A25BE2478F40C0085B477 /* QAUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B32478F40B0085B477 /* QAUsers.plist */; };
+		CE3A25BF2478F40C0085B477 /* WEBUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B42478F40B0085B477 /* WEBUsers.plist */; };
+		CE3A25C02478F40C0085B477 /* busy.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B62478F40B0085B477 /* busy.wav */; };
+		CE3A25C12478F40C0085B477 /* calling.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B72478F40B0085B477 /* calling.wav */; };
+		CE3A25C22478F40C0085B477 /* end_of_call.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B82478F40B0085B477 /* end_of_call.wav */; };
+		CE3A25C32478F40C0085B477 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE3A25B92478F40C0085B477 /* ringtone.wav */; };
 		CE4B1C5824627A72000144D9 /* CallPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B1C1424627A71000144D9 /* CallPermissions.swift */; };
 		CE4B1C5924627A72000144D9 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4B1C1624627A71000144D9 /* Call.storyboard */; };
 		CE4B1C5A24627A72000144D9 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B1C1824627A71000144D9 /* CallViewController.swift */; };
@@ -91,11 +100,6 @@
 		CE4B1C8024627A72000144D9 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B1C5224627A72000144D9 /* UsersViewController.swift */; };
 		CE4B1C8124627A72000144D9 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B1C5524627A72000144D9 /* CheckView.swift */; };
 		CE4B1C8224627A72000144D9 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B1C5724627A72000144D9 /* UserTableViewCell.swift */; };
-		CE65AC2C246418ED00B777BB /* StunList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC26246418ED00B777BB /* StunList.plist */; };
-		CE65AC2D246418ED00B777BB /* DEVUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC28246418ED00B777BB /* DEVUsers.plist */; };
-		CE65AC2E246418ED00B777BB /* PRODUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC29246418ED00B777BB /* PRODUsers.plist */; };
-		CE65AC2F246418ED00B777BB /* QAUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC2A246418ED00B777BB /* QAUsers.plist */; };
-		CE65AC30246418ED00B777BB /* WEBUsers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC2B246418ED00B777BB /* WEBUsers.plist */; };
 		CE704D862476ABF4009BDF49 /* DoctorListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704D852476ABF4009BDF49 /* DoctorListVc.swift */; };
 		CE95920F245AF8FF00F4BBF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */; };
 		CE959213245AF8FF00F4BBF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959212245AF8FF00F4BBF6 /* ViewController.swift */; };
@@ -107,11 +111,7 @@
 		CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959243245AFAAB00F4BBF6 /* Constant.swift */; };
 		CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */; };
 		CEBFFF2E2477FEE400AC7BA4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBFFF2D2477FEE400AC7BA4 /* Localizable.strings */; };
-		CEBFFF2F247800E500AC7BA4 /* busy.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC322464190C00B777BB /* busy.wav */; };
 		CEBFFF30247800E500AC7BA4 /* tring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBFFF2B2477F79400AC7BA4 /* tring.mp3 */; };
-		CEBFFF31247800E500AC7BA4 /* calling.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC332464190C00B777BB /* calling.wav */; };
-		CEBFFF32247800E500AC7BA4 /* end_of_call.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC342464190C00B777BB /* end_of_call.wav */; };
-		CEBFFF33247800E500AC7BA4 /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE65AC352464190C00B777BB /* ringtone.wav */; };
 		CECA458E246D569B00D0CFAC /* QbUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA458D246D569B00D0CFAC /* QbUserModel.swift */; };
 		CECA4590246D5AEC00D0CFAC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA458F246D5AEC00D0CFAC /* BaseViewController.swift */; };
 		CECA4592246D626C00D0CFAC /* PatientListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA4591246D626C00D0CFAC /* PatientListModel.swift */; };
@@ -189,6 +189,15 @@
 		CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewControllerExtension.swift; sourceTree = "<group>"; };
 		CE2C2D0B245C324D001CBD87 /* PatientListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListVC.swift; sourceTree = "<group>"; };
 		CE321FCB24739B5B000DC031 /* CryptoTokenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoTokenKit.framework; path = System/Library/Frameworks/CryptoTokenKit.framework; sourceTree = SDKROOT; };
+		CE3A25AF2478F40B0085B477 /* StunList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StunList.plist; sourceTree = "<group>"; };
+		CE3A25B12478F40B0085B477 /* DEVUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DEVUsers.plist; sourceTree = "<group>"; };
+		CE3A25B22478F40B0085B477 /* PRODUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PRODUsers.plist; sourceTree = "<group>"; };
+		CE3A25B32478F40B0085B477 /* QAUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QAUsers.plist; sourceTree = "<group>"; };
+		CE3A25B42478F40B0085B477 /* WEBUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WEBUsers.plist; sourceTree = "<group>"; };
+		CE3A25B62478F40B0085B477 /* busy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = busy.wav; sourceTree = "<group>"; };
+		CE3A25B72478F40B0085B477 /* calling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calling.wav; sourceTree = "<group>"; };
+		CE3A25B82478F40B0085B477 /* end_of_call.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = end_of_call.wav; sourceTree = "<group>"; };
+		CE3A25B92478F40C0085B477 /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		CE3CA5A424657587005179F1 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4B1C1424627A71000144D9 /* CallPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallPermissions.swift; sourceTree = "<group>"; };
 		CE4B1C1624627A71000144D9 /* Call.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Call.storyboard; sourceTree = "<group>"; };
@@ -233,15 +242,6 @@
 		CE4B1C5224627A72000144D9 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CE4B1C5524627A72000144D9 /* CheckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
 		CE4B1C5724627A72000144D9 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		CE65AC26246418ED00B777BB /* StunList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StunList.plist; sourceTree = "<group>"; };
-		CE65AC28246418ED00B777BB /* DEVUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DEVUsers.plist; sourceTree = "<group>"; };
-		CE65AC29246418ED00B777BB /* PRODUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PRODUsers.plist; sourceTree = "<group>"; };
-		CE65AC2A246418ED00B777BB /* QAUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QAUsers.plist; sourceTree = "<group>"; };
-		CE65AC2B246418ED00B777BB /* WEBUsers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WEBUsers.plist; sourceTree = "<group>"; };
-		CE65AC322464190C00B777BB /* busy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = busy.wav; sourceTree = "<group>"; };
-		CE65AC332464190C00B777BB /* calling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calling.wav; sourceTree = "<group>"; };
-		CE65AC342464190C00B777BB /* end_of_call.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = end_of_call.wav; sourceTree = "<group>"; };
-		CE65AC352464190C00B777BB /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		CE704D852476ABF4009BDF49 /* DoctorListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorListVc.swift; sourceTree = "<group>"; };
 		CE95920B245AF8FF00F4BBF6 /* DocotorPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocotorPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -516,6 +516,54 @@
 			path = SideMenuCell;
 			sourceTree = "<group>";
 		};
+		CE3A25AB2478F40B0085B477 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE3A25AD2478F40B0085B477 /* Plists */,
+				CE3A25B52478F40B0085B477 /* Sounds */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE3A25AD2478F40B0085B477 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				CE3A25AE2478F40B0085B477 /* StunList */,
+				CE3A25B02478F40B0085B477 /* Users */,
+			);
+			path = Plists;
+			sourceTree = "<group>";
+		};
+		CE3A25AE2478F40B0085B477 /* StunList */ = {
+			isa = PBXGroup;
+			children = (
+				CE3A25AF2478F40B0085B477 /* StunList.plist */,
+			);
+			path = StunList;
+			sourceTree = "<group>";
+		};
+		CE3A25B02478F40B0085B477 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				CE3A25B12478F40B0085B477 /* DEVUsers.plist */,
+				CE3A25B22478F40B0085B477 /* PRODUsers.plist */,
+				CE3A25B32478F40B0085B477 /* QAUsers.plist */,
+				CE3A25B42478F40B0085B477 /* WEBUsers.plist */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		CE3A25B52478F40B0085B477 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				CE3A25B62478F40B0085B477 /* busy.wav */,
+				CE3A25B72478F40B0085B477 /* calling.wav */,
+				CE3A25B82478F40B0085B477 /* end_of_call.wav */,
+				CE3A25B92478F40C0085B477 /* ringtone.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		CE4B1C1224627A71000144D9 /* Quickblox */ = {
 			isa = PBXGroup;
 			children = (
@@ -777,8 +825,6 @@
 		CE65AC23246418C700B777BB /* SupportingFile */ = {
 			isa = PBXGroup;
 			children = (
-				CE65AC312464190C00B777BB /* Sounds */,
-				CE65AC24246418ED00B777BB /* Plists */,
 				CE95920E245AF8FF00F4BBF6 /* AppDelegate.swift */,
 				CE959217245AF90500F4BBF6 /* Assets.xcassets */,
 				CE959219245AF90500F4BBF6 /* LaunchScreen.storyboard */,
@@ -786,50 +832,11 @@
 			path = SupportingFile;
 			sourceTree = "<group>";
 		};
-		CE65AC24246418ED00B777BB /* Plists */ = {
-			isa = PBXGroup;
-			children = (
-				CE65AC25246418ED00B777BB /* StunList */,
-				CE65AC27246418ED00B777BB /* Users */,
-			);
-			path = Plists;
-			sourceTree = "<group>";
-		};
-		CE65AC25246418ED00B777BB /* StunList */ = {
-			isa = PBXGroup;
-			children = (
-				CE65AC26246418ED00B777BB /* StunList.plist */,
-			);
-			path = StunList;
-			sourceTree = "<group>";
-		};
-		CE65AC27246418ED00B777BB /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				CE65AC28246418ED00B777BB /* DEVUsers.plist */,
-				CE65AC29246418ED00B777BB /* PRODUsers.plist */,
-				CE65AC2A246418ED00B777BB /* QAUsers.plist */,
-				CE65AC2B246418ED00B777BB /* WEBUsers.plist */,
-			);
-			path = Users;
-			sourceTree = "<group>";
-		};
-		CE65AC312464190C00B777BB /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				CE65AC322464190C00B777BB /* busy.wav */,
-				CEBFFF2B2477F79400AC7BA4 /* tring.mp3 */,
-				CE65AC332464190C00B777BB /* calling.wav */,
-				CE65AC342464190C00B777BB /* end_of_call.wav */,
-				CE65AC352464190C00B777BB /* ringtone.wav */,
-			);
-			path = Sounds;
-			sourceTree = "<group>";
-		};
 		CE959202245AF8FF00F4BBF6 = {
 			isa = PBXGroup;
 			children = (
 				CEBFFF2D2477FEE400AC7BA4 /* Localizable.strings */,
+				CEBFFF2B2477F79400AC7BA4 /* tring.mp3 */,
 				CE95920D245AF8FF00F4BBF6 /* DocotorPatient */,
 				CE959224245AF90500F4BBF6 /* DocotorPatientTests */,
 				CE95922F245AF90500F4BBF6 /* DocotorPatientUITests */,
@@ -858,6 +865,7 @@
 				CE2C2C87245C1E12001CBD87 /* View */,
 				CE959245245B0B0700F4BBF6 /* ViewController */,
 				CE95921C245AF90500F4BBF6 /* Info.plist */,
+				CE3A25AB2478F40B0085B477 /* Resources */,
 				CE65AC23246418C700B777BB /* SupportingFile */,
 			);
 			path = DocotorPatient;
@@ -1055,30 +1063,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEBFFF2F247800E500AC7BA4 /* busy.wav in Resources */,
 				CEBFFF30247800E500AC7BA4 /* tring.mp3 in Resources */,
-				CEBFFF31247800E500AC7BA4 /* calling.wav in Resources */,
-				CEBFFF32247800E500AC7BA4 /* end_of_call.wav in Resources */,
-				CEBFFF33247800E500AC7BA4 /* ringtone.wav in Resources */,
+				CE3A25BE2478F40C0085B477 /* QAUsers.plist in Resources */,
+				CE3A25C02478F40C0085B477 /* busy.wav in Resources */,
+				CE3A25C32478F40C0085B477 /* ringtone.wav in Resources */,
 				CE2C2C8C245C1E52001CBD87 /* NPCommonLoaderView.xib in Resources */,
 				CE2C2CA5245C1E81001CBD87 /* SimpleDropDownCellView.xib in Resources */,
-				CE65AC2E246418ED00B777BB /* PRODUsers.plist in Resources */,
 				CE4B1C6D24627A72000144D9 /* Settings.storyboard in Resources */,
 				CE95921B245AF90500F4BBF6 /* LaunchScreen.storyboard in Resources */,
-				CE65AC2C246418ED00B777BB /* StunList.plist in Resources */,
 				CE2C2CFC245C2906001CBD87 /* Menu.storyboard in Resources */,
+				CE3A25BB2478F40C0085B477 /* StunList.plist in Resources */,
 				CEBFFF2E2477FEE400AC7BA4 /* Localizable.strings in Resources */,
 				CE4B1C5924627A72000144D9 /* Call.storyboard in Resources */,
 				CE959218245AF90500F4BBF6 /* Assets.xcassets in Resources */,
 				CE4B1C7E24627A72000144D9 /* Users.storyboard in Resources */,
-				CE65AC2D246418ED00B777BB /* DEVUsers.plist in Resources */,
-				CE65AC30246418ED00B777BB /* WEBUsers.plist in Resources */,
 				CE4B1C6C24627A72000144D9 /* SettingCell.xib in Resources */,
+				CE3A25BC2478F40C0085B477 /* DEVUsers.plist in Resources */,
+				CE3A25BD2478F40C0085B477 /* PRODUsers.plist in Resources */,
 				CE4B1C7324627A72000144D9 /* SettingSwitchCell.xib in Resources */,
 				CE959216245AF8FF00F4BBF6 /* Main.storyboard in Resources */,
+				CE3A25C22478F40C0085B477 /* end_of_call.wav in Resources */,
 				CE2C2CA0245C1E81001CBD87 /* NoDataView.xib in Resources */,
-				CE65AC2F246418ED00B777BB /* QAUsers.plist in Resources */,
+				CE3A25C12478F40C0085B477 /* calling.wav in Resources */,
 				CE2C2D08245C2A40001CBD87 /* MenuTableCell.xib in Resources */,
+				CE3A25BF2478F40C0085B477 /* WEBUsers.plist in Resources */,
 				CE4B1C7024627A72000144D9 /* SettingSliderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

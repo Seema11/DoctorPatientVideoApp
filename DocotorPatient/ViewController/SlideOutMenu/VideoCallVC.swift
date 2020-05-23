@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Quickblox
 import QuickbloxWebRTC
+import CallKit
 
 
 enum CameraType {
@@ -35,6 +36,7 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var constarintLayoutHeightTextView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutHeightButtonsView: NSLayoutConstraint!
     
+    @IBOutlet weak var viewBackView: UIView!
     @IBOutlet weak var constarintLayoutHeightPreviewView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutWidthPreviewView: NSLayoutConstraint!
     @IBOutlet weak var constarintLayoutBottomPreviewView: NSLayoutConstraint!
@@ -104,8 +106,7 @@ class VideoCallVC: UIViewController {
                }
            }
        }
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpView()
@@ -221,12 +222,14 @@ class VideoCallVC: UIViewController {
         self.constarintLayoutHeightTextView.constant = 187
         self.constarintLayoutHeightButtonsView.constant = 0
         self.stackViewTextEdit.isHidden = false
+        self.viewBackView.backgroundColor = .white
     }
     
     @IBAction func didTapButtonCheckBox(_ sender: Any) {
         self.constarintLayoutHeightTextView.constant = 0
         self.constarintLayoutHeightButtonsView.constant = 44
         self.stackViewTextEdit.isHidden = true
+        self.viewBackView.backgroundColor = .clear
     }
     
     @IBAction func didTapButtonText(_ sender: Any) {
@@ -262,9 +265,9 @@ extension VideoCallVC {
 
              session?.localMediaStream.audioTrack.isEnabled = true;
             
-            if let muteAudio = self.session?.localMediaStream.audioTrack.isEnabled {
-                              self.session?.localMediaStream.audioTrack.isEnabled = !muteAudio
-                          }
+//            if let muteAudio = self.session?.localMediaStream.audioTrack.isEnabled {
+//                              self.session?.localMediaStream.audioTrack.isEnabled = !muteAudio
+//                          }
              
              CallKitManager.instance.onMicrophoneMuteAction = { [weak self] in
                  guard let self = self else {return}
@@ -289,17 +292,17 @@ extension VideoCallVC {
         self.localVideoSubView.isHidden = false
         localVideoView?.delegate = self
         let videoFormat = QBRTCVideoFormat()
-        videoFormat.frameRate = 100
-        videoFormat.pixelFormat = .formatARGB
+        videoFormat.frameRate = 50
+        videoFormat.pixelFormat = .format420f
         videoFormat.width = UInt(UIScreen.main.bounds.width)
         videoFormat.height = UInt(UIScreen.main.bounds.height)
         // QBRTCCameraCapture class used to capture frames using AVFoundation APIs
         self.videoCapture = QBRTCCameraCapture(videoFormat: videoFormat, position: .front)
-        self.videoCapture?.previewLayer.videoGravity = .resizeAspect
+        self.videoCapture?.previewLayer.videoGravity = .resizeAspectFill
         // add video capture to session's local media stream
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
         
-        self.videoCapture?.previewLayer.frame = self.view.bounds //self.localVideoSubView.bounds
+        self.videoCapture?.previewLayer.frame = self.localVideoSubView.bounds
         self.videoCapture?.startSession()
         
         self.localVideoSubView.layer.insertSublayer(self.videoCapture!.previewLayer, at: 0)
@@ -331,7 +334,7 @@ extension VideoCallVC {
            //Accept call
            let userInfo = ["acceptCall": "userInfo"]
            session?.acceptCall(userInfo)
-           startRecordingCall()
+        //   startRecordingCall()
        }
        
        private func closeCall() {
@@ -603,10 +606,6 @@ extension VideoCallVC: QBRTCClientDelegate {
         self.reloadAcceptCall()
         reloadContent()
     }
-    
-    func reloadLocalView() {
-        self.previewView.frame = CGRect.init(x: self.localVideoSubView.frame.origin.x, y: self.localVideoSubView.frame.origin.y, width: self.localVideoSubView.frame.size.width, height: self.localVideoSubView.frame.size.height)
-    }
     /**
      *  Called in case when connection is established with opponent
      */
@@ -639,7 +638,7 @@ extension VideoCallVC: QBRTCClientDelegate {
     func sessionDidClose(_ session: QBRTCSession) {
         if let sessionID = self.session?.id,
             sessionID == session.id {
-            session.recorder?.stopRecord()
+    //        session.recorder?.stopRecord()
             closeCall()
         }
     }
@@ -663,4 +662,5 @@ extension VideoCallVC : QBRTCRecorderDelegate{
            session?.recorder?.delegate = self
            session?.recorder?.startRecord(withFileURL: path!)
        }
+  
 }

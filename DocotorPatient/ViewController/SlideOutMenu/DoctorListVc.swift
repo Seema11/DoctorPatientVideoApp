@@ -66,17 +66,30 @@ class DoctorListVc: BaseViewController {
     }
     
     @IBAction func didTapButtonAudioCall(_ sender: Any) {
-        let qbUserId : UInt = UInt(self.userData!.qbuserId ?? "0") ?? 0
+        let qbUserId = self.userData!.qbuserId ?? "0"
            
-           QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
-               let selectUser : QBUUser = user
-               self.dataSource.selectedUsers = [selectUser]
-               let opid : NSNumber = NSNumber(value: selectUser.id)
-               print("\(opid)")
-               self.call(with: .audio, op_id: [opid])
-           }) { (response) in
-              GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
-           }
+        QBRequest.users(withIDs: [qbUserId], page: nil, successBlock: { (response, page, users) in
+                       print(users)
+                       let selectUser : QBUUser = users[0]
+                       self.dataSource.selectedUsers = [selectUser]
+                       let opid : NSNumber = NSNumber(value: selectUser.id)
+                       print("\(opid)")
+                       self.call(with: .video, op_id: [opid])
+                       
+                   }) { (response) in
+                       GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+                   }
+//
+//
+//           QBRequest.user(withID: qbUserId, successBlock: { (response, user) in
+//               let selectUser : QBUUser = user
+//               self.dataSource.selectedUsers = [selectUser]
+//               let opid : NSNumber = NSNumber(value: selectUser.id)
+//               print("\(opid)")
+//               self.call(with: .audio, op_id: [opid])
+//           }) { (response) in
+//              GeneralUtility.showAlert(message: "\(self.errorMessage(response: response) ?? "")")
+//           }
     }
     
     @IBAction func didTapButtonVideoCall(_ sender: Any) {

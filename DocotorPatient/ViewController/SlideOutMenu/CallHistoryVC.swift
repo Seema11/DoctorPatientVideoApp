@@ -64,7 +64,7 @@ class CallHistoryVC: BaseViewController {
         self.patientId = selectUser.id
         let qbuser = QBUUser()
         qbuser.email = selectUser.email
-        qbuser.id = UInt(selectUser.qbuserId!)!
+        qbuser.id = UInt(selectUser.qbuserId ?? "0")!
         qbuser.fullName = selectUser.username
         qbuser.login = selectUser.email
         self.callType = selectUser.calltype

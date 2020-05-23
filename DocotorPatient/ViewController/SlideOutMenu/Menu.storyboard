@@ -784,6 +784,10 @@
                                     <action selector="didTapButtonCall:" destination="GGY-GB-WXU" eventType="touchUpInside" id="F2a-ha-vFI"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9G-wO-40c">
+                                <rect key="frame" x="0.0" y="326" width="320" height="232"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PSg-u4-RW5">
                                 <rect key="frame" x="30" y="326" width="260" height="232"/>
                                 <subviews>
@@ -903,6 +907,7 @@
                                                             <constraint firstItem="WXY-ln-IgN" firstAttribute="height" secondItem="IdL-oE-oDy" secondAttribute="height" id="Kt1-oM-fgU"/>
                                                             <constraint firstItem="Ebf-eQ-DXi" firstAttribute="height" secondItem="WXY-ln-IgN" secondAttribute="height" id="Ycn-du-q5w"/>
                                                             <constraint firstItem="Ebf-eQ-DXi" firstAttribute="width" secondItem="WXY-ln-IgN" secondAttribute="width" id="bba-2U-zHG"/>
+                                                            <constraint firstAttribute="width" constant="250" id="fVU-c2-JA7"/>
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
@@ -945,11 +950,10 @@
                                     <action selector="didTapButtonMinimize:" destination="GGY-GB-WXU" eventType="touchUpInside" id="KOt-n0-r74"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-pU-icB">
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-pU-icB">
                                 <rect key="frame" x="200" y="183" width="104" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="104" id="CWz-96-pge"/>
                                     <constraint firstAttribute="height" constant="128" id="Ta4-aa-ZZT"/>
                                 </constraints>
                             </view>
@@ -1124,21 +1128,26 @@
                             <constraint firstItem="KhT-h4-2Or" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Z4c-U3-KMZ" secondAttribute="leading" id="ALy-iC-L7j"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="bottom" secondItem="PSg-u4-RW5" secondAttribute="bottom" constant="10" id="CZA-mj-tub"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="trailing" secondItem="zCK-pU-icB" secondAttribute="trailing" constant="16" id="Cq9-SU-L8C"/>
+                            <constraint firstItem="O9G-wO-40c" firstAttribute="centerX" secondItem="Z4c-U3-KMZ" secondAttribute="centerX" id="Jvz-5I-DqK"/>
                             <constraint firstItem="foE-uh-iPt" firstAttribute="top" secondItem="Z4c-U3-KMZ" secondAttribute="top" id="LST-rD-r5s"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="bottom" secondItem="TGN-4Z-rHY" secondAttribute="bottom" id="N7k-nB-FJn"/>
+                            <constraint firstItem="O9G-wO-40c" firstAttribute="bottom" secondItem="PSg-u4-RW5" secondAttribute="bottom" id="RSO-YN-Qds"/>
                             <constraint firstItem="TGN-4Z-rHY" firstAttribute="top" secondItem="Z4c-U3-KMZ" secondAttribute="top" id="SHZ-CR-XUR"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="bottom" secondItem="foE-uh-iPt" secondAttribute="bottom" id="SIe-VB-AaW"/>
                             <constraint firstItem="nfy-lb-p46" firstAttribute="centerX" secondItem="Z4c-U3-KMZ" secondAttribute="centerX" id="UFX-No-vy4"/>
                             <constraint firstItem="foE-uh-iPt" firstAttribute="leading" secondItem="Z4c-U3-KMZ" secondAttribute="leading" id="VsQ-v3-zwq"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="trailing" secondItem="KhT-h4-2Or" secondAttribute="trailing" id="amC-nQ-LIZ"/>
                             <constraint firstItem="Z4c-U3-KMZ" firstAttribute="trailing" secondItem="TGN-4Z-rHY" secondAttribute="trailing" id="bpB-3V-rc7"/>
+                            <constraint firstItem="O9G-wO-40c" firstAttribute="top" secondItem="PSg-u4-RW5" secondAttribute="top" id="cMK-23-AX1"/>
                             <constraint firstItem="zCK-pU-icB" firstAttribute="centerY" secondItem="yGH-oM-7qc" secondAttribute="centerY" id="hdq-pq-Nda"/>
                             <constraint firstItem="KhT-h4-2Or" firstAttribute="centerX" secondItem="Z4c-U3-KMZ" secondAttribute="centerX" id="huV-ko-LVa"/>
                             <constraint firstItem="CkP-Wj-wZi" firstAttribute="top" secondItem="C0r-Pv-2zy" secondAttribute="top" constant="17" id="izL-3j-sFP"/>
                             <constraint firstItem="nfy-lb-p46" firstAttribute="centerY" secondItem="Z4c-U3-KMZ" secondAttribute="centerY" id="jdt-dr-dJS"/>
+                            <constraint firstItem="mve-sK-DTG" firstAttribute="leading" secondItem="Z4c-U3-KMZ" secondAttribute="leading" constant="30" id="k2X-Bj-PF5"/>
                             <constraint firstItem="zCK-pU-icB" firstAttribute="leading" secondItem="PSg-u4-RW5" secondAttribute="trailing" constant="-90" id="m10-Ma-662"/>
                             <constraint firstItem="PSg-u4-RW5" firstAttribute="top" secondItem="yGH-oM-7qc" secondAttribute="bottom" constant="48.5" id="nKZ-8I-z5Q"/>
                             <constraint firstItem="TGN-4Z-rHY" firstAttribute="leading" secondItem="Z4c-U3-KMZ" secondAttribute="leading" id="oBA-Bn-pFL"/>
+                            <constraint firstItem="O9G-wO-40c" firstAttribute="leading" secondItem="Z4c-U3-KMZ" secondAttribute="leading" id="pUO-v6-f20"/>
                             <constraint firstItem="KhT-h4-2Or" firstAttribute="width" secondItem="C0r-Pv-2zy" secondAttribute="width" id="prf-XQ-9CX"/>
                             <constraint firstItem="PSg-u4-RW5" firstAttribute="leading" secondItem="Z4c-U3-KMZ" secondAttribute="leading" constant="30" id="rF4-Wb-cEr"/>
                             <constraint firstItem="KhT-h4-2Or" firstAttribute="top" relation="lessThanOrEqual" secondItem="Z4c-U3-KMZ" secondAttribute="top" id="ux4-WN-MoJ"/>
@@ -1167,6 +1176,7 @@
                         <outlet property="previewView" destination="KhT-h4-2Or" id="TRI-Oy-R9o"/>
                         <outlet property="stackViewTextEdit" destination="mve-sK-DTG" id="SX0-Sy-slE"/>
                         <outlet property="textViewEdit" destination="T2Z-VC-JLq" id="qdk-xI-gNO"/>
+                        <outlet property="viewBackView" destination="O9G-wO-40c" id="MHn-Q9-pWe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EWz-Nv-lMv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

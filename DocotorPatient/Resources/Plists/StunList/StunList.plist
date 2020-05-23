@@ -20,5 +20,7 @@
 	<string>stun:stun.aa.net.uk:3478</string>
 	<key>acrobits</key>
 	<string>stun:stun.acrobits.cz:3478</string>
+	<key>New item</key>
+	<string>provider.setDelegate</string>
 </dict>
 </plist>
