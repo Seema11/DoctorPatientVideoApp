@@ -110,6 +110,17 @@
 		CE959231245AF90500F4BBF6 /* DocotorPatientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959230245AF90500F4BBF6 /* DocotorPatientUITests.swift */; };
 		CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959243245AFAAB00F4BBF6 /* Constant.swift */; };
 		CE95924A245B0B5D00F4BBF6 /* SignuUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */; };
+		CE9F537F247D2555000EB830 /* libicucore.A.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F537E247D2555000EB830 /* libicucore.A.tbd */; };
+		CE9F5381247D256D000EB830 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5380247D256D000EB830 /* libc++.tbd */; };
+		CE9F5383247D2576000EB830 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5382247D2576000EB830 /* libresolv.tbd */; };
+		CE9F5385247D257F000EB830 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5384247D257F000EB830 /* libxml2.tbd */; };
+		CE9F5387247D2587000EB830 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5386247D2587000EB830 /* libz.tbd */; };
+		CE9F5389247D258F000EB830 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5388247D258F000EB830 /* CFNetwork.framework */; };
+		CE9F538B247D2598000EB830 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F538A247D2598000EB830 /* GLKit.framework */; };
+		CE9F538D247D259F000EB830 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F538C247D259F000EB830 /* MobileCoreServices.framework */; };
+		CE9F538F247D25A6000EB830 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F538E247D25A6000EB830 /* SystemConfiguration.framework */; };
+		CE9F5391247D25AD000EB830 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5390247D25AD000EB830 /* VideoToolbox.framework */; };
+		CE9F5393247D25B5000EB830 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9F5392247D25B4000EB830 /* Accelerate.framework */; };
 		CEBFFF2E2477FEE400AC7BA4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBFFF2D2477FEE400AC7BA4 /* Localizable.strings */; };
 		CEBFFF30247800E500AC7BA4 /* tring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBFFF2B2477F79400AC7BA4 /* tring.mp3 */; };
 		CECA458E246D569B00D0CFAC /* QbUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA458D246D569B00D0CFAC /* QbUserModel.swift */; };
@@ -258,6 +269,17 @@
 		CE959232245AF90500F4BBF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE959243245AFAAB00F4BBF6 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		CE959249245B0B5D00F4BBF6 /* SignuUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignuUpViewController.swift; sourceTree = "<group>"; };
+		CE9F537E247D2555000EB830 /* libicucore.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.A.tbd; path = usr/lib/libicucore.A.tbd; sourceTree = SDKROOT; };
+		CE9F5380247D256D000EB830 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CE9F5382247D2576000EB830 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		CE9F5384247D257F000EB830 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		CE9F5386247D2587000EB830 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CE9F5388247D258F000EB830 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CE9F538A247D2598000EB830 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		CE9F538C247D259F000EB830 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CE9F538E247D25A6000EB830 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CE9F5390247D25AD000EB830 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		CE9F5392247D25B4000EB830 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CEBFFF2B2477F79400AC7BA4 /* tring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tring.mp3; sourceTree = "<group>"; };
 		CEBFFF2D2477FEE400AC7BA4 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CECA458D246D569B00D0CFAC /* QbUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QbUserModel.swift; sourceTree = "<group>"; };
@@ -279,6 +301,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9F5393247D25B5000EB830 /* Accelerate.framework in Frameworks */,
+				CE9F5391247D25AD000EB830 /* VideoToolbox.framework in Frameworks */,
+				CE9F538F247D25A6000EB830 /* SystemConfiguration.framework in Frameworks */,
+				CE9F538D247D259F000EB830 /* MobileCoreServices.framework in Frameworks */,
+				CE9F538B247D2598000EB830 /* GLKit.framework in Frameworks */,
+				CE9F5389247D258F000EB830 /* CFNetwork.framework in Frameworks */,
+				CE9F5387247D2587000EB830 /* libz.tbd in Frameworks */,
+				CE9F5385247D257F000EB830 /* libxml2.tbd in Frameworks */,
+				CE9F5383247D2576000EB830 /* libresolv.tbd in Frameworks */,
+				CE9F5381247D256D000EB830 /* libc++.tbd in Frameworks */,
+				CE9F537F247D2555000EB830 /* libicucore.A.tbd in Frameworks */,
 				3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +345,17 @@
 		3C1035E9C9ECFCDCBC078A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE9F5392247D25B4000EB830 /* Accelerate.framework */,
+				CE9F5390247D25AD000EB830 /* VideoToolbox.framework */,
+				CE9F538E247D25A6000EB830 /* SystemConfiguration.framework */,
+				CE9F538C247D259F000EB830 /* MobileCoreServices.framework */,
+				CE9F538A247D2598000EB830 /* GLKit.framework */,
+				CE9F5388247D258F000EB830 /* CFNetwork.framework */,
+				CE9F5386247D2587000EB830 /* libz.tbd */,
+				CE9F5384247D257F000EB830 /* libxml2.tbd */,
+				CE9F5382247D2576000EB830 /* libresolv.tbd */,
+				CE9F5380247D256D000EB830 /* libc++.tbd */,
+				CE9F537E247D2555000EB830 /* libicucore.A.tbd */,
 				CE321FCB24739B5B000DC031 /* CryptoTokenKit.framework */,
 				CE3CA5A424657587005179F1 /* Alamofire.framework */,
 				9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */,

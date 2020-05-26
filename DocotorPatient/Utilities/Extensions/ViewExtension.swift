@@ -783,4 +783,18 @@ extension UIButton {
         self.layer.shadowRadius = 2.0
         self.layer.masksToBounds = false
     }
+        func setImageTintColor(_ color: UIColor) {
+            let tintedImage = self.imageView?.image?.withRenderingMode(.alwaysTemplate)
+            self.setImage(tintedImage, for: .normal)
+            self.tintColor = color
+        }
+
+}
+extension UIImageView {
+    func changeImageColor( color:UIColor) -> UIImage
+    {
+        image = image!.withRenderingMode(.alwaysTemplate)
+        tintColor = color
+        return image!
+    }
 }
