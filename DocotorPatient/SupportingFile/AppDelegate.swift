@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    var notes : String = ""
     
      
     lazy private var backgroundTask: UIBackgroundTaskIdentifier = {

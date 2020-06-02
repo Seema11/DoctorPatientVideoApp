@@ -19,6 +19,7 @@ class PatientListModel: NSObject,Mappable {
      var roomno : String?
      var qbuserId : String?
      var trn_date : String?
+     var profileimage : String?
     
     override init() {
         super.init()
@@ -33,15 +34,16 @@ class PatientListModel: NSObject,Mappable {
     }
     
     func mapping(map: Map) {
-          id          <- map["id"]
-          username    <- map["username"]
-          email       <- map["email"]
-          phoneno     <- map["phoneno"]
-          title       <- map["title"]
-          userid      <- map["userid"]
-          roomno      <- map["roomno"]
-          qbuserId    <- map["qbuserId"]
-          trn_date    <- map["trn_date"]
+          id                <- map["id"]
+          username          <- map["username"]
+          email             <- map["email"]
+          phoneno           <- map["phoneno"]
+          title             <- map["title"]
+          userid            <- map["userid"]
+          roomno            <- map["roomno"]
+          qbuserId          <- map["qbuserId"]
+          trn_date          <- map["trn_date"]
+          profileimage      <- map["profileimage"]
       }
 
 

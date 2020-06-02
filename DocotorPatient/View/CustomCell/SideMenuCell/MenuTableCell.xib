@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -50,7 +51,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41Q-W1-g90">
-                                <rect key="frame" x="64" y="13" width="87" height="20.5"/>
+                                <rect key="frame" x="32" y="13" width="256" height="20.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,12 +60,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="hu1-E2-H1l" secondAttribute="bottom" constant="10" id="DNk-be-gg9"/>
+                            <constraint firstAttribute="trailing" secondItem="41Q-W1-g90" secondAttribute="trailing" constant="32" id="DOx-qP-ggE"/>
+                            <constraint firstItem="41Q-W1-g90" firstAttribute="leading" secondItem="qWg-sG-EBv" secondAttribute="leading" constant="32" id="GNe-dH-BnI"/>
                             <constraint firstAttribute="height" constant="45" id="M6J-HX-7aF"/>
                             <constraint firstItem="hu1-E2-H1l" firstAttribute="leading" secondItem="qWg-sG-EBv" secondAttribute="leading" constant="20" id="Uid-Au-udl"/>
                             <constraint firstItem="MFz-JX-Uxa" firstAttribute="leading" secondItem="qWg-sG-EBv" secondAttribute="leading" constant="34" id="Uq3-Oh-Etq"/>
                             <constraint firstItem="b3t-64-Rqh" firstAttribute="top" secondItem="MFz-JX-Uxa" secondAttribute="top" constant="4" id="Wx5-xA-KLQ"/>
                             <constraint firstItem="MFz-JX-Uxa" firstAttribute="centerY" secondItem="qWg-sG-EBv" secondAttribute="centerY" constant="0.5" id="bLf-5m-aM1"/>
-                            <constraint firstItem="41Q-W1-g90" firstAttribute="leading" secondItem="MFz-JX-Uxa" secondAttribute="trailing" constant="12" id="dFI-RS-NJ9"/>
                             <constraint firstAttribute="trailing" secondItem="hu1-E2-H1l" secondAttribute="trailing" constant="20" id="i1q-Ur-hxd"/>
                             <constraint firstItem="41Q-W1-g90" firstAttribute="centerY" secondItem="qWg-sG-EBv" secondAttribute="centerY" constant="0.75" id="ocd-Q4-J9q"/>
                             <constraint firstItem="b3t-64-Rqh" firstAttribute="centerY" secondItem="qWg-sG-EBv" secondAttribute="centerY" constant="0.5" id="qY9-f9-dsw"/>

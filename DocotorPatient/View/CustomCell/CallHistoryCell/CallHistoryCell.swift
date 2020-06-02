@@ -16,6 +16,9 @@ class CallHistoryCell: UITableViewCell {
     @IBOutlet weak var labelPatientTime: UILabel!
     @IBOutlet weak var buttonCall: UIButton!
     @IBOutlet weak var buttonImage: UIImageView!
+    @IBOutlet weak var buttonNotes: UIButton!
+    @IBOutlet weak var viewNotes: UIView!
+    @IBOutlet weak var layooyConstarintWidthNotes: NSLayoutConstraint!
     
      static var nib:UINib {
            return UINib(nibName: identifier, bundle: nil)
@@ -37,12 +40,22 @@ class CallHistoryCell: UITableViewCell {
     }
     func setUpData(response : HistoryModel) {
         if response.calltype == "video"{
+            self.viewNotes.isHidden = false
+            self.layooyConstarintWidthNotes.constant = 44
             self.buttonImage.image = UIImage.init(named: "video-call 50-30")
         } else {
+             self.viewNotes.isHidden = true
             self.buttonImage.image = UIImage.init(named: "audio-call 50-50")
         }
         self.labelPatientName.text = response.username
-        self.labelPatientTime.text = "\(response.starttime ?? "0:0") - \(response.endtime ?? "0"))"
+        self.labelPatientTime.text = "Last call on \(response.endtime ?? "0")"
+        if let str = response.profileimage {
+        if str.contains("http") {
+            self.imageViewProfile.downloadImage(fromURL: "\(response.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+        } else {
+            self.imageViewProfile.downloadImage(fromURL: "http://yashikainfotech.website/doctorapi/api/\(response.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                         }
+               }
       }
 
 }

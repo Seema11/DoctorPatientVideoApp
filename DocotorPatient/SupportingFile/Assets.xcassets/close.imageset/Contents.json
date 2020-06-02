@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "audio-call 75-75.png",
+      "filename" : "close.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "audio-call 100-100.png",
       "scale" : "2x"
     },
     {

@@ -41,8 +41,15 @@ class PatientListCell: UITableViewCell {
     }
     func setUpData(response : PatientListModel) {
           self.labelPatientName.text = response.username
-        self.labelPatientTime.text = response.trn_date
+          self.labelPatientTime.text = response.trn_date
+        if let str = response.profileimage {
+        if str.contains("http") {
+            self.imageViewProfile.downloadImage(fromURL: "\(response.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                  } else {
+            self.imageViewProfile.downloadImage(fromURL: "http://yashikainfotech.website/doctorapi/api/\(response.profileimage ?? "")", placeHolderImage: UIImage.init(named: "man"), completion: nil)
+                  }
         }
-
+        
+    }
 
 }

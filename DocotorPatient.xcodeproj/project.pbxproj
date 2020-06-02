@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3BE3C88118405798D1D42CE5 /* Pods_DocotorPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */; };
+		CE057F1524821E5000CFC33F /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE057F1424821E5000CFC33F /* LabelExtensions.swift */; };
+		CE057F1724821EE000CFC33F /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE057F1624821EE000CFC33F /* NotesViewController.swift */; };
 		CE1C65AA2469711F00697F6A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C65A92469711F00697F6A /* UserModel.swift */; };
 		CE1E1E4B245C495500A8AE72 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */; };
 		CE23849B246E98DF00911FAB /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23849A246E98DF00911FAB /* HistoryModel.swift */; };
@@ -156,6 +158,8 @@
 /* Begin PBXFileReference section */
 		9E44D3B923673E7F622B2817 /* Pods_DocotorPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DocotorPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06D674406E77720586407A5 /* Pods-DocotorPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DocotorPatient.debug.xcconfig"; path = "Target Support Files/Pods-DocotorPatient/Pods-DocotorPatient.debug.xcconfig"; sourceTree = "<group>"; };
+		CE057F1424821E5000CFC33F /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
+		CE057F1624821EE000CFC33F /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		CE1C65A92469711F00697F6A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CE1E1E4A245C495500A8AE72 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		CE23849A246E98DF00911FAB /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				CE2C2CB4245C2063001CBD87 /* UserDefaultsExtension.swift */,
 				CE2C2CB5245C2063001CBD87 /* ViewExtension.swift */,
 				CE2C2D09245C2FAC001CBD87 /* viewControllerExtension.swift */,
+				CE057F1424821E5000CFC33F /* LabelExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				CECE425A245D2A0300AEEA58 /* CallRecordingVC.swift */,
 				CECE4265245D517D00AEEA58 /* VideoCallVC.swift */,
 				CE704D852476ABF4009BDF49 /* DoctorListVc.swift */,
+				CE057F1624821EE000CFC33F /* NotesViewController.swift */,
 			);
 			path = SlideOutMenu;
 			sourceTree = "<group>";
@@ -1248,6 +1254,7 @@
 				CE2C2CD1245C225C001CBD87 /* ServerConstant.swift in Sources */,
 				CE4B1C6B24627A72000144D9 /* SettingCell.swift in Sources */,
 				CE4B1C8224627A72000144D9 /* UserTableViewCell.swift in Sources */,
+				CE057F1524821E5000CFC33F /* LabelExtensions.swift in Sources */,
 				CE4B1C7624627A72000144D9 /* VideoSettingsViewController.swift in Sources */,
 				CE2C2CC1245C2063001CBD87 /* ViewExtension.swift in Sources */,
 				CE2C2CA4245C1E81001CBD87 /* SimpleDropDownCellView.swift in Sources */,
@@ -1317,6 +1324,7 @@
 				CE2C2CBE245C2063001CBD87 /* StringExtension.swift in Sources */,
 				CE959244245AFAAB00F4BBF6 /* Constant.swift in Sources */,
 				CE4B1C7B24627A72000144D9 /* Profile.swift in Sources */,
+				CE057F1724821EE000CFC33F /* NotesViewController.swift in Sources */,
 				CE4B1C7D24627A72000144D9 /* UsersDataSource.swift in Sources */,
 				CECE425B245D2A0300AEEA58 /* CallRecordingVC.swift in Sources */,
 				CE2C2CFD245C2906001CBD87 /* MenuViewController.swift in Sources */,

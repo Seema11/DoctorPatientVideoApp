@@ -21,6 +21,7 @@ class BaseViewController: UIViewController {
     var qbuserID : String?
     var callType : String?
     var patientName : String?
+    var notes : String?
     
     //MARK: - Properties
     var dataSource: UsersDataSource = {
@@ -438,11 +439,15 @@ extension BaseViewController {
     func performApiCallforAddHistory()  {
 
        // GeneralUtility.showProcessing()
-        let parameter : [String:Any] = [ "userid": userData?.id as Any,
+        var parameter : [String:Any] = [ "userid": userData?.id as Any,
                                          "patientid": self.patientId as Any,
                                          "starttime": self.startTime as Any,
                                          "endtime": self.endTime as Any,
                                          "calltype": self.callType as Any]
+        if self.callType == "video" {
+            print(Constant.appDelegate.notes)
+            parameter.updateValue(Constant.appDelegate.notes as Any, forKey: "notes")
+        }
         
         print(parameter)
         

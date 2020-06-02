@@ -20,6 +20,8 @@ class HistoryModel: NSObject,Mappable {
     var qbuserId : String?
     var calltype : String?
     var id : String?
+    var notes : String?
+    var profileimage : String?
     override init() {
         super.init()
     }
@@ -34,15 +36,17 @@ class HistoryModel: NSObject,Mappable {
     }
     
     func mapping(map: Map) {
-        starttime   <- map["starttime"]
-        endtime     <- map["endtime"]
-        username    <- map["username"]
-        email       <- map["email"]
-        phoneno     <- map["phoneno"]
-        title       <- map["title"]
-        qbuserId    <- map["qbuserId"]
-        calltype    <- map["calltype"]
-        id          <- map["id"]
+        starttime          <- map["starttime"]
+        endtime            <- map["endtime"]
+        username           <- map["username"]
+        email              <- map["email"]
+        phoneno            <- map["phoneno"]
+        title              <- map["title"]
+        qbuserId           <- map["qbuserId"]
+        calltype           <- map["calltype"]
+        id                 <- map["id"]
+        notes              <- map["notes"]
+        profileimage       <- map["profileimage"]
     }
     
 }

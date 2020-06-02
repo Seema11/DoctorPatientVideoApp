@@ -58,9 +58,6 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var buttonAudioCallMute: UIButton!
     @IBOutlet weak var imageViewMute: UIImageView!
     
-    
-    
-    
     //MARK: - Internal Properties
     private var timeDuration: TimeInterval = 0.0
     
@@ -205,7 +202,7 @@ class VideoCallVC: UIViewController {
         // self.navigationController?.popViewController(animated: true)
     }
     @IBAction func didTapButtonCall(_ sender: Any) {
-        
+
         self.session?.hangUp(["hangup": "hang up"])
         //self.navigationController?.popViewController(animated: true)
     }
@@ -394,8 +391,9 @@ extension VideoCallVC {
     
     private func closeCall() {
         
+        Constant.appDelegate.notes = self.textViewEdit.text
+        print(self.textViewEdit.text)
         self.endCallRecording()
-        
         CallKitManager.instance.endCall(with: callUUID)
         videoCapture?.stopSession(nil)
         
@@ -611,6 +609,8 @@ extension VideoCallVC: QBRTCClientDelegate {
             return
         }
         
+        Constant.appDelegate.notes = self.textViewEdit.text
+        
         user.bitrate = 0.0
         
         if let videoView = videoViews[userID.uintValue] as? QBRTCRemoteVideoView {
@@ -710,19 +710,19 @@ extension VideoCallVC : QBRTCRecorderDelegate{
         print(error.localizedDescription)
     }
     
-    //    func startRecordingCall() {
-    //           //Start Recording on Caller's Screen
-    //           let dirPathNoScheme = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-    //           let dateStr = Date.getCurrentDateddMMyyyy()
-    //           //add directory path file Scheme;  some operations fail w/out it
-    //           let dirPath = Constant.path
-    //           //name your file, make sure you get the ext right .mp3/.wav/.m4a/.mov/.whatever
-    //           let fileName = "\(dateStr).mp4"
-    //           let pathArray = [dirPath, fileName]
-    //           let path = URL(string: pathArray.joined(separator: "/"))
-    //            print(path)
-    //           session?.recorder?.delegate = self
-    //           session?.recorder?.startRecord(withFileURL: path!)
+//        func startRecordingCall() {
+//               //Start Recording on Caller's Screen
+//               let dirPathNoScheme = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+//               let dateStr = Date.getCurrentDateddMMyyyy()
+//               //add directory path file Scheme;  some operations fail w/out it
+//               let dirPath = Constant.path
+//               //name your file, make sure you get the ext right .mp3/.wav/.m4a/.mov/.whatever
+//               let fileName = "\(dateStr).mp4"
+//               let pathArray = [dirPath, fileName]
+//               let path = URL(string: pathArray.joined(separator: "/"))
+//                print(path)
+//               session?.recorder?.delegate = self
+//               session?.recorder?.startRecord(withFileURL: path!)
     //       }
     
     
@@ -742,5 +742,10 @@ extension VideoCallVC : QBRTCRecorderDelegate{
 extension VideoCallVC : AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         player.play()
+    }
+}
+extension VideoCallVC : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        Constant.appDelegate.notes = self.textViewEdit.text
     }
 }

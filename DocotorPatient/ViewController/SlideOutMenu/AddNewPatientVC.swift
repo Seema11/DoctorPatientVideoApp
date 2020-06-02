@@ -24,11 +24,22 @@ class AddNewPatientVC: BaseViewController {
     
     let password : String = GeneralUtility.generatePassword(passwordLength: 8)
     
+    var imagePicker: ImagePicker!
+    var imageData: Data?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageViewProfile.downloadImage(fromURL: userData?.profileimage, placeHolderImage: UIImage.init(named: "man"), completion: nil)
         print(password)
+        self.setUpView()
         // Do any additional setup after loading the view.
+    }
+    
+    func setUpView() {
+        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewPatientVC.tappedMe))
+        imageViewProfile.addGestureRecognizer(tap)
+        imageViewProfile.isUserInteractionEnabled = true
     }
     
     @IBAction func didTapButtonBack(_ sender: Any) {
@@ -50,6 +61,28 @@ class AddNewPatientVC: BaseViewController {
         self.textfiledPhoneNumber.text = ""
         self.textfieldTitle.text = ""
         self.imageViewProfile.image = nil
+    }
+    @objc func tappedMe(_ sender : Any)
+       {
+           self.imagePicker.present(from: self.imageViewProfile )
+       }
+}
+extension AddNewPatientVC : ImagePickerDelegate {
+    func didSelectWithUrl(image: UIImage?, fileUrl: URL?) {
+        // let imgName = fileUrl?.lastPathComponent
+    }
+    
+    func didSelect(image: UIImage?) {
+        self.imageViewProfile.image = image
+        let options: NSDictionary =  [:]
+            let convertToPng = imageViewProfile.image!.toData(options: options, type: .png)
+            guard let pngData = convertToPng else {
+                GeneralUtility.endProcessing()
+                GeneralUtility.showAlert(message: "Error to load Image .Please Try Again")
+                print("😡 ERROR: could not convert image to a png pngData var.")
+                return
+            }
+        self.imageData = pngData
     }
 }
 
@@ -84,7 +117,7 @@ extension AddNewPatientVC {
         newUser.password = self.password
         QBRequest.signUp(newUser, successBlock: { [weak self] response, user in
             if let username = self?.textfieldUserName.text ,let email = self?.textfieldEmail.text,let phone =   self?.textfiledPhoneNumber.text,let Dtitle = self?.textfieldTitle.text {
-                let paramater : [String:Any] = ["userid": self?.userData?.id as Any,
+                var paramater : [String:Any] = ["userid": self?.userData?.id as Any,
                                                 "username": username,
                                                 "email": email,
                                                 "phoneno":phone,
@@ -92,6 +125,9 @@ extension AddNewPatientVC {
                                                 "password": self?.password as Any,
                                                 "qbuserId" : "\(user.id)",
                                                 "d_qbuserid": self?.userData?.qbuserId as Any]
+                var imageString = self?.imageData?.base64EncodedString()
+                    imageString = "data:image/png;base64,\(imageString ?? "")"
+                paramater.updateValue(imageString as Any, forKey: "profileimage")
             self!.performApiCallForAddPatient(paramater: paramater)
                 } else {
                     GeneralUtility.endProcessing()

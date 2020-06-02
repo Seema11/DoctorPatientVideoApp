@@ -15,6 +15,9 @@ class CallHistoryVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelNodata: UILabel!
+   
+    
+    
     var historyData : [Any] = []
     
     override func viewDidLoad() {
@@ -79,6 +82,28 @@ class CallHistoryVC: BaseViewController {
         
     }
     
+    @IBAction func didTapButtonNotes(_ sender: UIButton) {
+       let selectUser : HistoryModel = historyData[sender.tag] as! HistoryModel
+        
+        if let notesString = selectUser.notes {
+            if #available(iOS 13.0, *) {
+                let notesVc = self.storyboard?.instantiateViewController(identifier: "NotesViewController") as! NotesViewController
+                notesVc.notesStr = notesString
+                notesVc.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(notesVc, animated: true, completion: nil)
+
+            } else {
+                let notesVc = UIViewController.instantiateFrom("Menu", "NotesViewController") as! NotesViewController
+                notesVc.notesStr = notesString
+                notesVc.modalPresentationStyle = .overCurrentContext
+                 self.navigationController?.present(notesVc, animated: true, completion: nil)
+            }
+        } else {
+            self.view.showToast(message: "No Notes There")
+        }
+
+        
+    }
 }
 extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,6 +118,7 @@ extension CallHistoryVC : UITableViewDataSource,UITableViewDelegate {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "CallHistoryCell") as! CallHistoryCell
         cell.setUpData(response: historyData[indexPath.section] as! HistoryModel)
         cell.buttonCall.tag = indexPath.section
+        cell.buttonNotes.tag = indexPath.section
         return cell
     }
 }
